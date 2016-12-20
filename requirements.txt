@@ -1,0 +1,11 @@
+backports-abc==0.5
+certifi==2016.9.26
+enum==0.4.6
+messenger-maid-chan==0.1
+pymessenger==0.0.7.0
+requests==2.12.4
+requests-toolbelt==0.7.0
+singledispatch==3.4.0.3
+six==1.10.0
+tornado==4.4.2
+

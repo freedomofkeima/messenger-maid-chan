@@ -1,0 +1,17 @@
+*.pyc
+/build
+/venv
+
+# Packages
+*.egg
+*.egg-info
+
+# Others
+*~
+*.swp
+*.DS_Store
+.idea/
+
+# Specific project
+maidchan/config.py
+

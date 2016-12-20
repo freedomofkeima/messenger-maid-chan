@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+
+# Facebook token
+ACCESS_TOKEN = "FACEBOOK_PAGE_ACCESS_TOKEN"
+VERIFY_TOKEN = "WEBHOOK_VERIFY_TOKEN"  # Set this value by yourself
+
+# Application configuration 
+
+## Tuples of (your own preferred name, recipient_id from Facebook)
+USERS = [
+    ("your_nickname", "your_facebook_recipient_id")
+]
+
