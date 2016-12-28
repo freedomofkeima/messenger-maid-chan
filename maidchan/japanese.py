@@ -68,6 +68,7 @@ def get_vocabulary(current_pos=1):
             num_of_lines += 1
             if num_of_lines == current_pos:
                 vocabulary = dict(zip(VOCABULARY_FIELDS, line))
+                break
     # Convert to UTF-8
     for key, value in vocabulary.iteritems():
         vocabulary[key] = value.encode("utf-8")

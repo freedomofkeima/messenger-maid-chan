@@ -33,7 +33,8 @@ class WebhookHandler(tornado.web.RequestHandler):
         for event in body.get('entry', []):
             messaging = event['messaging']
             for msg in messaging:
-                if msg.get('message'):
+                command = msg.get('message', {}).get('text')
+                if command:
                     recipient_id = msg['sender']['id']
                     logging.info("Sender ID: {}".format(recipient_id))
 
@@ -60,11 +61,6 @@ class WebhookHandler(tornado.web.RequestHandler):
                     message = m1 + "\n---\n\n" + m2
 
                     bot.send_text_message(recipient_id, message)
-                    #if msg['message'].get('text'):
-                    #    message = msg['message']['text']
-                    #    bot.send_text_message(recipient_id, message)
-                    #else:
-                    #    pass
         self.write("Success")
 
 
