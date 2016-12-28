@@ -2,9 +2,20 @@
 
 Maid-chan name is inspired from [Sakurasou's Artificial Intelligence](http://sakurasounopetnakanojo.wikia.com/wiki/Maid).
 
-For initial configuration, you need to create `maidchan/config.py` based on `maidchan/config.py.example`.
-
 If you have any other ideas, I am accepting contributions :)
+
+## How to Run
+
+1. For initial configuration, you need to create `maidchan/config.py` based on `maidchan/config.py.example` and fill those values based on your own configuration.
+
+2. Maid-chan are using Redis as the database. Redis can be downloaded via https://redis.io/download. Run Redis as a background process in port 6379 (default port).
+
+3. It is recommended to use `virtualenv` (e.g.: `virtualenv venv` then `source venv/bin/activate`). You need to install all dependencies via `pip install -r requirements.txt`.
+
+4. Run `python setup.py install` to build Maid-chan. Finally, you can execute `maidchan` to run this bot.
+
+
+## Available Command
 
 
 ## Priority Ideas
@@ -28,6 +39,8 @@ If you have any other ideas, I am accepting contributions :)
 
 ## Reference
 
+
+- http://gakuran.com/japanese-csv-database/ for raw data of Japanese Vocabulary and Kanji list
 - https://github.com/hungtraan/FacebookBot
 
 
@@ -35,5 +48,5 @@ If you have any other ideas, I am accepting contributions :)
 
 MIT License.
 
-Last Updated: December 20, 2016
+Last Updated: December 29, 2016
 
