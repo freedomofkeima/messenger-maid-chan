@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
+import errno
 import logging
 import json
 import redis
+import shutil
 import sys
+import tempfile
 import time
 import tornado.ioloop
 import tornado.web
@@ -10,8 +13,10 @@ import tornado.web
 from random import randint
 
 from maidchan.config import ACCESS_TOKEN, VERIFY_TOKEN
+from maidchan.helper import send_image
 from maidchan.japanese import get_kanji, get_vocabulary,\
     KANJI_TOTAL_RECORDS, VOCABULARY_TOTAL_RECORDS
+from maidchan.primitive import process_image
 from pymessenger.bot import Bot
 
 bot = Bot(ACCESS_TOKEN)
@@ -33,9 +38,10 @@ class WebhookHandler(tornado.web.RequestHandler):
         for event in body.get('entry', []):
             messaging = event['messaging']
             for msg in messaging:
-                command = msg.get('message', {}).get('text')
-                if command:
-                    recipient_id = msg['sender']['id']
+                fb_message = msg.get('message', {})
+                recipient_id = msg['sender']['id']
+                if 'text' in fb_message:
+                    # command = fb_message.get['text']
                     logging.info("Sender ID: {}".format(recipient_id))
 
                     # Try N3
@@ -61,6 +67,30 @@ class WebhookHandler(tornado.web.RequestHandler):
                     message = m1 + "\n---\n\n" + m2
 
                     bot.send_text_message(recipient_id, message)
+                elif 'attachments' in fb_message:
+                    for attachment in fb_message['attachments']:
+                        if attachment.get('type') != 'image':
+                            continue
+                        try:
+                            d = tempfile.mkdtemp()  # create directory
+                            url = attachment.get('payload', {}).get('url')
+                            image_path, image_type = process_image(d, url)
+                            if image_path and image_type:
+                                send_image(
+                                    ACCESS_TOKEN,
+                                    recipient_id,
+                                    image_path,
+                                    image_type
+                                )
+                            else:
+                                bot.send_text_message(recipient_id, "なにそれ？")
+                        finally:
+                            # cleanup temporary directory
+                            try:
+                                shutil.rmtree(d)  # delete directory
+                            except OSError as exc:
+                                if exc.errno != errno.ENOENT:
+                                    raise
         self.write("Success")
 
 

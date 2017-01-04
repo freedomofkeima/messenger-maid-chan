@@ -17,6 +17,8 @@ If you have any other ideas, I am accepting contributions :)
 
 ## Available Command
 
+- Random image filters, e.g.: https://github.com/fogleman/primitive
+
 
 ## Priority Ideas
 
@@ -24,7 +26,6 @@ If you have any other ideas, I am accepting contributions :)
 - Send link to download at home, e.g.: Youtube (feat https://github.com/soimort/you-get), image files, etc
 - RSS monitoring (similar to my previous RSS Twilio bot: https://github.com/freedomofkeima/rss-twilio-bot)
 - Time-based interaction (おはよう, daily "offerings", etc)
-- Random image filters, e.g.: https://github.com/fogleman/primitive
 - Translate text (feat: https://github.com/soimort/translate-shell)
 
 
@@ -48,5 +49,5 @@ If you have any other ideas, I am accepting contributions :)
 
 MIT License.
 
-Last Updated: December 29, 2016
+Last Updated: January 4, 2017
 
