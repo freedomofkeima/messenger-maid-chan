@@ -12,12 +12,12 @@ If you have any other ideas, I am accepting contributions :)
 
 3. It is recommended to use `virtualenv` (e.g.: `virtualenv venv` then `source venv/bin/activate`). You need to install all dependencies via `pip install -r requirements.txt`.
 
-4. Run `python setup.py install` to build Maid-chan. Finally, you can execute `maidchan` to run this bot.
+4. Run `python setup.py install` to build Maid-chan. Finally, you can execute `maidchan` in the background process to run this bot.
 
 
 ## Available Command
 
-- Random image filters, e.g.: https://github.com/fogleman/primitive
+- Random image filters, e.g.: https://github.com/fogleman/primitive (Requires `maidchan_primitive` running in the background)
 
 
 ## Priority Ideas

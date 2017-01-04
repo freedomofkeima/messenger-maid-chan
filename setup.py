@@ -18,8 +18,9 @@ setup(
     description='Maid-chan feat Facebook Messenger bot',
     entry_points = {
         'console_scripts': [
-                'maidchan = maidchan.main:main',
-                'maidchan_local = maidchan.simple:main'
+                'maidchan = maidchan.cmds.main:main',
+                'maidchan_local = maidchan.cmds.simple:main',
+                'maidchan_primitive = maidchan.cmds.primitive_worker:main'
             ]
     },
     install_requires = install_requires(),

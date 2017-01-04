@@ -2,16 +2,15 @@
 import errno
 import logging
 import json
-import redis
 import shutil
 import sys
 import tempfile
-import time
 import tornado.ioloop
 import tornado.web
 
 from random import randint
 
+from maidchan.base import connect_redis, RedisObject
 from maidchan.config import ACCESS_TOKEN, VERIFY_TOKEN
 from maidchan.helper import send_image
 from maidchan.japanese import get_kanji, get_vocabulary,\
@@ -104,17 +103,12 @@ def main():
     ])
 
     # Connect to Redis
-    val = None
-    while val is None:
-        try:
-            r = redis.StrictRedis(host='127.0.0.1',
-                                  port=6379,
-                                  db=0)
-            val = r.dbsize()
-            application.redis_client = r
-        except Exception:
-            logging.exception("Cannot connect to Redis - Wait 30 seconds")
-            time.sleep(30)
+    rc = connect_redis(
+        host='127.0.0.1',
+        port=6379,
+        db=0
+    )
+    application.redis_client = RedisObject(rc)
 
     # Start app
     application.listen(9999)
