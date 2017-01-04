@@ -12,19 +12,17 @@ def process_image(image_path, url):
     filename = None
     if '.png' in url:
         filename = "input.png"
-        image_type = "image/png"
     elif '.jpg' in url:
         filename = "input.jpg"
-        image_type = "image/jpg"
 
     if image_path and filename:
         # Download image to the specified directory
         urllib.urlretrieve(url, os.path.join(image_path, filename))
-        return create_primitive_image(image_path, image_type, filename)
+        return create_primitive_image(image_path, filename)
     return None, None
 
 
-def create_primitive_image(image_path, image_type, filename):
+def create_primitive_image(image_path, filename):
     """
     create_primitive_image utilizes fogleman/primitive
     """
@@ -48,4 +46,4 @@ def create_primitive_image(image_path, image_type, filename):
     (output, err) = p.communicate()
     if err:
         logging.error(err)
-    return output_path, image_type
+    return output_path, "image/png"
