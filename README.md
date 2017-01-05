@@ -17,7 +17,9 @@ If you have any other ideas, I am accepting contributions :)
 
 ## Available Feature
 
-- Upload image for random image filtering via https://github.com/fogleman/primitive (Requires `maidchan_primitive` running in the background)
+- Upload image for random image filtering via https://github.com/fogleman/primitive (**Requires** `maidchan_primitive` running in the background)  
+<img src="https://freedomofkeima.com/images/maid-chan/primitive_scr.jpg" height="500">  
+<img alt="Combined result" src="https://freedomofkeima.com/images/maid-chan/primitive.gif" height="500">  
 - Japanese Kanji & Vocabulary for each reply
 
 ## Available Command
