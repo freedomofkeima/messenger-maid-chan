@@ -29,16 +29,12 @@ def create_primitive_image(image_path, filename):
     output_path = os.path.join(image_path, "output.png")
     args = [
         'primitive',
-        '-r',
-        '128',
-        '-s',
-        '512',
         '-i',
         os.path.join(image_path, filename),
         '-o',
         output_path,
         '-n',
-        '30',
+        '125',
         '-v'
     ]
     # Execute
