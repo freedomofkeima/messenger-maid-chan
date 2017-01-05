@@ -15,10 +15,14 @@ If you have any other ideas, I am accepting contributions :)
 4. Run `python setup.py install` to build Maid-chan. Finally, you can execute `maidchan` in the background process to run this bot.
 
 
+## Available Feature
+
+- Upload image for random image filtering via https://github.com/fogleman/primitive (Requires `maidchan_primitive` running in the background)
+- Japanese Kanji & Vocabulary for each reply
+
 ## Available Command
 
-- Random image filters, e.g.: https://github.com/fogleman/primitive (Requires `maidchan_primitive` running in the background)
-
+-
 
 ## Priority Ideas
 
@@ -49,5 +53,5 @@ If you have any other ideas, I am accepting contributions :)
 
 MIT License.
 
-Last Updated: January 4, 2017
+Last Updated: January 5, 2017
 
