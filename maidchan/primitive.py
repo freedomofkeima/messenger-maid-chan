@@ -35,7 +35,7 @@ def create_primitive_image(image_path, filename):
             '-o',
             output_path,
             '-n',
-            '125',
+            '150',
             '-v'
         ]
         # Execute
@@ -54,7 +54,7 @@ def generate_gif_file_from_primitive(image_path, filename):
     args = [
         'convert',
         '-delay',
-        '1x6',  # 6 FPS
+        '1x5',  # 5 FPS
         '-loop',
         '0',
         os.path.join(image_path, '*.png'),
