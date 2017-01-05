@@ -34,7 +34,7 @@ def create_primitive_image(image_path, filename):
         '-o',
         output_path,
         '-n',
-        '125',
+        '250',
         '-v'
     ]
     # Execute
