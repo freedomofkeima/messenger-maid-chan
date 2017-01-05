@@ -26,20 +26,43 @@ def create_primitive_image(image_path, filename):
     """
     create_primitive_image utilizes fogleman/primitive
     """
-    output_path = os.path.join(image_path, "output.png")
+    for i in xrange(0, 3):  # Generate 3 different images
+       output_path = os.path.join(image_path, "output{}.png".format(i))
+       args = [
+           'primitive',
+           '-i',
+            os.path.join(image_path, filename),
+            '-o',
+            output_path,
+            '-n',
+            '125',
+            '-v'
+        ]
+        # Execute
+        p = subprocess.Popen(args, stdout=subprocess.PIPE, shell=False)
+        (output, err) = p.communicate()
+        if err:
+            logging.error(err)
+    return generate_gif_file_from_primitive(image_path, filename)
+
+
+def generate_gif_file_from_primitive(image_path, filename):
+    # Remove input file
+    os.remove(os.path.join(image_path, filename))
+    # Generate gif output
+    output_path = os.path.join(image_path, "output.gif")
     args = [
-        'primitive',
-        '-i',
-        os.path.join(image_path, filename),
-        '-o',
-        output_path,
-        '-n',
-        '250',
-        '-v'
+        'convert',
+        '-delay',
+        '1x6',  # 6 FPS
+        '-loop',
+        '0',
+        os.path.join(image_path, '*.png'),
+        output_path
     ]
     # Execute
     p = subprocess.Popen(args, stdout=subprocess.PIPE, shell=False)
     (output, err) = p.communicate()
     if err:
         logging.error(err)
-    return output_path, "image/png"
+    return output_path, "image/gif"
