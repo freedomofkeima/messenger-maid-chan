@@ -2,6 +2,7 @@
 import logging
 from chatterbot import ChatBot
 from langdetect import detect
+from langdetect.lang_detect_exception import LangDetectException
 
 
 class ChatBotDriver(object):
@@ -25,6 +26,9 @@ class ChatBotDriver(object):
             return self.chatbot.get_response(query)
 
     def get_response(self, query):
-        probable_language = detect(query)
+        try:
+            probable_language = detect(query)
+        except LangDetectException:
+            probable_language = ""
         logging.info("Probable language is {}".format(probable_language))
         return self.get_response_from_chatbot(query, probable_language)
