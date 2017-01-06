@@ -17,10 +17,11 @@ If you have any other ideas, I am accepting contributions :)
 
 ## Available Feature
 
-- Upload image for random image filtering via https://github.com/fogleman/primitive (**Requires** `maidchan_primitive` running in the background and [ImageMagick](https://www.imagemagick.org/script/index.php) `convert` feature for generating GIF)  
+- Upload image for random image filtering via [Primitive](https://github.com/fogleman/primitive) (**Requires** `maidchan_primitive` running in the background and [ImageMagick](https://www.imagemagick.org/script/index.php) `convert` feature for generating GIF)  
 <img src="https://freedomofkeima.com/images/maid-chan/primitive_scr.jpg" height="500">  
 <img alt="Combined result" src="https://freedomofkeima.com/images/maid-chan/primitive.gif" height="500">  
-- Japanese Kanji & Vocabulary for each reply
+- Simple chat (English or Bahasa Indonesia) via [ChatterBot](https://github.com/gunthercox/ChatterBot) feat [langdetect](https://github.com/Mimino666/langdetect)
+- [Command Not Implemented] Japanese Kanji & Vocabulary for each reply
 
 ## Available Command
 
@@ -38,7 +39,7 @@ If you have any other ideas, I am accepting contributions :)
 ## Future Ideas 
 
 - Image recognition, e.g.: waifu recognizer - https://github.com/nagadomi/lbpcascade_animeface or self-created
-- Natural Language processing for conversing daily conversation (Naturally we can use IBM Watson or Google Cloud Speech, but the model "probably" differs from Maid-chan requirement)
+- Natural Language processing for conversing daily conversation (Naturally we can improve it with IBM Watson or Google Cloud Speech, but the model "probably" differs from Maid-chan requirement)
 - IoT with home electronics
 - Mini games
 - etc
@@ -55,5 +56,5 @@ If you have any other ideas, I am accepting contributions :)
 
 MIT License.
 
-Last Updated: January 5, 2017
+Last Updated: January 7, 2017
 

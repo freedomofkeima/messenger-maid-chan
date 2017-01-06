@@ -25,7 +25,7 @@ def connect_redis(host, port, db):
             time.sleep(30)
 
 
-class RedisObject(object):
+class RedisDriver(object):
     def __init__(self, redis_client):
         self.redis_client = redis_client
 

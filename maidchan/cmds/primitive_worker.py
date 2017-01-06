@@ -5,7 +5,7 @@ import tempfile
 import threading
 import time
 
-from maidchan.base import connect_redis, RedisObject
+from maidchan.base import connect_redis, RedisDriver
 from maidchan.config import ACCESS_TOKEN
 from maidchan.helper import send_image
 from maidchan.primitive import process_image
@@ -51,7 +51,7 @@ def main():
         port=6379,
         db=0
     )
-    redis_client = RedisObject(rc)
+    redis_client = RedisDriver(rc)
     while True:
         data = redis_client.pop_primitive_queue()
         if not data:

@@ -7,12 +7,18 @@ import tornado.web
 
 from random import randint
 
-from maidchan.base import connect_redis, RedisObject
+from maidchan.base import connect_redis, RedisDriver
+from maidchan.chatbot import ChatBotDriver
 from maidchan.config import ACCESS_TOKEN, VERIFY_TOKEN
 from maidchan.japanese import get_kanji, get_vocabulary,\
     KANJI_TOTAL_RECORDS, VOCABULARY_TOTAL_RECORDS
 from pymessenger.bot import Bot
 
+RESERVED_KEYWORDS = [
+    "subscribe"
+]
+
+# Global init
 bot = Bot(ACCESS_TOKEN)
 
 
@@ -51,6 +57,13 @@ def validate_attachments(attachments):
     return True
 
 
+def validate_reserved_keywords(command):
+    for keyword in RESERVED_KEYWORDS:
+        if keyword in command:
+            return keyword
+    return None
+
+
 class WebhookHandler(tornado.web.RequestHandler):
     def get(self):
         args = self.request.arguments
@@ -70,9 +83,14 @@ class WebhookHandler(tornado.web.RequestHandler):
                 fb_message = msg.get('message', {})
                 recipient_id = msg['sender']['id']
                 if 'text' in fb_message:
-                    # command = fb_message.get['text']
+                    query = fb_message.get['text']
+                    keyword = validate_reserved_keywords(query)
                     logging.info("Sender ID: {}".format(recipient_id))
-                    bot.send_text_message(recipient_id, test_message())
+                    if keyword:
+                        response = test_message()
+                    else:
+                        response = self.application.chatbot.get_response(query)
+                    bot.send_text_message(recipient_id, response)
                 elif 'attachments' in fb_message:
                     is_valid = validate_attachments(fb_message['attachments'])
                     if not is_valid:
@@ -103,7 +121,10 @@ def main():
         port=6379,
         db=0
     )
-    application.redis_client = RedisObject(rc)
+    application.redis_client = RedisDriver(rc)
+
+    # Initialize Chatbot
+    application.chatbot = ChatBotDriver()
 
     # Start app
     application.listen(9999)
