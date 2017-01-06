@@ -20,7 +20,8 @@ If you have any other ideas, I am accepting contributions :)
 - Upload image for random image filtering via [Primitive](https://github.com/fogleman/primitive) (**Requires** `maidchan_primitive` running in the background and [ImageMagick](https://www.imagemagick.org/script/index.php) `convert` feature for generating GIF)  
 <img src="https://freedomofkeima.com/images/maid-chan/primitive_scr.jpg" height="500">  
 <img alt="Combined result" src="https://freedomofkeima.com/images/maid-chan/primitive.gif" height="500">  
-- Simple chat (English or Bahasa Indonesia) via [ChatterBot](https://github.com/gunthercox/ChatterBot) feat [langdetect](https://github.com/Mimino666/langdetect)
+- Simple chat (English or Bahasa Indonesia) via [ChatterBot](https://github.com/gunthercox/ChatterBot) feat [langdetect](https://github.com/Mimino666/langdetect). The accuracy is still bad, though (no optimization so far)  
+<img src="https://freedomofkeima.com/images/maid-chan/chatterbot.png" height="300">  
 - [Command Not Implemented] Japanese Kanji & Vocabulary for each reply
 
 ## Available Command
