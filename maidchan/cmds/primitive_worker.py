@@ -33,7 +33,7 @@ class ThreadHandler(threading.Thread):
             else:
                 bot.send_text_message(
                     self.data.get('recipient_id', ""),
-                    "なにそれ？"
+                    "なにそれ？意味わかない!"
                 )
         finally:
             # cleanup temporary directory

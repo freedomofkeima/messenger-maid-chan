@@ -41,6 +41,16 @@ def test_message():
     return message
 
 
+def validate_attachments(attachments):
+    for attachment in attachments:
+        if attachment.get('type') != 'image':
+            return False
+        url = attachment.get('payload', {}).get('url')
+        if '.png' not in url and '.jpg' not in url:
+            return False
+    return True
+
+
 class WebhookHandler(tornado.web.RequestHandler):
     def get(self):
         args = self.request.arguments
@@ -64,16 +74,17 @@ class WebhookHandler(tornado.web.RequestHandler):
                     logging.info("Sender ID: {}".format(recipient_id))
                     bot.send_text_message(recipient_id, test_message())
                 elif 'attachments' in fb_message:
-                    for attachment in fb_message['attachments']:
+                    is_valid = validate_attachments(fb_message['attachments'])
+                    if not is_valid:
                         # We are not handling non-image data right now
-                        if attachment.get('type') != 'image':
-                            bot.send_text_message(recipient_id, "いいねえ!")
-                            continue
+                        bot.send_text_message(recipient_id, "いいねえ!")
+                        continue
+                    for attachment in fb_message['attachments']:
                         self.application.redis_client.push_primitive_queue({
                             "url": attachment.get('payload', {}).get('url'),
                             "recipient_id": recipient_id
                         })
-                        bot.send_text_message(recipient_id, "しばらくねえ <3")
+                    bot.send_text_message(recipient_id, "しばらくねえ <3")
         self.write("Success")
 
 
