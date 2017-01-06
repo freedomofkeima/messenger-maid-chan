@@ -26,4 +26,5 @@ class ChatBotDriver(object):
 
     def get_response(self, query):
         probable_language = detect(query)
+        logging.info("Probable language is {}".format(probable_language))
         return self.get_response_from_chatbot(query, probable_language)

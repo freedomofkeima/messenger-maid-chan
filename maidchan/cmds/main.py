@@ -83,7 +83,7 @@ class WebhookHandler(tornado.web.RequestHandler):
                 fb_message = msg.get('message', {})
                 recipient_id = msg['sender']['id']
                 if 'text' in fb_message:
-                    query = fb_message.get['text']
+                    query = fb_message['text']
                     keyword = validate_reserved_keywords(query)
                     logging.info("Sender ID: {}".format(recipient_id))
                     if keyword:
