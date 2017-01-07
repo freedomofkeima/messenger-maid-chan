@@ -8,6 +8,7 @@ KANJI_FILENAMES = {
     4: "data/japanese_kanji_N4.csv"
 }
 
+# TODO: Calculate total records on initialization
 KANJI_TOTAL_RECORDS = {
     1: 1150,
     2: 739,

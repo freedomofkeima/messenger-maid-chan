@@ -16,12 +16,13 @@ class ChatBotDriver(object):
         logging.info("Chatterbot is initialized!")
 
     def get_response_from_chatbot(self, query, language):
-        if language not in ['en', 'id', 'tl']:
+        if not language:
             return "nyaa <3"
         else:
             if language in ['id', 'tl']:
                 self.chatbot.train("chatterbot.corpus.indonesia")
             else:
+                # Default to English
                 self.chatbot.train("chatterbot.corpus.english")
             return self.chatbot.get_response(query)
 

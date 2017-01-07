@@ -6,7 +6,9 @@ VERIFY_TOKEN = "WEBHOOK_VERIFY_TOKEN"  # Set this value by yourself
 
 # Application configuration 
 
-## Tuples of (your own preferred name, recipient_id from Facebook)
+# Tuples of (your own preferred name, recipient_id from Facebook)
+# These values are only used for bot-initiated communication (e.g.: daily offerings)
+# which requires Redis as datastore
 USERS = [
     ("your_nickname", "your_facebook_recipient_id")
 ]
