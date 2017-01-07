@@ -19,8 +19,8 @@ setup(
     entry_points = {
         'console_scripts': [
                 'maidchan = maidchan.cmds.main:main',
-                'maidchan_local = maidchan.cmds.simple:main',
-                'maidchan_primitive = maidchan.cmds.primitive_worker:main'
+                'maidchan_primitive = maidchan.cmds.primitive_worker:main',
+                'maidchan_scheduler = maidchan.cmds.scheduler_worker:main'
             ]
     },
     install_requires = install_requires(),

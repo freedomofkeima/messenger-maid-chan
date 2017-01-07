@@ -22,23 +22,33 @@ If you have any other ideas, I am accepting contributions :)
 <img alt="Combined result" src="https://freedomofkeima.com/images/maid-chan/primitive.gif" height="500">  
 - Simple chat (English or Bahasa Indonesia) via [ChatterBot](https://github.com/gunthercox/ChatterBot) feat [langdetect](https://github.com/Mimino666/langdetect). The accuracy is still bad, though (no optimization so far)  
 <img src="https://freedomofkeima.com/images/maid-chan/chatterbot.png" height="300">  
-- [Command Not Implemented] Japanese Kanji & Vocabulary for each reply
+- [Command Not Yet Implemented] Daily good morning and good night messages, with "offerings"!
+- [Command Not Yet Implemented] Daily Japanese Kanji & Vocabulary
 
-## Available Command
+## [IN PROGRESS] Available Command
 
--
+### All users
+
+- `help`: You will get the list of all available commands from Maid-chan
+- `subscribe offerings`: Maid-chan will start giving you a good morning message and a good night messages
+- `unsubscribe offerings`: Maid-chan will stop spamming you with those messages, but Maid-chan will be sad :'(
+- `update offerings`: Maid-chan will ask you about your usual waking up and sleeping time, because Maid-chan doesn't want to disturb your sleep . . ., usually :p
+- `subscribe japanese`: Maid-chan will start sending you random daily Kanji & Vocabulary
+- `unsubscribe japanese`: Maid-chan will stop sending you random daily Kanji & Vocabulary
+- `update japanese`: Maid-chan will ask about your level preference for Kanji (N1 to N4, old test format)
+- `update name`: By default, Maid-chan will call you with `onii-chan`
+
 
 ## Priority Ideas
 
-- Japanese language quiz & daily Kanji
 - Send link to download at home, e.g.: Youtube (feat https://github.com/soimort/you-get), image files, etc
 - RSS monitoring (similar to my previous RSS Twilio bot: https://github.com/freedomofkeima/rss-twilio-bot)
-- Time-based interaction (おはよう, daily "offerings", etc)
 - Translate text (feat: https://github.com/soimort/translate-shell)
 
 
 ## Future Ideas 
 
+- Japanese language quiz
 - Image recognition, e.g.: waifu recognizer - https://github.com/nagadomi/lbpcascade_animeface or self-created
 - Natural Language processing for conversing daily conversation (Naturally we can improve it with IBM Watson or Google Cloud Speech, but the model "probably" differs from Maid-chan requirement)
 - IoT with home electronics
@@ -57,5 +67,5 @@ If you have any other ideas, I am accepting contributions :)
 
 MIT License.
 
-Last Updated: January 7, 2017
+Last Updated: January 8, 2017
 

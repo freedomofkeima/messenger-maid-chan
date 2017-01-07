@@ -10,13 +10,11 @@ from random import randint
 from maidchan.base import connect_redis, RedisDriver
 from maidchan.chatbot import ChatBotDriver
 from maidchan.config import ACCESS_TOKEN, VERIFY_TOKEN
+from maidchan.helper import validate_reserved_keywords, validate_attachments
 from maidchan.japanese import get_kanji, get_vocabulary,\
     KANJI_TOTAL_RECORDS, VOCABULARY_TOTAL_RECORDS
 from pymessenger.bot import Bot
 
-RESERVED_KEYWORDS = [
-    "subscribe"
-]
 
 # Global init
 bot = Bot(ACCESS_TOKEN)
@@ -47,21 +45,13 @@ def test_message():
     return message
 
 
-def validate_attachments(attachments):
-    for attachment in attachments:
-        if attachment.get('type') != 'image':
-            return False
-        url = attachment.get('payload', {}).get('url')
-        if '.png' not in url and '.jpg' not in url:
-            return False
-    return True
+def process_command(redis_client, recipient_id, query):
+    return test_message()
 
 
-def validate_reserved_keywords(command):
-    for keyword in RESERVED_KEYWORDS:
-        if keyword in command:
-            return keyword
-    return None
+def process_active_question(redis_client, recipient_id, question_id, query):
+    redis_client.set_active_question(recipient_id, -1)  # Set back to default
+    return "<3"
 
 
 class WebhookHandler(tornado.web.RequestHandler):
@@ -82,13 +72,32 @@ class WebhookHandler(tornado.web.RequestHandler):
             for msg in messaging:
                 fb_message = msg.get('message', {})
                 recipient_id = msg['sender']['id']
+                logging.info("Sender ID: {}".format(recipient_id))
                 if 'text' in fb_message:
                     query = fb_message['text']
-                    keyword = validate_reserved_keywords(query)
-                    logging.info("Sender ID: {}".format(recipient_id))
-                    if keyword:
-                        response = test_message()
+                    if query:  # Convert all queries to lowercase
+                        query = query.lower()
+                    # Check active question, if it's not active, continue
+                    q_id = self.application.redis_client.get_active_question(
+                        recipient_id
+                    )
+                    if q_id != -1:
+                        # Process answer to Maid-chan questions
+                        response = process_active_question(
+                            self.application.redis_client,
+                            recipient_id,
+                            q_id,
+                            query
+                        )
+                    elif validate_reserved_keywords(query):
+                        # Process user's command
+                        response = process_command(
+                            self.application.redis_client,
+                            recipient_id,
+                            query
+                        )
                     else:
+                        # Normal chatbot
                         response = self.application.chatbot.get_response(query)
                     bot.send_text_message(recipient_id, response)
                 elif 'attachments' in fb_message:
