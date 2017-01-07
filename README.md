@@ -32,18 +32,20 @@ If you have any other ideas, I am accepting contributions :)
 - `help`: You will get the list of all available commands from Maid-chan
 - `subscribe offerings`: Maid-chan will start giving you a good morning message and a good night messages
 - `unsubscribe offerings`: Maid-chan will stop spamming you with those messages, but Maid-chan will be sad :'(
-- `update offerings`: Maid-chan will ask you about your usual waking up and sleeping time, because Maid-chan doesn't want to disturb your sleep . . ., usually :p
+- `update offerings`: Maid-chan will ask you about your usual waking up and sleeping time, because Maid-chan doesn't want to disturb your sleep . . ., usually :p (some surprises inside!)
 - `subscribe japanese`: Maid-chan will start sending you random daily Kanji & Vocabulary
 - `unsubscribe japanese`: Maid-chan will stop sending you random daily Kanji & Vocabulary
 - `update japanese`: Maid-chan will ask about your level preference for Kanji (N1 to N4, old test format)
 - `update name`: By default, Maid-chan will call you with `onii-chan`
+- `profile`: Do you want to know what Maid-chan knows about you? Then, you could use this command!
 
 
 ## Priority Ideas
 
-- Send link to download at home, e.g.: Youtube (feat https://github.com/soimort/you-get), image files, etc
 - RSS monitoring (similar to my previous RSS Twilio bot: https://github.com/freedomofkeima/rss-twilio-bot)
 - Translate text (feat: https://github.com/soimort/translate-shell)
+- (Admin only) Send link to download at home, e.g.: Youtube (feat https://github.com/soimort/you-get), image files, etc
+- (Admin only) Broadcast message to all users which have talked to Maid-chan at least once
 
 
 ## Future Ideas 
@@ -57,7 +59,6 @@ If you have any other ideas, I am accepting contributions :)
 
 
 ## Reference
-
 
 - http://gakuran.com/japanese-csv-database/ for raw data of Japanese Vocabulary and Kanji list
 - https://github.com/hungtraan/FacebookBot

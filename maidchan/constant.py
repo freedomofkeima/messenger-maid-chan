@@ -9,7 +9,8 @@ class Constants(object):
         ("update offerings", "Maid-chan will keep her best to follow your waking up and sleeping time pattern!"),
         ("subscribe japanese", "Maid-chan will start sending you daily Japanese Kanji & Vocabulary"),
         ("unsubscribe japanese", "Maid-chan will stop sending you daily Japanese Kanji & Vocabulary"),
-        ("update name", "What name do you prefer to be called? onii-chan? goshujin-sama? or ... darling?")
+        ("update name", "What name do you prefer to be called? onii-chan? goshujin-sama? or ... darling?"),
+        ("profile", "Maid-chan will show all information which Maid-chan knows about you")
     ]
 
     QUESTIONS = {
@@ -21,19 +22,29 @@ class Constants(object):
     NORMAL_GOOD_MORNING = [
         "おはよう! Wishing you a good day ahead, {} <3",
         "Ohaa~ I had a nice dream last night. Hope {} also had one!",
-        "Good morning, {}. I feel you will have a nice day today!"
+        "Good morning, {}. I feel you will have a nice day today!",
+        "Ohayou gozaimasu, {}! Don't forget to exercise!",
+        "Morning, {}. It's time to wake up :D",
+        "Good morning to you, {}",
+        "Ohaa~ Time to get up already, {}"
     ]
 
     NORMAL_GOOD_NIGHT = [
         "おやすみ, {}! Have a nice dream and rest tonight <3",
-        "Oyasumi~ Today was fun and thanks for keep talking with me, nyaa~",
-        "Good night, {}. I hope you will have a nice sleep tonight zzz..."
+        "Oyasumi, {}~ Today was fun and thanks for keep talking with me, nyaa~",
+        "Good night, {}. I hope you will have a nice sleep tonight zzz...",
+        "Have a nice sleep, {} <3",
+        "Tomorrow will be absolutely better. It's time to sleep, {} :D",
+        "Good night to you, {}",
+        "Oyaa~ Let's have a nice sleep, {}"
     ]
 
     SPECIAL_GOOD_MORNING = [
-        "Kyaaaah! Maid-chan overslept today, やばい やばい! Good morning, {}~"
+        "Kyaaaah! Maid-chan overslept today, やばい やばい! Good morning, {}~",
+        "Uh? What time is it now, {}? Pyaaahh! Maid-chan is late!"
     ]
 
     SPECIAL_GOOD_NIGHT = [
-        "Ah no, it's already this late! Good night, {} <3"
+        "Ah no, it's already this late! Good night, {} <3",
+        "The game was so much fun! Are you sleeping already, {}? Good nite~"
     ]
