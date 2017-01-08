@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
+import calendar
+import datetime
 import logging
 import subprocess
+import time
 
 from maidchan.constant import Constants
 
@@ -68,3 +71,19 @@ def split_message(message):
     if current_line:
         messages.append(current_line)
     return messages
+
+
+def time_to_next_utc_mt(time_str):
+    dt = datetime.datetime.strptime(time_str, "%H:%M")  # UTC+9
+    dt_now = datetime.datetime.now()  # Local timezone
+    dt = dt.replace(
+        year=dt_now.year,
+        month=dt_now.month,
+        day=dt_now.day
+    )  # UTC+9
+    dt = dt - datetime.timedelta(seconds=3600 * 9)  # UTC
+    current_epoch_time = time.time()
+    dt_epoch_time = int(calendar.timegm(dt.timetuple()))
+    while dt_epoch_time < current_epoch_time:  # Move to the next day
+        dt_epoch_time += 86400
+    return dt_epoch_time

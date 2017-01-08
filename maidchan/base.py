@@ -62,12 +62,9 @@ class RedisDriver(object):
                   "morning_time": "09:00",  # UTC+9
                   "night_time": "23:00",  # UTC+9
                   "kanji_level": "N3",
-                  "schedules": [
-                      {
-                          "type": "morning_offerings",
-                          "next_mt": "..."
-                      }
-                  ]
+                  "schedules": {
+                      "morning_offerings_mt": ... # UTC epoch
+                  }
               }
         """
         redis_key = "{}_{}".format(USER, recipient_id)
@@ -77,14 +74,19 @@ class RedisDriver(object):
         redis_key = "{}_{}".format(USER, recipient_id)
         data = self.redis_client.get(redis_key)
         if data:
-            return json.loads(data)
+            data = json.loads(data)
+            # Update existing DB
+            if "schedules" not in data:
+                data["schedules"] = {}
+            return data
         else:
             return {
                 "offerings_status": "unsubscribed",
                 "japanese_status": "unsubscribed",
                 "morning_time": Constants.DEFAULT_MORNING_TIME,
                 "night_time": Constants.DEFAULT_NIGHT_TIME,
-                "kanji_level": "N3"
+                "kanji_level": "N3",
+                "schedules": {}
             }
 
     def push_primitive_queue(self, data):
@@ -135,7 +137,7 @@ class RedisDriver(object):
                   "kanji_n3": "",
                   "kanji_n4": "",
                   "vocabulary": "",
-                  "next_mt": "..."
+                  "next_mt": "..."  # UTC epoch
               }
         """
         self.redis_client.set(SCHEDULES, json.dumps(data))

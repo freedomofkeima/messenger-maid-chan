@@ -54,5 +54,5 @@ class Constants(object):
 
     # Base default time, before adding random delta
     DEFAULT_MORNING_TIME = "09:00"  # UTC+9
-    DEFAULT_JAPANESE_TIME = "12:00"  # UTC+9
+    DEFAULT_JAPANESE_TIME = "13:00"  # UTC+9
     DEFAULT_NIGHT_TIME = "23:00"  # UTC+9

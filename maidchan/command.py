@@ -2,6 +2,7 @@
 import re
 
 from maidchan.constant import Constants
+from maidchan.helper import time_to_next_utc_mt
 
 DEFAULT_NICKNAME = "onii-chan"
 
@@ -78,8 +79,12 @@ def process_unsubscribe_offerings(redis_client, recipient_id):
     user = redis_client.get_user(recipient_id)
     # Update DB information
     user["offerings_status"] = "unsubscribed"
+    # Remove schedule
+    if "morning_offerings_mt" in user["schedules"]:
+        del user["schedules"]["morning_offerings_mt"]
+    if "night_offerings_mt" in user["schedules"]:
+        del user["schedules"]["night_offerings_mt"]
     redis_client.set_user(recipient_id, user)
-    # TODO: Remove schedulers
     return "Maid-chan wish she could serve {} in the future :)".format(
         user.get("nickname", DEFAULT_NICKNAME)
     )
@@ -106,8 +111,10 @@ def process_subscribe_japanese(redis_client, recipient_id):
         )
     # Update DB information
     user["japanese_status"] = "subscribed"
+    user["schedules"]["japanese_lesson_mt"] = time_to_next_utc_mt(
+        Constants.DEFAULT_JAPANESE_TIME
+    )
     redis_client.set_user(recipient_id, user)
-    # TODO: Update schedulers
     # Ask for user's preference
     message = "Thanks for subscribing to Maid-chan Japanese lessons <3\n"
     redis_client.set_active_question(recipient_id, 3)
@@ -121,8 +128,10 @@ def process_unsubscribe_japanese(redis_client, recipient_id):
     user = redis_client.get_user(recipient_id)
     # Update DB information
     user["japanese_status"] = "unsubscribed"
+    # Remove schedule
+    if "japanese_lesson_mt" in user["schedules"]:
+        del user["schedules"]["japanese_lesson_mt"]
     redis_client.set_user(recipient_id, user)
-    # TODO: Remove schedulers
     return "Maid-chan wish she could serve {} in the future :)".format(
         user.get("nickname", DEFAULT_NICKNAME)
     )
@@ -177,11 +186,13 @@ def process_morning_question(redis_client, recipient_id, query):
     else:
         user["morning_time"] = match.group(0)
         message = "Thank you!\n"
+    next_mt = time_to_next_utc_mt(user["morning_time"])
+    night_mt = user["schedules"].get("night_offerings_mt")
+    if not night_mt or next_mt < night_mt:
+        if night_mt:  # Replace
+            del user["schedules"]["night_offerings_mt"]
+        user["schedules"]["morning_offerings_mt"] = next_mt
     redis_client.set_user(recipient_id, user)
-    # TODO: Update schedulers
-    # If the next one is "morning_offering" / none
-    # Check if the next "night_offering" is closer to this value or not
-    # If it is closer, change the type
     redis_client.set_active_question(recipient_id, 2)
     message += Constants.QUESTIONS[2].format(
         user.get("nickname", DEFAULT_NICKNAME)
@@ -201,11 +212,15 @@ def process_night_question(redis_client, recipient_id, query):
     else:
         user["night_time"] = match.group(0)
         message = "Thank you for answering Maid-chan question!\n"
+    next_mt = time_to_next_utc_mt(user["night_time"])
+    morning_mt = user["schedules"].get("morning_offerings_mt")
+    import logging
+    logging.info(user)
+    if not morning_mt or next_mt < morning_mt:
+        if morning_mt:  # Replace
+            del user["schedules"]["morning_offerings_mt"]
+        user["schedules"]["night_offerings_mt"] = next_mt
     redis_client.set_user(recipient_id, user)
-    # TODO: Update schedulers
-    # If the next one is "night_offering" / none
-    # Check the next "morning_offering" is closer to this value or not
-    # If it is closer, change the type
     message += "Your information for my offerings has been updated <3"
     return message
 
