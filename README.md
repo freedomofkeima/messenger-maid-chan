@@ -15,20 +15,22 @@ If you have any other ideas, I am accepting contributions :)
 4. Run `python setup.py install` to build Maid-chan. Finally, you can execute `maidchan` in the background process to run this bot.
 
 
-## Available Feature
+## Available Features
 
 - Upload image for random image filtering via [Primitive](https://github.com/fogleman/primitive) (**Requires** `maidchan_primitive` running in the background and [ImageMagick](https://www.imagemagick.org/script/index.php) `convert` feature for generating GIF)  
-<img src="https://freedomofkeima.com/images/maid-chan/primitive_scr.jpg" height="500">  
-<img alt="Combined result" src="https://freedomofkeima.com/images/maid-chan/primitive.gif" height="500">  
+<img src="https://freedomofkeima.com/images/maid-chan/primitive_scr.jpg" width="350">  
+<img alt="Combined result" src="https://freedomofkeima.com/images/maid-chan/primitive.gif" width="350">  
 - Simple chat (English or Bahasa Indonesia) via [ChatterBot](https://github.com/gunthercox/ChatterBot) feat [langdetect](https://github.com/Mimino666/langdetect). The accuracy is still bad, though (no optimization so far)  
-<img src="https://freedomofkeima.com/images/maid-chan/chatterbot.png" height="300">  
-- [In Progress] Daily good morning and good night messages, with "offerings"! (**Requires** `maidchan_scheduler` running in the background)
-- Daily Japanese Kanji & Vocabulary (**Requires** `maidchan_scheduler` running in the background)
+<img src="https://freedomofkeima.com/images/maid-chan/chatterbot.png" width="350">  
+- **[In Progress]** Daily good morning and good night messages, with "offerings"! (**Requires** `maidchan_scheduler` running in the background)
+<img src="https://freedomofkeima.com/images/maid-chan/offerings_subscribe.png" width="350">  
+- Daily Japanese Kanji & Vocabulary (**Requires** `maidchan_scheduler` running in the background)  
+<img src="https://freedomofkeima.com/images/maid-chan/japanese_subscribe.png" width="350">  
 
 All time-related features are currently handled in **UTC+9 (Japan Time)**.
 
 
-## Available Command
+## Available Commands
 
 ### All users
 
@@ -41,6 +43,8 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 - `update japanese`: Maid-chan will ask about your level preference for Kanji (N1 to N4, old test format)
 - `update name`: By default, Maid-chan will call you with `onii-chan`
 - `show profile`: Do you want to know what Maid-chan knows about you? Then, you could use this command!
+
+<img src="https://freedomofkeima.com/images/maid-chan/name.png" width="350">
 
 
 ## Priority Ideas
