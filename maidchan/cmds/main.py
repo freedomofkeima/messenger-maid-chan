@@ -17,6 +17,16 @@ from pymessenger.bot import Bot
 bot = Bot(ACCESS_TOKEN)
 
 
+def check_user_id(redis_client, recipient_id):
+    users = redis_client.get_users()
+    if recipient_id not in users:
+        users.append(recipient_id)
+        redis_client.set_users(users)
+        logging.info("{} has just talked for the first time!".format(
+            recipient_id
+        ))
+
+
 class WebhookHandler(tornado.web.RequestHandler):
     def get(self):
         args = self.request.arguments
@@ -35,6 +45,11 @@ class WebhookHandler(tornado.web.RequestHandler):
             for msg in messaging:
                 fb_message = msg.get('message', {})
                 recipient_id = msg['sender']['id']
+                # Append recipient_id to Maid-chan users list
+                check_user_id(
+                    self.application.redis_client,
+                    recipient_id
+                )
                 logging.info("Sender ID: {}".format(recipient_id))
                 if 'text' in fb_message:
                     query = fb_message['text']

@@ -169,9 +169,11 @@ def process_morning_question(redis_client, recipient_id, query):
     user = redis_client.get_user(recipient_id)
     match = re.search(r'^([01]?\d|2[0-3]):([0-5]?\d)$', query)
     if not match:
-        user["morning_time"] = "09:00"
+        user["morning_time"] = Constants.DEFAULT_MORNING_TIME
         message = "Since I couldn't understand your message, "
-        message += "I set your morning time to around 09:00 UTC+9, sorry :(\n"
+        message += "I set your morning time to {} UTC+9, sorry :(\n".format(
+            Constants.DEFAULT_MORNING_TIME
+        )
     else:
         user["morning_time"] = match.group(0)
         message = "Thank you!\n"
@@ -191,9 +193,11 @@ def process_night_question(redis_client, recipient_id, query):
     user = redis_client.get_user(recipient_id)
     match = re.search(r'^([01]?\d|2[0-3]):([0-5]?\d)$', query)
     if not match:
-        user["night_time"] = "23:00"
+        user["night_time"] = Constants.DEFAULT_NIGHT_TIME
         message = "Since I couldn't understand your message, "
-        message += "I set your night time to around 23:00 UTC+9, sorry :(\n"
+        message += "I set your night time to {} UTC+9, sorry :(\n".format(
+            Constants.DEFAULT_NIGHT_TIME
+        )
     else:
         user["night_time"] = match.group(0)
         message = "Thank you for answering Maid-chan question!\n"

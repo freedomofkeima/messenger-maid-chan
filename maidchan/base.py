@@ -4,6 +4,8 @@ import logging
 import redis
 import time
 
+from maidchan.constant import Constants
+
 # Redis reserved keys
 USER = "USER"
 USERS = "USERS"
@@ -59,7 +61,13 @@ class RedisDriver(object):
                   "japanese_status": "subscribed",
                   "morning_time": "09:00",  # UTC+9
                   "night_time": "23:00",  # UTC+9
-                  "kanji_level": "N3"
+                  "kanji_level": "N3",
+                  "schedules": [
+                      {
+                          "type": "morning_offerings",
+                          "next_mt": "..."
+                      }
+                  ]
               }
         """
         redis_key = "{}_{}".format(USER, recipient_id)
@@ -74,8 +82,8 @@ class RedisDriver(object):
             return {
                 "offerings_status": "unsubscribed",
                 "japanese_status": "unsubscribed",
-                "morning_time": "09:00",
-                "night_time": "23:00",
+                "morning_time": Constants.DEFAULT_MORNING_TIME,
+                "night_time": Constants.DEFAULT_NIGHT_TIME,
                 "kanji_level": "N3"
             }
 
@@ -116,27 +124,18 @@ class RedisDriver(object):
 
     def set_schedules(self, data):
         """
-        data: dict of all scheduled activities and all daily choices
+        data: dict of all schedules metadata
         e.g.: {
-                  "schedules": [
-                      {
-                          "recipient_id": "1242484182465008",
-                          "type": "morning_offering",
-                          "next_mt": "..."
-                      }
-                  ],
-                  "metadata": {
-                      "morning_offering_text": "normal_1",
-                      "morning_offering_image": "example.png",
-                      "night_offering_text": "special_1",
-                      "night_offering_image": "example2.png",
-                      "kanji_n1": "",
-                      "kanji_n2": "",
-                      "kanji_n3": "",
-                      "kanji_n4": "",
-                      "vocabulary": "",
-                      "next_mt": "..."
-                  }
+                  "morning_offering_text": "normal_1",
+                  "morning_offering_image": "example.png",
+                  "night_offering_text": "special_1",
+                  "night_offering_image": "example2.png",
+                  "kanji_n1": "",
+                  "kanji_n2": "",
+                  "kanji_n3": "",
+                  "kanji_n4": "",
+                  "vocabulary": "",
+                  "next_mt": "..."
               }
         """
         self.redis_client.set(SCHEDULES, json.dumps(data))
