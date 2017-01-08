@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import unicodecsv as csv
+from random import randint
 
 KANJI_FILENAMES = {
     1: "data/japanese_kanji_N1.csv",
@@ -74,3 +75,29 @@ def get_vocabulary(current_pos=1):
     for key, value in vocabulary.iteritems():
         vocabulary[key] = value.encode("utf-8")
     return vocabulary
+
+
+# THIS IS A TEST FUNCTION
+def test_japanese_message():
+    # Try N3
+    level = 3
+    kanji_pos = randint(1, KANJI_TOTAL_RECORDS[level])
+    kanji = get_kanji(level, kanji_pos)
+    vocab_pos = randint(1, VOCABULARY_TOTAL_RECORDS)
+    vocab = get_vocabulary(vocab_pos)
+
+    m1 = "Kanji: {}\nOn: {}\nKun: {}\nMeaning: {}".format(
+        kanji["kanji"],
+        kanji["on"],
+        kanji["kun"],
+        kanji["meaning"]
+    )
+
+    m2 = "Vocabulary: {}\nKanji: {}\nMeaning: {}".format(
+        vocab["vocabulary"],
+        vocab["kanji"],
+        vocab["meaning"]
+    )
+
+    message = m1 + "\n---\n\n" + m2
+    return message

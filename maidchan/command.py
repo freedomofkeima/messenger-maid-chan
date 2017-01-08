@@ -1,37 +1,9 @@
 # -*- coding: utf-8 -*-
-from random import randint
+import re
 
 from maidchan.constant import Constants
-from maidchan.japanese import get_kanji, get_vocabulary,\
-    KANJI_TOTAL_RECORDS, VOCABULARY_TOTAL_RECORDS
 
 DEFAULT_NICKNAME = "onii-chan"
-
-
-# THIS IS A TEST FUNCTION
-def test_message():
-    # Try N3
-    level = 3
-    kanji_pos = randint(1, KANJI_TOTAL_RECORDS[level])
-    kanji = get_kanji(level, kanji_pos)
-    vocab_pos = randint(1, VOCABULARY_TOTAL_RECORDS)
-    vocab = get_vocabulary(vocab_pos)
-
-    m1 = "Kanji: {}\nOn: {}\nKun: {}\nMeaning: {}".format(
-        kanji["kanji"],
-        kanji["on"],
-        kanji["kun"],
-        kanji["meaning"]
-    )
-
-    m2 = "Vocabulary: {}\nKanji: {}\nMeaning: {}".format(
-        vocab["vocabulary"],
-        vocab["kanji"],
-        vocab["meaning"]
-    )
-
-    message = m1 + "\n---\n\n" + m2
-    return message
 
 
 def process_command(redis_client, recipient_id, query):
@@ -195,13 +167,19 @@ def process_show_profile(redis_client, recipient_id):
 
 def process_morning_question(redis_client, recipient_id, query):
     user = redis_client.get_user(recipient_id)
-    # TODO: validate and normalize
-    # If it's not valid, return (use default value)
-    user["morning_time"] = query
+    match = re.search(r'^([01]?\d|2[0-3]):([0-5]?\d)$', query)
+    if not match:
+        user["morning_time"] = "09:00"
+        message = "Since I couldn't understand your message, "
+        message += "I set your morning time to around 09:00 UTC+9, sorry :(\n"
+    else:
+        user["morning_time"] = match.group(0)
+        message = "Thank you!\n"
     redis_client.set_user(recipient_id, user)
-    message = "Thank you for answering Maid-chan question!\n"
-    # If answer is valid, proceed to 2nd question
     # TODO: Update schedulers
+    # If the next one is "morning_offering" / none
+    # Check if the next "night_offering" is closer to this value or not
+    # If it is closer, change the type
     redis_client.set_active_question(recipient_id, 2)
     message += Constants.QUESTIONS[2].format(
         user.get("nickname", DEFAULT_NICKNAME)
@@ -211,21 +189,35 @@ def process_morning_question(redis_client, recipient_id, query):
 
 def process_night_question(redis_client, recipient_id, query):
     user = redis_client.get_user(recipient_id)
-    # TODO: validate and normalize
-    # If it's not valid, return (use default value)
-    user["night_time"] = query
+    match = re.search(r'^([01]?\d|2[0-3]):([0-5]?\d)$', query)
+    if not match:
+        user["night_time"] = "23:00"
+        message = "Since I couldn't understand your message, "
+        message += "I set your night time to around 23:00 UTC+9, sorry :(\n"
+    else:
+        user["night_time"] = match.group(0)
+        message = "Thank you for answering Maid-chan question!\n"
     redis_client.set_user(recipient_id, user)
     # TODO: Update schedulers
-    return "Your information for my offerings has been updated <3"
+    # If the next one is "night_offering" / none
+    # Check the next "morning_offering" is closer to this value or not
+    # If it is closer, change the type
+    message += "Your information for my offerings has been updated <3"
+    return message
 
 
 def process_kanji_level_question(redis_client, recipient_id, query):
     user = redis_client.get_user(recipient_id)
-    # TODO: validate and normalize
-    # If it's not valid, return (use default value)
-    user["kanji_level"] = query
+    match = re.search(r'^N?[1-4]$', query)
+    if not match:
+        user["kanji_level"] = "N3"
+        message = "Since I couldn't understand your message, "
+        message += "I set your Kanji level to N3, sorry :("
+    else:
+        user["kanji_level"] = match.group(0)
+        message = "Your information for Kanji level has been updated <3"
     redis_client.set_user(recipient_id, user)
-    return "Your information for Kanji level has been updated <3"
+    return message
 
 
 def process_update_name_question(redis_client, recipient_id, query):
