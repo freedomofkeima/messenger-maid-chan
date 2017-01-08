@@ -10,9 +10,6 @@ def get_night_offerings_text():
     return Constants.NORMAL_GOOD_NIGHT[0]
 
 
-def get_morning_offerings_image():
-    return "example.png"
-
-
-def get_night_offerings_image():
-    return "example.png"
+def get_offerings_image():
+    # Ensure morning and night are different
+    return "example.png", "example.png"

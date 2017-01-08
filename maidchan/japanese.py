@@ -87,24 +87,25 @@ def get_random_vocabulary():
     return get_vocabulary(vocab_pos)
 
 
-# THIS IS A TEST FUNCTION
-def test_japanese_message():
-    # Try N3
-    kanji = get_random_kanji(3)
-    vocab = get_random_vocabulary()
+def get_japanese_message(kanji, vocab):
+    # Convert to UTF-8
+    for key, value in kanji.iteritems():
+        kanji[key] = value.encode("utf-8")
+    for key, value in vocab.iteritems():
+        vocab[key] = value.encode("utf-8")
 
-    m1 = "Kanji: {}\nOn: {}\nKun: {}\nMeaning: {}".format(
+    message = "Welcome to Maid-chan's Daily Japanese lesson!\n\n"
+    message += "Today Kanji is {}\nOn: {}\nKun: {}\nMeaning: {}\n".format(
         kanji["kanji"],
         kanji["on"],
         kanji["kun"],
         kanji["meaning"]
     )
-
-    m2 = "Vocabulary: {}\nKanji: {}\nMeaning: {}".format(
+    message += "----------\n\n"
+    message += "Today Vocabulary is {}\nKanji: {}\nMeaning: {}\n".format(
         vocab["vocabulary"],
         vocab["kanji"],
         vocab["meaning"]
     )
-
-    message = m1 + "\n---\n\n" + m2
+    message += "See you tomorrow in the same section! <3"
     return message

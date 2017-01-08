@@ -148,3 +148,6 @@ class RedisDriver(object):
             return json.loads(data)
         else:
             return {}
+
+    def flush_schedules(self):
+        self.redis_client.delete(SCHEDULES)

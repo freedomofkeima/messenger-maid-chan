@@ -53,7 +53,7 @@ def process_help(redis_client, recipient_id):
             keyword[0],
             keyword[1]
         )
-    message += "And also, time is handled in UTC+9, te-hee~"
+    message += "And also, time is handled in UTC+9 (Japan time), te-hee~"
     return message
 
 
