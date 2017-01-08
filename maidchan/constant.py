@@ -51,3 +51,8 @@ class Constants(object):
         "Ah no, it's already this late! Good night, {} <3",
         "The game was so much fun! Are you sleeping already, {}? Good nite~"
     ]
+
+    # Base default time, before adding random delta
+    DEFAULT_MORNING_TIME = "9:00"  # UTC+9
+    DEFAULT_JAPANESE_TIME = "12:00"  # UTC+9
+    DEFAULT_NIGHT_TIME = "23:00"  # UTC+9

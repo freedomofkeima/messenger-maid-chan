@@ -5,7 +5,10 @@ from maidchan.constant import Constants
 from maidchan.japanese import get_kanji, get_vocabulary,\
     KANJI_TOTAL_RECORDS, VOCABULARY_TOTAL_RECORDS
 
+DEFAULT_NICKNAME = "onii-chan"
 
+
+# THIS IS A TEST FUNCTION
 def test_message():
     # Try N3
     level = 3
@@ -69,7 +72,7 @@ def process_active_question(redis_client, recipient_id, question_id, query):
 def process_help(redis_client, recipient_id):
     user = redis_client.get_user(recipient_id)
     message = "Hello {}, welcome to Maid-chan Help System!\n\n".format(
-        user.get("nickname", "onii-chan")
+        user.get("nickname", DEFAULT_NICKNAME)
     )
     message += "You could ask me for these commands:\n"
     for keyword in Constants.RESERVED_KEYWORDS:
@@ -82,36 +85,98 @@ def process_help(redis_client, recipient_id):
 
 
 def process_subscribe_offerings(redis_client, recipient_id):
-    return test_message()
+    user = redis_client.get_user(recipient_id)
+    if user["offerings_status"] == "subscribed":
+        return "You have been subscribed to Maid-chan offerings, {}!".format(
+            user.get("nickname", DEFAULT_NICKNAME)
+        )
+    # Update DB information
+    user["offerings_status"] = "subscribed"
+    redis_client.set_user(recipient_id, user)
+    # Ask for user's preference
+    message = "Thanks for subscribing to Maid-chan offerings <3\n"
+    redis_client.set_active_question(recipient_id, 1)
+    message += Constants.QUESTIONS[1].format(
+        user.get("nickname", DEFAULT_NICKNAME)
+    )
+    return message
 
 
 def process_unsubscribe_offerings(redis_client, recipient_id):
-    return test_message()
+    user = redis_client.get_user(recipient_id)
+    # Update DB information
+    user["offerings_status"] = "unsubscribed"
+    redis_client.set_user(recipient_id, user)
+    # TODO: Remove schedulers
+    return "Maid-chan wish she could serve {} in the future :)".format(
+        user.get("nickname", DEFAULT_NICKNAME)
+    )
 
 
 def process_update_offerings(redis_client, recipient_id):
-    return test_message()
+    user = redis_client.get_user(recipient_id)
+    if user["offerings_status"] != "subscribed":
+        return "You need to subscribe first, {}!".format(
+            user.get("nickname", DEFAULT_NICKNAME)
+        )
+    # Ask for user's preference
+    redis_client.set_active_question(recipient_id, 1)
+    return Constants.QUESTIONS[1].format(
+        user.get("nickname", DEFAULT_NICKNAME)
+    )
 
 
 def process_subscribe_japanese(redis_client, recipient_id):
-    return test_message()
+    user = redis_client.get_user(recipient_id)
+    if user["japanese_status"] == "subscribed":
+        return "You have been subscribed to Japanese lesson, {}!".format(
+            user.get("nickname", DEFAULT_NICKNAME)
+        )
+    # Update DB information
+    user["japanese_status"] = "subscribed"
+    redis_client.set_user(recipient_id, user)
+    # TODO: Update schedulers
+    # Ask for user's preference
+    message = "Thanks for subscribing to Maid-chan Japanese lessons <3\n"
+    redis_client.set_active_question(recipient_id, 3)
+    message += Constants.QUESTIONS[3].format(
+        user.get("nickname", DEFAULT_NICKNAME)
+    )
+    return message
 
 
 def process_unsubscribe_japanese(redis_client, recipient_id):
-    return test_message()
+    user = redis_client.get_user(recipient_id)
+    # Update DB information
+    user["japanese_status"] = "unsubscribed"
+    redis_client.set_user(recipient_id, user)
+    # TODO: Remove schedulers
+    return "Maid-chan wish she could serve {} in the future :)".format(
+        user.get("nickname", DEFAULT_NICKNAME)
+    )
 
 
 def process_update_japanese(redis_client, recipient_id):
-    return test_message()
+    user = redis_client.get_user(recipient_id)
+    if user["japanese_status"] != "subscribed":
+        return "You need to subscribe first, {}!".format(
+            user.get("nickname", DEFAULT_NICKNAME)
+        )
+    # Ask for user's preference
+    redis_client.set_active_question(recipient_id, 3)
+    return Constants.QUESTIONS[3].format(
+        user.get("nickname", DEFAULT_NICKNAME)
+    )
 
 
 def process_update_name(redis_client, recipient_id):
-    return test_message()
+    redis_client.set_active_question(recipient_id, 4)
+    return Constants.QUESTIONS[4]
 
 
 def process_show_profile(redis_client, recipient_id):
     user = redis_client.get_user(recipient_id)
-    message = "Hi, {}!\n".format(user.get("nickname", "onii-chan"))
+    message = "Hi, {}!\n\n".format(user.get("nickname", DEFAULT_NICKNAME))
     if not user.get("nickname"):
         message += "Maid-chan haven't learned how to call you properly :'(\n\n"
     message += "Offerings status: {}\n".format(user["offerings_status"])
@@ -129,17 +194,50 @@ def process_show_profile(redis_client, recipient_id):
 
 
 def process_morning_question(redis_client, recipient_id, query):
-    return test_message()
+    user = redis_client.get_user(recipient_id)
+    # TODO: validate and normalize
+    # If it's not valid, return (use default value)
+    user["morning_time"] = query
+    redis_client.set_user(recipient_id, user)
+    message = "Thank you for answering Maid-chan question!\n"
+    # If answer is valid, proceed to 2nd question
+    # TODO: Update schedulers
+    redis_client.set_active_question(recipient_id, 2)
+    message += Constants.QUESTIONS[2].format(
+        user.get("nickname", DEFAULT_NICKNAME)
+    )
+    return message
 
 
 def process_night_question(redis_client, recipient_id, query):
-    return test_message()
+    user = redis_client.get_user(recipient_id)
+    # TODO: validate and normalize
+    # If it's not valid, return (use default value)
+    user["night_time"] = query
+    redis_client.set_user(recipient_id, user)
+    # TODO: Update schedulers
+    return "Your information for my offerings has been updated <3"
 
 
 def process_kanji_level_question(redis_client, recipient_id, query):
-    return test_message()
+    user = redis_client.get_user(recipient_id)
+    # TODO: validate and normalize
+    # If it's not valid, return (use default value)
+    user["kanji_level"] = query
+    redis_client.set_user(recipient_id, user)
+    return "Your information for Kanji level has been updated <3"
 
 
 def process_update_name_question(redis_client, recipient_id, query):
+    user = redis_client.get_user(recipient_id)
     # Ensure name is not empty or space-only
-    return test_message()
+    if not query or query.isspace():
+        return "That's not a proper name, buu-buu~"
+    # Update DB information
+    user["nickname"] = query
+    redis_client.set_user(recipient_id, user)
+    message = "Maid-chan will start calling you {} from now onwards!\n".format(
+        user.get("nickname", DEFAULT_NICKNAME)
+    )
+    message += "よろしくお願いします~"
+    return message

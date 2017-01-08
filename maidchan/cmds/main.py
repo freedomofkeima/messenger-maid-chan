@@ -38,8 +38,6 @@ class WebhookHandler(tornado.web.RequestHandler):
                 logging.info("Sender ID: {}".format(recipient_id))
                 if 'text' in fb_message:
                     query = fb_message['text']
-                    if query:  # Convert all queries to lowercase
-                        query = query.lower()
                     # Check active question, if it's not active, continue
                     q_id = self.application.redis_client.get_active_question(
                         recipient_id
@@ -52,12 +50,12 @@ class WebhookHandler(tornado.web.RequestHandler):
                             q_id,
                             query
                         )
-                    elif validate_reserved_keywords(query):
+                    elif validate_reserved_keywords(query.lower()):
                         # Process user's command
                         response = process_command(
                             self.application.redis_client,
                             recipient_id,
-                            query
+                            query.lower()
                         )
                     else:
                         # Normal chatbot

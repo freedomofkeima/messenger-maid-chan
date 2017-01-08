@@ -66,7 +66,8 @@ class RedisDriver(object):
         self.redis_client.set(redis_key, json.dumps(data))
 
     def get_user(self, recipient_id):
-        data = self.redis_client.get(recipient_id)
+        redis_key = "{}_{}".format(USER, recipient_id)
+        data = self.redis_client.get(redis_key)
         if data:
             return json.loads(data)
         else:
