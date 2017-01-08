@@ -71,7 +71,6 @@ class RedisDriver(object):
             return json.loads(data)
         else:
             return {
-                "nickname": "onii-chan",
                 "offerings_status": "unsubscribed",
                 "japanese_status": "unsubscribed",
                 "morning_time": "09:00",

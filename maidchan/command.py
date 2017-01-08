@@ -73,7 +73,7 @@ def process_help(redis_client, recipient_id):
     )
     message += "You could ask me for these commands:\n"
     for keyword in Constants.RESERVED_KEYWORDS:
-        message += "- {}: {}\n".format(
+        message += "- \"{}\": {}\n".format(
             keyword[0],
             keyword[1]
         )
@@ -110,7 +110,22 @@ def process_update_name(redis_client, recipient_id):
 
 
 def process_show_profile(redis_client, recipient_id):
-    return test_message()
+    user = redis_client.get_user(recipient_id)
+    message = "Hi, {}!\n".format(user.get("nickname", "onii-chan"))
+    if not user.get("nickname"):
+        message += "Maid-chan haven't learned how to call you properly :'(\n\n"
+    message += "Offerings status: {}\n".format(user["offerings_status"])
+    if user["offerings_status"] == "subscribed":
+        message += "Morning message: around {} UTC+9\n".format(
+            user["morning_time"]
+        )
+        message += "Night message: around {} UTC+9\n".format(
+            user["night_time"]
+        )
+    message += "Japanese status: {}\n".format(user["japanese_status"])
+    if user["japanese_status"] == "subscribed":
+        message += "Kanji level: {}".format(user["kanji_level"])
+    return message
 
 
 def process_morning_question(redis_client, recipient_id, query):
