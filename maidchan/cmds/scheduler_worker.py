@@ -17,7 +17,7 @@ def main():
     )
     redis_client = RedisDriver(rc)
     while True:
-        # TODO: Update schedules metadata if it's empty
+        # TODO: Update schedules metadata if it's empty or every 24 hours
         # TODO: Check all stored jobs
         time.sleep(60)
 

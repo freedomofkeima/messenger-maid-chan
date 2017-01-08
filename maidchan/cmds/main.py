@@ -5,53 +5,16 @@ import sys
 import tornado.ioloop
 import tornado.web
 
-from random import randint
-
 from maidchan.base import connect_redis, RedisDriver
 from maidchan.chatbot import ChatBotDriver
+from maidchan.command import process_command, process_active_question
 from maidchan.config import ACCESS_TOKEN, VERIFY_TOKEN
-from maidchan.helper import validate_reserved_keywords, validate_attachments
-from maidchan.japanese import get_kanji, get_vocabulary,\
-    KANJI_TOTAL_RECORDS, VOCABULARY_TOTAL_RECORDS
+from maidchan.helper import validate_reserved_keywords, validate_attachments,\
+    split_message
 from pymessenger.bot import Bot
-
 
 # Global init
 bot = Bot(ACCESS_TOKEN)
-
-
-def test_message():
-    # Try N3
-    level = 3
-    kanji_pos = randint(1, KANJI_TOTAL_RECORDS[level])
-    kanji = get_kanji(level, kanji_pos)
-    vocab_pos = randint(1, VOCABULARY_TOTAL_RECORDS)
-    vocab = get_vocabulary(vocab_pos)
-
-    m1 = "Kanji: {}\nOn: {}\nKun: {}\nMeaning: {}".format(
-        kanji["kanji"],
-        kanji["on"],
-        kanji["kun"],
-        kanji["meaning"]
-    )
-
-    m2 = "Vocabulary: {}\nKanji: {}\nMeaning: {}".format(
-        vocab["vocabulary"],
-        vocab["kanji"],
-        vocab["meaning"]
-    )
-
-    message = m1 + "\n---\n\n" + m2
-    return message
-
-
-def process_command(redis_client, recipient_id, query):
-    return test_message()
-
-
-def process_active_question(redis_client, recipient_id, question_id, query):
-    redis_client.set_active_question(recipient_id, -1)  # Set back to default
-    return "<3"
 
 
 class WebhookHandler(tornado.web.RequestHandler):
@@ -99,7 +62,9 @@ class WebhookHandler(tornado.web.RequestHandler):
                     else:
                         # Normal chatbot
                         response = self.application.chatbot.get_response(query)
-                    bot.send_text_message(recipient_id, response)
+                    response_part = split_message(response)
+                    for part in response_part:
+                        bot.send_text_message(recipient_id, part)
                 elif 'attachments' in fb_message:
                     is_valid = validate_attachments(fb_message['attachments'])
                     if not is_valid:

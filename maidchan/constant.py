@@ -2,6 +2,7 @@
 
 
 class Constants(object):
+    # See command.py for implementation
     RESERVED_KEYWORDS = [
         ("help", "Maid-chan will show you these texts"),
         ("subscribe offerings", "Maid-chan will start sending a good morning & a good night messages"),
@@ -9,14 +10,16 @@ class Constants(object):
         ("update offerings", "Maid-chan will keep her best to follow your waking up and sleeping time pattern!"),
         ("subscribe japanese", "Maid-chan will start sending you daily Japanese Kanji & Vocabulary"),
         ("unsubscribe japanese", "Maid-chan will stop sending you daily Japanese Kanji & Vocabulary"),
-        ("update name", "What name do you prefer to be called? onii-chan? goshujin-sama? or ... darling?"),
-        ("profile", "Maid-chan will show all information which Maid-chan knows about you")
+        ("update japanese", "Maid-chan will ask you about Kanji level selection (N1-N4, old test format)"),
+        ("update name", "What name do you prefer to be called? onii-chan? goshujin-sama? or perhaps, ... darling?"),
+        ("show profile", "Maid-chan will show all information which Maid-chan knows about you")
     ]
 
     QUESTIONS = {
-        "1": "What time do you usually wake up in the morning, {}? (e.g.: 9:00)",
-        "2": "What time do you usually sleep, {}? (e.g.: 23:00)",
-        "3": "Which level of Kanji do you want to learn between N1-N4, {}? (e.g.: N3)"
+        1: "What time do you usually wake up in the morning, {}? (e.g.: 9:00)",
+        2: "What time do you usually sleep, {}? (e.g.: 23:00)",
+        3: "Which level of Kanji do you want to learn between N1-N4, {}? (e.g.: N3)",
+        4: "How should Maid-chan call you? onii-chan? goshujin-sama? or perhaps, ... darling?"
     }
 
     NORMAL_GOOD_MORNING = [

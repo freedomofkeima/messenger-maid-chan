@@ -44,3 +44,27 @@ def validate_reserved_keywords(command):
         if keyword[0] in command:
             return True
     return False
+
+
+def split_message(message):
+    """
+    Apparently, Facebook has a text limit of 640
+    We currently assume there's no line longer than 640
+    """
+    if len(message) <= 640:
+        return [message]
+
+    messages = []
+    # Split based on new line
+    d = "\n"
+    lines = [e+d for e in message.split(d)]
+    current_line = ""
+    for line in lines:
+        if len(current_line) + len(line) <= 640:
+            current_line += line
+        else:
+            messages.append(current_line)
+            current_line = ""
+    if current_line:
+        messages.append(current_line)
+    return messages

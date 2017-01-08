@@ -25,6 +25,9 @@ If you have any other ideas, I am accepting contributions :)
 - [Command Not Yet Implemented] Daily good morning and good night messages, with "offerings"!
 - [Command Not Yet Implemented] Daily Japanese Kanji & Vocabulary
 
+All time-related features are currently handled in **UTC+9 (Japan Time)**.
+
+
 ## [IN PROGRESS] Available Command
 
 ### All users
@@ -37,7 +40,7 @@ If you have any other ideas, I am accepting contributions :)
 - `unsubscribe japanese`: Maid-chan will stop sending you random daily Kanji & Vocabulary
 - `update japanese`: Maid-chan will ask about your level preference for Kanji (N1 to N4, old test format)
 - `update name`: By default, Maid-chan will call you with `onii-chan`
-- `profile`: Do you want to know what Maid-chan knows about you? Then, you could use this command!
+- `show profile`: Do you want to know what Maid-chan knows about you? Then, you could use this command!
 
 
 ## Priority Ideas
@@ -55,6 +58,7 @@ If you have any other ideas, I am accepting contributions :)
 - Natural Language processing for conversing daily conversation (Naturally we can improve it with IBM Watson or Google Cloud Speech, but the model "probably" differs from Maid-chan requirement)
 - IoT with home electronics
 - Mini games
+- Automatic offerings update from upstream
 - etc
 
 

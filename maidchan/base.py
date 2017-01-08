@@ -57,8 +57,8 @@ class RedisDriver(object):
                   "nickname": "Ryuunosuke",
                   "offerings_status": "subscribed",
                   "japanese_status": "subscribed",
-                  "morning_time": "09:00",
-                  "night_time": "23:00",
+                  "morning_time": "09:00",  # UTC+9
+                  "night_time": "23:00",  # UTC+9
                   "kanji_level": "N3"
               }
         """
@@ -70,7 +70,14 @@ class RedisDriver(object):
         if data:
             return json.loads(data)
         else:
-            return {}
+            return {
+                "nickname": "onii-chan",
+                "offerings_status": "unsubscribed",
+                "japanese_status": "unsubscribed",
+                "morning_time": "09:00",
+                "night_time": "23:00",
+                "kanji_level": "N3"
+            }
 
     def push_primitive_queue(self, data):
         """
