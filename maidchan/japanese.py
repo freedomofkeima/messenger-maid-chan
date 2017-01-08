@@ -77,14 +77,21 @@ def get_vocabulary(current_pos=1):
     return vocabulary
 
 
+def get_random_kanji(level):
+    kanji_pos = randint(1, KANJI_TOTAL_RECORDS[level])
+    return get_kanji(level, kanji_pos)
+
+
+def get_random_vocabulary():
+    vocab_pos = randint(1, VOCABULARY_TOTAL_RECORDS)
+    return get_vocabulary(vocab_pos)
+
+
 # THIS IS A TEST FUNCTION
 def test_japanese_message():
     # Try N3
-    level = 3
-    kanji_pos = randint(1, KANJI_TOTAL_RECORDS[level])
-    kanji = get_kanji(level, kanji_pos)
-    vocab_pos = randint(1, VOCABULARY_TOTAL_RECORDS)
-    vocab = get_vocabulary(vocab_pos)
+    kanji = get_random_kanji(3)
+    vocab = get_random_vocabulary()
 
     m1 = "Kanji: {}\nOn: {}\nKun: {}\nMeaning: {}".format(
         kanji["kanji"],

@@ -3,6 +3,7 @@ certifi==2016.9.26
 chatterbot==0.5.4
 enum==0.4.6
 future==0.16.0
+futures==3.0.5
 jsondatabase==0.1.7
 langdetect==1.0.7
 nltk==3.2.2

@@ -22,8 +22,8 @@ If you have any other ideas, I am accepting contributions :)
 <img alt="Combined result" src="https://freedomofkeima.com/images/maid-chan/primitive.gif" height="500">  
 - Simple chat (English or Bahasa Indonesia) via [ChatterBot](https://github.com/gunthercox/ChatterBot) feat [langdetect](https://github.com/Mimino666/langdetect). The accuracy is still bad, though (no optimization so far)  
 <img src="https://freedomofkeima.com/images/maid-chan/chatterbot.png" height="300">  
-- [Command Not Yet Implemented] Daily good morning and good night messages, with "offerings"!
-- [Command Not Yet Implemented] Daily Japanese Kanji & Vocabulary
+- [Command In Progress] Daily good morning and good night messages, with "offerings"! (**Requires** `maidchan_scheduler` running in the background)
+- [Command In Progress] Daily Japanese Kanji & Vocabulary (**Requires** `maidchan_scheduler` running in the background)
 
 All time-related features are currently handled in **UTC+9 (Japan Time)**.
 
@@ -77,5 +77,5 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 
 MIT License.
 
-Last Updated: January 8, 2017
+Last Updated: January 9, 2017
 
