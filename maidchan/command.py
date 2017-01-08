@@ -227,7 +227,7 @@ def process_night_question(redis_client, recipient_id, query):
 
 def process_kanji_level_question(redis_client, recipient_id, query):
     user = redis_client.get_user(recipient_id)
-    match = re.search(r'^N?[1-4]$', query)
+    match = re.search(r'^N[1-4]$', query)
     if not match:
         user["kanji_level"] = "N3"
         message = "Since I couldn't understand your message, "
