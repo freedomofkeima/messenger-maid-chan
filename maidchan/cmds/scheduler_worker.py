@@ -6,6 +6,7 @@ import time
 from random import randint
 
 from maidchan.base import connect_redis, RedisDriver
+from maidchan.command import DEFAULT_NICKNAME
 from maidchan.config import ACCESS_TOKEN
 from maidchan.helper import send_image
 from maidchan.japanese import get_random_kanji, get_random_vocabulary,\
@@ -51,7 +52,7 @@ def process_user(redis_client, recipient_id, metadata, current_mt):
             send_offerings(
                 recipient_id,
                 metadata["morning_offering_text"].format(
-                    user.get("nickname", "onii-chan")
+                    user.get("nickname", DEFAULT_NICKNAME)
                 ),
                 metadata["morning_offering_image"]
             )
@@ -62,13 +63,13 @@ def process_user(redis_client, recipient_id, metadata, current_mt):
             redis_client.set_user(recipient_id, user)
             logging.info("Morning offerings for {} - {} is sent!".format(
                 recipient_id,
-                user["nickname"]
+                user.get("nickname", DEFAULT_NICKNAME)
             ))
         elif schedule_type == "night_offerings_mt" and mt < current_mt:
             send_offerings(
                 recipient_id,
                 metadata["night_offering_text"].format(
-                    user.get("nickname", "onii-chan")
+                    user.get("nickname", DEFAULT_NICKNAME)
                 ),
                 metadata["night_offering_image"]
             )
@@ -79,7 +80,7 @@ def process_user(redis_client, recipient_id, metadata, current_mt):
             redis_client.set_user(recipient_id, user)
             logging.info("Night offerings for {} - {} is sent!".format(
                 recipient_id,
-                user["nickname"]
+                user.get("nickname", DEFAULT_NICKNAME)
             ))
         elif schedule_type == "japanese_lesson_mt" and mt < current_mt:
             level = user["kanji_level"].lower()
@@ -124,6 +125,7 @@ def main():
     while True:
         recipient_ids = redis_client.get_users()
         current_mt = int(time.time())
+        logging.info("Current epoch time is {}".format(current_mt))
         metadata = redis_client.get_schedules()
         if not metadata or metadata["next_mt"] < current_mt:
             # Get offerings text for today
@@ -189,7 +191,7 @@ def main():
                 ): recipient_id for recipient_id in recipient_ids}
             for future in concurrent.futures.as_completed(future_to_msg):
                 try:
-                    future.result()
+                    future.result(timeout=30)
                 except Exception:
                     logging.exception("Error in scheduler!")
         time.sleep(60)
