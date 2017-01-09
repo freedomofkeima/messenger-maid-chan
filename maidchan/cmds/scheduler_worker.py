@@ -3,6 +3,7 @@ import concurrent.futures
 import logging
 import sys
 import time
+from random import randint
 
 from maidchan.base import connect_redis, RedisDriver
 from maidchan.config import ACCESS_TOKEN
@@ -10,20 +11,76 @@ from maidchan.helper import send_image
 from maidchan.japanese import get_random_kanji, get_random_vocabulary,\
     get_japanese_message
 from maidchan.offerings import get_morning_offerings_text,\
-    get_night_offerings_text, get_offerings_image
+    get_night_offerings_text, get_offerings_image, remove_offerings_image,\
+    SPECIAL
 from pymessenger.bot import Bot
 
+from maidchan.helper import time_to_next_utc_mt
+
+
 bot = Bot(ACCESS_TOKEN)
+
+
+def send_offerings(recipient_id, text_message, image_path):
+    if 'png' in image_path:
+        image_type = "image/png"
+    elif 'jpg' or 'jpeg' in image_path:
+        image_type = "image/jpeg"
+    else:
+        image_type = None
+    # Send good morning / good night message
+    bot.send_text_message(
+        recipient_id,
+        text_message
+    )
+    # Send image offerings if file exists and recognizable
+    if image_path and image_type:
+        send_image(
+            ACCESS_TOKEN,
+            recipient_id,
+            image_path,
+            image_type
+        )
 
 
 def process_user(redis_client, recipient_id, metadata, current_mt):
     user = redis_client.get_user(recipient_id)
     schedules = user["schedules"]
-    for schedule_type, mt in schedules.iteritems():
+    for schedule_type, mt in schedules.items():
         if schedule_type == "morning_offerings_mt" and mt < current_mt:
-            continue
+            send_offerings(
+                recipient_id,
+                metadata["morning_offering_text"].format(
+                    user.get("nickname", "onii-chan")
+                ),
+                metadata["morning_offering_image"]
+            )
+            next_mt = time_to_next_utc_mt(user["night_time"])
+            next_mt += metadata.get("night_offering_mt_offset", 0)
+            del user["schedules"]["morning_offerings_mt"]  # Remove current item
+            user["schedules"]["night_offerings_mt"] = next_mt
+            redis_client.set_user(recipient_id, user)
+            logging.info("Morning offerings for {} - {} is sent!".format(
+                recipient_id,
+                user["nickname"]
+            ))
         elif schedule_type == "night_offerings_mt" and mt < current_mt:
-            continue
+            send_offerings(
+                recipient_id,
+                metadata["night_offering_text"].format(
+                    user.get("nickname", "onii-chan")
+                ),
+                metadata["night_offering_image"]
+            )
+            next_mt = time_to_next_utc_mt(user["morning_time"])
+            next_mt += metadata.get("morning_offering_mt_offset", 0)
+            del user["schedules"]["night_offerings_mt"]  # Remove current item
+            user["schedules"]["morning_offerings_mt"] = next_mt
+            redis_client.set_user(recipient_id, user)
+            logging.info("Night offerings for {} - {} is sent!".format(
+                recipient_id,
+                user["nickname"]
+            ))
         elif schedule_type == "japanese_lesson_mt" and mt < current_mt:
             level = user["kanji_level"].lower()
             message = get_japanese_message(
@@ -39,6 +96,20 @@ def process_user(redis_client, recipient_id, metadata, current_mt):
             ))
 
 
+def adjust_offerings_mt(redis_client, users, metadata,
+                        morning_offset, night_offset):
+    m_adj = morning_offset - metadata.get("morning_offering_mt_offset", 0)
+    n_adj = night_offset - metadata.get("night_offering_mt_offset", 0)
+    for recipient_id in users:
+        user = redis_client.get_user(recipient_id)
+        schedules = user["schedules"]
+        if "morning_offerings_mt" in schedules:
+            user["schedules"]["morning_offerings_mt"] += m_adj
+        if "night_offerings_mt" in schedules:
+            user["schedules"]["night_offerings_mt"] += n_adj
+        redis_client.set_user(recipient_id, user)
+
+
 def main():
     # Logging
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
@@ -51,23 +122,61 @@ def main():
     )
     redis_client = RedisDriver(rc)
     while True:
+        recipient_ids = redis_client.get_users()
         current_mt = int(time.time())
         metadata = redis_client.get_schedules()
         if not metadata or metadata["next_mt"] < current_mt:
-            metadata["morning_offering_text"] = get_morning_offerings_text()
-            metadata["night_offering_text"] = get_night_offerings_text()
+            # Get offerings text for today
+            morning_text, morning_type = get_morning_offerings_text()
+            metadata["morning_offering_text"] = morning_text
+            if morning_type == SPECIAL:
+                morning_offset = randint(3600, 7200)
+            else:
+                morning_offset = randint(0, 1800)
+            night_text, night_type = get_night_offerings_text()
+            metadata["night_offering_text"] = night_text
+            if night_type == SPECIAL:
+                night_offset = randint(2700, 5400)
+            else:
+                night_offset = randint(0, 900)
+
+            # Adjust all users' offerings mt
+            adjust_offerings_mt(
+                redis_client,
+                recipient_ids,
+                metadata,
+                morning_offset,
+                night_offset
+            )
+
+            metadata["morning_offering_mt_offset"] = morning_offset
+            metadata["night_offering_mt_offset"] = night_offset
+
+            # Move old images
+            if metadata.get("morning_offering_image"):
+                remove_offerings_image(metadata["morning_offering_image"])
+            if metadata.get("night_offering_image"):
+                remove_offerings_image(metadata["night_offering_image"])
+
+            # Get offerings image for today
             morning_image, night_image = get_offerings_image()
             metadata["morning_offering_image"] = morning_image
             metadata["night_offering_image"] = night_image
+
+            # Get daily Kanji & Vocabulary
             metadata["kanji_n1"] = get_random_kanji(1)
             metadata["kanji_n2"] = get_random_kanji(2)
             metadata["kanji_n3"] = get_random_kanji(3)
             metadata["kanji_n4"] = get_random_kanji(4)
             metadata["vocabulary"] = get_random_vocabulary()
+
+            # Set next_mt
             metadata["next_mt"] = current_mt + 86400  # every 1 day
+
+            # Save to DB
             redis_client.set_schedules(metadata)
+
         # Check all users (good enough if the number of users are small)
-        recipient_ids = redis_client.get_users()
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) \
             as executor:
             future_to_msg = \

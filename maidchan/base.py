@@ -129,9 +129,11 @@ class RedisDriver(object):
         data: dict of all schedules metadata
         e.g.: {
                   "morning_offering_text": "normal_1",
+                  "morning_offering_mt_offset": 1000,
                   "morning_offering_image": "example.png",
                   "night_offering_text": "special_1",
-                  "night_offering_image": "example2.png",
+                  "night_offering_mt_offset": 4000,
+                  "night_offering_image": "example.png",
                   "kanji_n1": "",
                   "kanji_n2": "",
                   "kanji_n3": "",

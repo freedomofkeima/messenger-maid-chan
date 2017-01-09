@@ -22,7 +22,7 @@ If you have any other ideas, I am accepting contributions :)
 <img alt="Combined result" src="https://freedomofkeima.com/images/maid-chan/primitive.gif" width="350">  
 - Simple chat (English or Bahasa Indonesia) via [ChatterBot](https://github.com/gunthercox/ChatterBot) feat [langdetect](https://github.com/Mimino666/langdetect). The accuracy is still bad, though (no optimization so far)  
 <img src="https://freedomofkeima.com/images/maid-chan/chatterbot.png" width="350">  
-- **[In Progress]** Daily good morning and good night messages, with "offerings"! (**Requires** `maidchan_scheduler` running in the background)  
+- Daily good morning and good night messages, with "offerings"! (**Requires** `maidchan_scheduler` running in the background)  
 <img src="https://freedomofkeima.com/images/maid-chan/offerings_subscribe.png" width="350">  
 - Daily Japanese Kanji & Vocabulary (**Requires** `maidchan_scheduler` running in the background)  
 <img src="https://freedomofkeima.com/images/maid-chan/japanese_subscribe.png" width="350">  
@@ -68,6 +68,7 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 - Natural Language processing for conversing daily conversation (Naturally we can improve it with IBM Watson or Google Cloud Speech, but the model "probably" differs from Maid-chan requirement)
 - IoT with home electronics
 - Mini games
+- Location-aware features: Recommendation, weather, train status, etc
 - etc
 
 

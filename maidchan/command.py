@@ -186,7 +186,9 @@ def process_morning_question(redis_client, recipient_id, query):
     else:
         user["morning_time"] = match.group(0)
         message = "Thank you!\n"
+    metadata = redis_client.get_schedules()
     next_mt = time_to_next_utc_mt(user["morning_time"])
+    next_mt += metadata.get("morning_offering_mt_offset", 0)
     night_mt = user["schedules"].get("night_offerings_mt")
     if not night_mt or next_mt < night_mt:
         if night_mt:  # Replace
@@ -212,10 +214,10 @@ def process_night_question(redis_client, recipient_id, query):
     else:
         user["night_time"] = match.group(0)
         message = "Thank you for answering Maid-chan question!\n"
+    metadata = redis_client.get_schedules()
     next_mt = time_to_next_utc_mt(user["night_time"])
+    next_mt += metadata.get("night_offering_mt_offset", 0)
     morning_mt = user["schedules"].get("morning_offerings_mt")
-    import logging
-    logging.info(user)
     if not morning_mt or next_mt < morning_mt:
         if morning_mt:  # Replace
             del user["schedules"]["morning_offerings_mt"]

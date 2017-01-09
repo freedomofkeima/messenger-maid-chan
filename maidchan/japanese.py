@@ -95,14 +95,14 @@ def get_japanese_message(kanji, vocab):
         vocab[key] = value.encode("utf-8")
 
     message = "Welcome to Maid-chan's Daily Japanese lesson!\n\n"
-    message += "Today Kanji is {}\nOn: {}\nKun: {}\nMeaning: {}\n".format(
+    message += "Today Kanji is {}\nOn: {}\nKun: {}\nMeaning: {}\n\n".format(
         kanji["kanji"],
         kanji["on"],
         kanji["kun"],
         kanji["meaning"]
     )
     message += "----------\n\n"
-    message += "Today Vocabulary is {}\nKanji: {}\nMeaning: {}\n".format(
+    message += "Today Vocabulary is {}\nKanji: {}\nMeaning: {}\n\n".format(
         vocab["vocabulary"],
         vocab["kanji"],
         vocab["meaning"]
