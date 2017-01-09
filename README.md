@@ -23,9 +23,10 @@ If you have any other ideas, I am accepting contributions :)
 - Simple chat (English or Bahasa Indonesia) via [ChatterBot](https://github.com/gunthercox/ChatterBot) feat [langdetect](https://github.com/Mimino666/langdetect). The accuracy is still bad, though (no optimization so far)  
 <img src="https://freedomofkeima.com/images/maid-chan/chatterbot.png" width="350">  
 - Daily good morning and good night messages, with "offerings"! (**Requires** `maidchan_scheduler` running in the background)  
-<img src="https://freedomofkeima.com/images/maid-chan/offerings_subscribe.png" width="350">  
+<img src="https://freedomofkeima.com/images/maid-chan/daily_morning_offerings.png" width="350">  
+<img src="https://freedomofkeima.com/images/maid-chan/daily_night_offerings.png" width="350">  
 - Daily Japanese Kanji & Vocabulary (**Requires** `maidchan_scheduler` running in the background)  
-<img src="https://freedomofkeima.com/images/maid-chan/japanese_subscribe.png" width="350">  
+<img src="https://freedomofkeima.com/images/maid-chan/daily_japanese.png" width="350">
 
 All time-related features are currently handled in **UTC+9 (Japan Time)**.
 
@@ -37,14 +38,15 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 - `help`: You will get the list of all available commands from Maid-chan
 - `subscribe offerings`: Maid-chan will start giving you a good morning message and a good night messages
 - `unsubscribe offerings`: Maid-chan will stop spamming you with those messages, but Maid-chan will be sad :'(
-- `update offerings`: Maid-chan will ask you about your usual waking up and sleeping time, because Maid-chan doesn't want to disturb your sleep . . ., usually :p (some surprises inside!)
+- `update offerings`: Maid-chan will ask you about your usual waking up and sleeping time, because Maid-chan doesn't want to disturb your sleep . . ., usually :p (some surprises inside!)  
+<img src="https://freedomofkeima.com/images/maid-chan/offerings_subscribe.png" width="350">  
 - `subscribe japanese`: Maid-chan will start sending you random daily Kanji & Vocabulary
 - `unsubscribe japanese`: Maid-chan will stop sending you random daily Kanji & Vocabulary
-- `update japanese`: Maid-chan will ask about your level preference for Kanji (N1 to N4, old test format)
-- `update name`: By default, Maid-chan will call you with `onii-chan`
+- `update japanese`: Maid-chan will ask about your level preference for Kanji (N1 to N4, old test format)  
+<img src="https://freedomofkeima.com/images/maid-chan/japanese_subscribe.png" width="350">  
+- `update name`: By default, Maid-chan will call you with `onii-chan`  
+<img src="https://freedomofkeima.com/images/maid-chan/name.png" width="350">  
 - `show profile`: Do you want to know what Maid-chan knows about you? Then, you could use this command!
-
-<img src="https://freedomofkeima.com/images/maid-chan/name.png" width="350">
 
 
 ## Priority Ideas
@@ -66,9 +68,9 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 - Japanese language quiz
 - Image recognition, e.g.: waifu recognizer - https://github.com/nagadomi/lbpcascade_animeface or self-created
 - Natural Language processing for conversing daily conversation (Naturally we can improve it with IBM Watson or Google Cloud Speech, but the model "probably" differs from Maid-chan requirement)
-- IoT with home electronics
 - Mini games
 - Location-aware features: Recommendation, weather, train status, etc
+- IoT with home electronics
 - etc
 
 
