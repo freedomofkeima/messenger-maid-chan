@@ -82,7 +82,7 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 
 ## License
 
-MIT License.
+This project itself is licensed under MIT License. All images are owned by their respective creators.
 
 Last Updated: January 9, 2017
 
