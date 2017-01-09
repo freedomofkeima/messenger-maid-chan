@@ -173,7 +173,7 @@ def main():
             metadata["vocabulary"] = get_random_vocabulary()
 
             # Set next_mt
-            metadata["next_mt"] = current_mt + 86400  # every 1 day
+            metadata["next_mt"] += 86400  # every 1 day
 
             # Save to DB
             redis_client.set_schedules(metadata)

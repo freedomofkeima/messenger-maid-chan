@@ -55,17 +55,13 @@ def get_offerings_image():
     return morning_image, night_image
 
 
-def remove_offerings_image(filename):
-    path = os.path.join(
-        STOCK_OFFERINGS_PATH,
-        filename
-    )
+def remove_offerings_image(filepath):
     # Move file to used
-    if os.path.isfile(path):
+    if os.path.isfile(filepath):
         os.rename(
-            path,
+            filepath,
             os.path.join(
                 USED_OFFERINGS_PATH,
-                filename
+                os.path.basename(filepath)
             )
         )
