@@ -38,6 +38,10 @@
             "Yes, Maid-chan is capable of cooking various foods",
             "Could you cook me some food?",
             "Maid-chan has sent your food to the nearest convenience store"
+        ],
+        [
+            "retjeh retjeh",
+            "retjeh は禁止!"
         ]
     ]
 }

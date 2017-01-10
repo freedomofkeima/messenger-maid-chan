@@ -17,12 +17,20 @@
             "Ohayou!"
         ],
         [
+            "おはよう",
+            "Ohayou!"
+        ],
+        [
             "Oyasumi",
             "Good night <3"
         ],
         [
             "Good night",
-            "Oyasumi <3"
+            "Oyasumi~"
+        ],
+        [
+            "おやすみ",
+            "Oyasumi~"
         ],
         [
             "Itadakimasu",
@@ -35,6 +43,26 @@
         [
             "How are you?",
             "I'm fine, Master!"
+        ],
+        [
+            "さようなら",
+            "Good bye!"
+        ],
+        [
+            "Sayonara",
+            "Good bye!"
+        ],
+        [
+            "Good bye!",
+            "Sayonara~"
+        ],
+        [
+            "onegaishimasu",
+            "Onee-chan makasete!"
+        ],
+        [
+            "おねがいします",
+            "Onee-chan makasete!"
         ]
     ]
 }
