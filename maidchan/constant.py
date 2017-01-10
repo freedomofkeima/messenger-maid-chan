@@ -29,7 +29,8 @@ class Constants(object):
         "Ohayou gozaimasu, {}! Don't forget to exercise!",
         "Morning, {}. It's time to wake up :D",
         "Good morning to you, {}",
-        "Ohaa~ Time to get up already, {}"
+        "Ohaa~ Time to get up already, {}",
+        "Guten Morgen, {}. A new day means a new hope, がんばって!"
     ]
 
     NORMAL_GOOD_NIGHT = [
@@ -39,7 +40,8 @@ class Constants(object):
         "Have a nice sleep, {} <3",
         "Tomorrow will be absolutely better. It's time to sleep, {} :D",
         "Good night to you, {}",
-        "Oyaa~ Let's have a nice sleep, {}"
+        "Oyaa~ Let's have a nice sleep, {}",
+        "Gute Nacht, have a proper rest, {}!"
     ]
 
     SPECIAL_GOOD_MORNING = [

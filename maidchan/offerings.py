@@ -14,7 +14,7 @@ USED_OFFERINGS_PATH = "offerings/used"
 
 def get_special_probability():
     p = randint(1, 100)
-    if p <= 5:  # 5% chance of special
+    if p <= 2:  # 2% chance of special
         logging.info("Special offerings for today!")
         return True
     logging.info("Normal offerings for today!")

@@ -132,13 +132,13 @@ def main():
             morning_text, morning_type = get_morning_offerings_text()
             metadata["morning_offering_text"] = morning_text
             if morning_type == SPECIAL:
-                morning_offset = randint(3600, 7200)
+                morning_offset = randint(2700, 5400)
             else:
                 morning_offset = randint(0, 1800)
             night_text, night_type = get_night_offerings_text()
             metadata["night_offering_text"] = night_text
             if night_type == SPECIAL:
-                night_offset = randint(2700, 5400)
+                night_offset = randint(2700, 3600)
             else:
                 night_offset = randint(0, 900)
 
