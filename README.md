@@ -20,7 +20,7 @@ If you have any other ideas, I am accepting contributions :)
 - Upload image for random image filtering via [Primitive](https://github.com/fogleman/primitive) (**Requires** `maidchan_primitive` running in the background and [ImageMagick](https://www.imagemagick.org/script/index.php) `convert` feature for generating GIF)  
 <img src="https://freedomofkeima.com/images/maid-chan/primitive_scr.jpg" width="350">  
 <img alt="Combined result" src="https://freedomofkeima.com/images/maid-chan/primitive.gif" width="350">  
-- Simple chat (English or Bahasa Indonesia) via [ChatterBot](https://github.com/gunthercox/ChatterBot) feat [langdetect](https://github.com/Mimino666/langdetect). The accuracy is still bad, though (no optimization so far)  
+- Simple chat (English or Bahasa Indonesia) via [ChatterBot](https://github.com/gunthercox/ChatterBot) feat [langdetect](https://github.com/Mimino666/langdetect). The accuracy is still bad, though  
 <img src="https://freedomofkeima.com/images/maid-chan/chatterbot.png" width="350">  
 - Daily good morning and good night messages, with "offerings"! (**Requires** `maidchan_scheduler` running in the background)  
 <img src="https://freedomofkeima.com/images/maid-chan/daily_morning_offerings.png" width="350">  
@@ -84,5 +84,5 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 
 This project itself is licensed under MIT License. All images are owned by their respective creators.
 
-Last Updated: January 9, 2017
+Last Updated: January 10, 2017
 

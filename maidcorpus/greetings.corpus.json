@@ -1,0 +1,40 @@
+{
+    "greetings": [
+        [
+            "Arigatou",
+            "どういたしまして~"
+        ],
+        [
+            "ありがとう",
+            "どういたしまして"
+        ],
+        [
+            "Ohayou",
+            "Good morning to you too!"
+        ],
+        [
+            "Good morning",
+            "Ohayou!"
+        ],
+        [
+            "Oyasumi",
+            "Good night <3"
+        ],
+        [
+            "Good night",
+            "Oyasumi <3"
+        ],
+        [
+            "Itadakimasu",
+            "Have a nice meal!"
+        ],
+        [
+            "いただきます",
+            "Have a nice meal!"
+        ],
+        [
+            "How are you?",
+            "I'm fine, Master!"
+        ]
+    ]
+}

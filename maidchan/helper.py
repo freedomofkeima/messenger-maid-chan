@@ -2,6 +2,8 @@
 import calendar
 import datetime
 import logging
+import os
+import shutil
 import subprocess
 import time
 
@@ -87,3 +89,17 @@ def time_to_next_utc_mt(time_str):
     while dt_epoch_time < current_epoch_time:  # Move to the next day
         dt_epoch_time += 86400
     return dt_epoch_time
+
+
+def copy_recursive(src, dst, symlinks=False, ignore=None):
+    if not os.path.exists(dst):
+        os.makedirs(dst)
+    for item in os.listdir(src):
+        s = os.path.join(src, item)
+        d = os.path.join(dst, item)
+        if os.path.isdir(s):
+            copy_recursive(s, d, symlinks, ignore)
+        else:
+            if not os.path.exists(d) \
+                    or os.stat(s).st_mtime - os.stat(d).st_mtime > 1:
+                shutil.copy2(s, d)

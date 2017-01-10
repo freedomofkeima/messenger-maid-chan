@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 import logging
+import os
+import chatterbot.corpus
 from chatterbot import ChatBot
 from langdetect import detect
 from langdetect.lang_detect_exception import LangDetectException
+from maidchan.helper import copy_recursive
 
 
 class ChatBotDriver(object):
     def __init__(self):
+        self.initialize()  # Initialize corpus files
         self.chatbot = ChatBot(
             'Maid-chan',
             trainer='chatterbot.trainers.ChatterBotCorpusTrainer',
@@ -15,9 +19,20 @@ class ChatBotDriver(object):
         )
         self.chatbot.train(
             "chatterbot.corpus.indonesia",
-            "chatterbot.corpus.english"
+            "chatterbot.corpus.english",
+            "chatterbot.corpus.maidcorpus"  # Custom!
         )
         logging.info("Chatterbot is initialized!")
+
+    def initialize(self):
+        """
+        WARNING: Not exactly a correct way to do it
+        """
+        # Get installed path
+        path = os.path.dirname(chatterbot.corpus.__file__)
+        # Put maidcorpus to the destination path
+        data_path = os.path.join(path, "data", "maidcorpus")
+        copy_recursive("maidcorpus", data_path)
 
     def get_response_from_chatbot(self, query, language):
         if not language:
