@@ -3,18 +3,25 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Maid-chan Messenger Bot's documentation!
-===================================================
+Maid-chan Messenger Bot
+=======================
+
+Maid-chan name is inspired from `Sakurasou's Artificial Intelligence`_.
+
+This documentation is intended for developers.
+
+For users who are interested in using Maid-chan features, please ask me directly and head to `Maid-chan Facebook Page`_.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
 
-
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
+
+.. _Sakurasou's Artificial Intelligence: http://sakurasounopetnakanojo.wikia.com/wiki/Maid
+.. _Maid-chan Facebook Page: https://www.facebook.com/maidchan2/

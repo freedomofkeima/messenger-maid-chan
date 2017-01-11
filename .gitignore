@@ -17,5 +17,5 @@ maidchan/config.py
 database.db
 
 # Sphinx docs
-docs/_build/
+docs/_build*
 

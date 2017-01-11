@@ -2,7 +2,7 @@
 
 Maid-chan name is inspired from [Sakurasou's Artificial Intelligence](http://sakurasounopetnakanojo.wikia.com/wiki/Maid).
 
-If you have any other ideas, I am accepting contributions :)
+If you have any other ideas, I am accepting contributions :) For developers, you could access [Sphinx documentation here](https://messenger-maid-chan.readthedocs.io/) [In Progress].
 
 ## How to Run
 
@@ -84,5 +84,4 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 
 This project itself is licensed under MIT License. All images are owned by their respective creators.
 
-Last Updated: January 10, 2017
-
+Last Updated: January 11, 2017
