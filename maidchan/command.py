@@ -54,7 +54,7 @@ def process_help(redis_client, recipient_id):
             keyword[1]
         )
 
-    message += "\nMaid-chan also have the following features:\n"
+    message += "\nMaid-chan also has the following features:\n"
     for feature in Constants.FEATURES:
         message += "- \"{}\": {}\n".format(
             feature[0],
