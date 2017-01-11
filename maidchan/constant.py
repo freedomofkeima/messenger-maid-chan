@@ -15,6 +15,11 @@ class Constants(object):
         ("show profile", "Maid-chan will show all information which Maid-chan knows about you")
     ]
 
+    FEATURES = [
+        ("upload picture", "Maid-chan will convert it to a primivite image, but it might take several minutes"),
+        ("simple chatbot", "Maid-chan will try her best to engage in a conversation!")
+    ]
+
     QUESTIONS = {
         1: "What time do you usually wake up in the morning, {}? (e.g.: 9:00)",
         2: "What time do you usually sleep, {}? (e.g.: 23:00)",

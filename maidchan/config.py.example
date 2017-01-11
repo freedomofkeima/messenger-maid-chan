@@ -8,3 +8,8 @@ VERIFY_TOKEN = "WEBHOOK_VERIFY_TOKEN"  # Set this value by yourself
 ADMIN = [
     "123...9"
 ]
+
+# Chatbot storage adapter
+# If you're using MongoDB, specify "chatterbot.storage.MongoDatabaseAdapter"
+# See http://chatterbot.readthedocs.io/en/stable/storage/index.html
+STORAGE_ADAPTER = "chatterbot.storage.JsonFileStorageAdapter"

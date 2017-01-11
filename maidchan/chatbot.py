@@ -9,17 +9,20 @@ from maidchan.helper import copy_recursive
 
 
 class ChatBotDriver(object):
-    def __init__(self):
+    def __init__(self, storage_adapter):
         self.initialize()  # Initialize corpus files
         self.chatbot = ChatBot(
             'Maid-chan',
             trainer='chatterbot.trainers.ChatterBotCorpusTrainer',
             output_adapter="chatterbot.output.OutputFormatAdapter",
-            output_format='text'
+            output_format='text',
+            storage_adapter=storage_adapter
         )
         self.chatbot.train(
-            "chatterbot.corpus.indonesia",
-            "chatterbot.corpus.english",
+            "chatterbot.corpus.indonesia.conversations",
+            "chatterbot.corpus.indonesia.greetings",
+            "chatterbot.corpus.english.conversations",
+            "chatterbot.corpus.english.greetings",
             "chatterbot.corpus.maidcorpus"  # Custom!
         )
         logging.info("Chatterbot is initialized!")

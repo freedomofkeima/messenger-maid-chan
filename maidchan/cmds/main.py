@@ -8,7 +8,7 @@ import tornado.web
 from maidchan.base import connect_redis, RedisDriver
 from maidchan.chatbot import ChatBotDriver
 from maidchan.command import process_command, process_active_question
-from maidchan.config import ACCESS_TOKEN, VERIFY_TOKEN
+from maidchan.config import ACCESS_TOKEN, VERIFY_TOKEN, STORAGE_ADAPTER
 from maidchan.helper import validate_reserved_keywords, validate_attachments,\
     split_message
 from pymessenger.bot import Bot
@@ -111,7 +111,7 @@ def main():
     application.redis_client = RedisDriver(rc)
 
     # Initialize Chatbot
-    application.chatbot = ChatBotDriver()
+    application.chatbot = ChatBotDriver(STORAGE_ADAPTER)
 
     # Start app
     application.listen(9999)

@@ -53,7 +53,15 @@ def process_help(redis_client, recipient_id):
             keyword[0],
             keyword[1]
         )
-    message += "And also, time is handled in UTC+9 (Japan time), te-hee~"
+
+    message += "\nMaid-chan also have the following features:\n"
+    for feature in Constants.FEATURES:
+        message += "- \"{}\": {}\n".format(
+            feature[0],
+            feature[1]
+        )
+
+    message += "\nOh, and also, time is handled in UTC+9 (Japan time), te-hee~"
     return message
 
 
