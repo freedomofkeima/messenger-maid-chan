@@ -18,5 +18,7 @@ requests-oauthlib==0.7.0
 requests-toolbelt==0.7.0
 singledispatch==3.4.0.3
 six==1.10.0
+Sphinx==1.5.1
+sphinx-autobuild==0.6.0
 tornado==4.4.2
 unicodecsv==0.14.1
