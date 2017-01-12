@@ -36,7 +36,7 @@ sys.path.insert(0, project_root)
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosectionlabel',
-#    'sphinx.ext.viewcode'
+    'sphinx.ext.viewcode'
 ]
 
 # Add any paths that contain templates here, relative to this directory.

@@ -10,7 +10,7 @@ Maid-chan name is inspired from `Sakurasou's Artificial Intelligence`_.
 
 This documentation is intended for developers.
 
-For users who are interested in using Maid-chan features, please ask me directly and head to `Maid-chan Facebook Page`_.
+For non-developers who are interested in using Maid-chan features, please ask me directly and head to `Maid-chan Facebook Page`_.
 
 Maid-chan Overview
 ==================
