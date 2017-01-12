@@ -98,7 +98,9 @@ html_theme = 'alabaster'
 html_theme_options = {
     'description': "Maid-chan feat Facebook Messenger bot",
     'github_user': 'freedomofkeima',
-    'github_repo': 'messenger-maid-chan'
+    'github_repo': 'messenger-maid-chan',
+    'github_type': 'star',
+    'code_font_size': '0.7em'
 }
 
 html_sidebars = {
