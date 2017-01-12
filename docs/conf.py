@@ -35,6 +35,7 @@ sys.path.insert(0, project_root)
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.autosectionlabel',
 #    'sphinx.ext.viewcode'
 ]
 
@@ -94,7 +95,21 @@ html_theme = 'alabaster'
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = {
+    'description': "Maid-chan feat Facebook Messenger bot",
+    'github_user': 'freedomofkeima',
+    'github_repo': 'messenger-maid-chan'
+}
+
+html_sidebars = {
+    '**': [
+        'about.html',
+        'localtoc.html',
+        'navigation.html',
+        'relations.html',
+        'searchbox.html'
+    ]
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
