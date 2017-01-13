@@ -4,16 +4,6 @@ Maid-chan name is inspired from [Sakurasou's Artificial Intelligence](http://sak
 
 If you have any other ideas, I am accepting contributions :) For developers, you could access [the documentation pages for developers here](https://messenger-maid-chan.readthedocs.io/). For others who are interested in using Maid-chan features, please ask me directly and head to [Maid-chan Facebook Page](https://www.facebook.com/maidchan2/).
 
-## How to Run
-
-1. For initial configuration, you need to create `maidchan/config.py` based on `maidchan/config.py.example` and fill those values based on your own configuration.
-
-2. Maid-chan is using Redis as the database. Redis can be downloaded via https://redis.io/download. Run Redis as a background process in port 6379 (default port).
-
-3. It is recommended to use `virtualenv` (e.g.: `virtualenv venv` then `source venv/bin/activate`). You need to install all dependencies via `pip install -r requirements.txt`.
-
-4. Run `python setup.py install` to build Maid-chan. Finally, you can execute `maidchan` in the background process to run this bot.
-
 
 ## Available Features
 
@@ -47,6 +37,17 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 - `update name`: By default, Maid-chan will call you with `onii-chan`  
 <img src="https://freedomofkeima.com/images/maid-chan/name.png" width="350">  
 - `show profile`: Do you want to know what Maid-chan knows about you? Then, you could use this command!
+
+
+## How to Run
+
+1. For initial configuration, you need to create `maidchan/config.py` based on `maidchan/config.py.example` and fill those values based on your own configuration.
+
+2. Maid-chan is using Redis as the database. Redis can be downloaded via https://redis.io/download. Run Redis as a background process in port 6379 (default port).
+
+3. It is recommended to use `virtualenv` (e.g.: `virtualenv venv` then `source venv/bin/activate`). You need to install all dependencies via `pip install -r requirements.txt`.
+
+4. Run `python setup.py install` to build Maid-chan. Finally, you can execute `maidchan` in the background process to run this bot.
 
 
 ## Priority Ideas

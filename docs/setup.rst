@@ -12,7 +12,7 @@ Maid-chan Installation
 
 .. code-block:: bash
 
-   git clone https://github.com/freedomofkeima/messenger-maid-chan.git
+   $ git clone https://github.com/freedomofkeima/messenger-maid-chan.git
 
 2. You need to fill Facebook token information in `maidchan/config.py` based on `maidchan/config.py.example`.
 
@@ -80,4 +80,3 @@ Maid-chan has 3 executables (recommended to use `screen`):
 .. _Facebook Messenger Bot: https://developers.facebook.com/docs/messenger-platform/guides/quick-start
 .. _davidchua/pymessenger: https://github.com/davidchua/pymessenger/blob/master/examples/echo_bot.py
 .. _Chatterbot Documentation: http://chatterbot.readthedocs.io/en/stable/storage/index.html
-.. _chatbot:
