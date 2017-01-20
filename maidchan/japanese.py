@@ -36,7 +36,7 @@ VOCABULARY_FIELDS = [
 
 def get_kanji(level, current_pos=1):
     """
-    get_kanji return a single record of the current_pos line position
+    get_kanji returns a single record of the current_pos line position
 
     level: 1 - 4 (N1 to N4)
     current_pos: up to number of records
@@ -58,7 +58,7 @@ def get_kanji(level, current_pos=1):
 
 def get_vocabulary(current_pos=1):
     """
-    get_vocabulary return a single record of the current_pos line position
+    get_vocabulary returns a single record of the current_pos line position
 
     current_pos: up to number of records
     """
