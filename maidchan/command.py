@@ -46,11 +46,11 @@ def process_active_question(redis_client, recipient_id, question_id, query):
     elif question_id == 5:
         return process_rss_source_selection(redis_client, recipient_id, query)
     elif question_id == 6:
-        return process_rss_pattern(redis_client, recipient_id, query)
-    elif question_id == 7:
         return process_default_preset(redis_client, recipient_id, query)
-    elif question_id == 8:
+    elif question_id == 7:
         return process_rss_url(redis_client, recipient_id, query)
+    elif question_id == 8:
+        return process_rss_pattern(redis_client, recipient_id, query)
     elif question_id == 9:
         return process_rss_removal(redis_client, recipient_id, query)
     return "<3"
@@ -178,13 +178,21 @@ def process_update_name(redis_client, recipient_id):
 
 
 def process_subscribe_rss(redis_client, recipient_id):
+    user = redis_client.get_user(recipient_id)
     redis_client.set_active_question(recipient_id, 5)
-    return Constants.QUESTIONS[5]
+    return Constants.QUESTIONS[5].format(
+        user.get("nickname", DEFAULT_NICKNAME)
+    )
 
 
 def process_unsubscribe_rss(redis_client, recipient_id):
+    user = redis_client.get_user(recipient_id)
     redis_client.set_active_question(recipient_id, 9)
-    return Constants.QUESTIONS[9]
+    message = Constants.QUESTIONS[9].format(
+        user.get("nickname", DEFAULT_NICKNAME)
+    )
+    # TODO: Append RSS subscription list to message
+    return message
 
 
 def process_show_profile(redis_client, recipient_id):
@@ -203,6 +211,7 @@ def process_show_profile(redis_client, recipient_id):
     message += "Japanese status: {}\n".format(user["japanese_status"])
     if user["japanese_status"] == "subscribed":
         message += "Kanji level: {}".format(user["kanji_level"])
+    # TODO: Show RSS status
     return message
 
 
@@ -289,20 +298,53 @@ def process_update_name_question(redis_client, recipient_id, query):
 
 
 def process_rss_source_selection(redis_client, recipient_id, query):
-    pass
-
-
-def process_rss_pattern(redis_client, recipient_id, query):
-    pass
+    if query == "1" or query.lower() == "preset":
+        message = "Thank you!\n"
+        redis_client.set_active_question(recipient_id, 6)
+        message += Constants.QUESTIONS[6]
+        message += "\n"
+        for k, v in Constants.DEFAULT_RSS_PRESET.iteritems():
+            message = "Type {} for {}\n".format(k, v["title"])
+    elif query == "2" or query.lower() == "custom":
+        message = "Thank you!\n"
+        redis_client.set_active_question(recipient_id, 7)
+        message += Constants.QUESTIONS[7]
+    else:
+        message = "Sorry, your choice is not recognized!"
+    return message
 
 
 def process_default_preset(redis_client, recipient_id, query):
-    pass
+    user = redis_client.get_user(recipient_id)
+    if query not in Constants.DEFAULT_RSS_PRESET.keys():
+        message = "Sorry, your preset is not recognized!"
+    else:
+        preset = Constants.DEFAULT_RSS_PRESET[query]
+        user["temp_rss_url"] = preset["url"]
+        message = Constants.QUESTIONS[8]
+        redis_client.set_user(recipient_id, user)
+    return message
+
 
 
 def process_rss_url(redis_client, recipient_id, query):
-    pass
+    user = redis_client.get_user(recipient_id)
+    # TODO: Validate query is a RSS feed
+    user["temp_rss_url"] = query
+    message = Constants.QUESTIONS[8]
+    redis_client.set_user(recipient_id, user)
+    return message
+
+
+def process_rss_pattern(redis_client, recipient_id, query):
+    user = redis_client.get_user(recipient_id)
+    # TODO: update RSS feed
+    message = "Your RSS subscription has been updated!"
+    del user["temp_rss_url"]  # Remove temporary reference
+    redis_client.set_user(recipient_id, user)
+    return message
 
 
 def process_rss_removal(redis_client, recipient_id, query):
+    # TODO: implement
     pass

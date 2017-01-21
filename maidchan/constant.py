@@ -27,11 +27,11 @@ class Constants(object):
         2: "What time do you usually sleep, {}? (e.g.: 23:00)",
         3: "Which level of Kanji do you want to learn between N1-N4, {}? (e.g.: N3)",
         4: "How should Maid-chan call you? onii-chan? goshujin-sama? or perhaps, ... darling?",
-        5: "Do you want to use preset RSS feed or add a custom one, {}? (Type 1 for preset, 2 for scustom)",
-        6: "What is the title (or even regex pattern) that you want to use? (e.g.: Shokugeki no Souma)",
-        7: "Which preset do you want to use?",
-        8: "Which RSS feed do you want to use? (e.g.: http://mangastream.com/rss)",
-        9: "Which number of subscription do you want to remove?"
+        5: "Do you want to use preset RSS feed or add a custom one, {}? (Type 1 for preset, 2 for custom)",
+        6: "Which preset do you want to use?",
+        7: "Which RSS feed do you want to use? (e.g.: http://mangastream.com/rss)",
+        8: "What is the title (or even regex pattern) that you want to use? (e.g.: Shokugeki no Souma)",
+        9: "Which number of subscription do you want to remove, {}?"
     }
 
     NORMAL_GOOD_MORNING = [
@@ -74,7 +74,13 @@ class Constants(object):
     DEFAULT_NIGHT_TIME = "23:00"  # UTC+9
 
     # RSS Feed default preset
-    DEFAULT_RSS_PRESET = [
-        ("1", "Manga", "https://www.mangaupdates.com/rss.php"),
-        ("2", "Nyaa", "https://www.nyaa.se/?page=rss")
-    ]
+    DEFAULT_RSS_PRESET = {
+        "1": {
+            "title": "Manga",
+            "url": "https://www.mangaupdates.com/rss.php"
+        },
+        "2": {
+            "title": "Nyaa",
+            "url": "https://www.nyaa.se/?page=rss"
+        }
+    }
