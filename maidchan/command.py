@@ -23,6 +23,10 @@ def process_command(redis_client, recipient_id, query):
         return process_update_japanese(redis_client, recipient_id)
     elif query == "update name":
         return process_update_name(redis_client, recipient_id)
+    elif query == "subscribe rss":
+        return process_subscribe_rss(redis_client, recipient_id)
+    elif query == "unsubscribe rss":
+        return process_unsubscribe_rss(redis_client, recipient_id)
     elif query == "show profile":
         return process_show_profile(redis_client, recipient_id)
     # query "help" as default query
@@ -39,6 +43,16 @@ def process_active_question(redis_client, recipient_id, question_id, query):
         return process_kanji_level_question(redis_client, recipient_id, query)
     elif question_id == 4:
         return process_update_name_question(redis_client, recipient_id, query)
+    elif question_id == 5:
+        return process_rss_source_selection(redis_client, recipient_id, query)
+    elif question_id == 6:
+        return process_rss_pattern(redis_client, recipient_id, query)
+    elif question_id == 7:
+        return process_default_preset(redis_client, recipient_id, query)
+    elif question_id == 8:
+        return process_rss_url(redis_client, recipient_id, query)
+    elif question_id == 9:
+        return process_rss_removal(redis_client, recipient_id, query)
     return "<3"
 
 
@@ -163,6 +177,16 @@ def process_update_name(redis_client, recipient_id):
     return Constants.QUESTIONS[4]
 
 
+def process_subscribe_rss(redis_client, recipient_id):
+    redis_client.set_active_question(recipient_id, 5)
+    return Constants.QUESTIONS[5]
+
+
+def process_unsubscribe_rss(redis_client, recipient_id):
+    redis_client.set_active_question(recipient_id, 9)
+    return Constants.QUESTIONS[9]
+
+
 def process_show_profile(redis_client, recipient_id):
     user = redis_client.get_user(recipient_id)
     message = "Hi, {}!\n\n".format(user.get("nickname", DEFAULT_NICKNAME))
@@ -262,3 +286,23 @@ def process_update_name_question(redis_client, recipient_id, query):
     )
     message += "よろしくお願いします~"
     return message
+
+
+def process_rss_source_selection(redis_client, recipient_id, query):
+    pass
+
+
+def process_rss_pattern(redis_client, recipient_id, query):
+    pass
+
+
+def process_default_preset(redis_client, recipient_id, query):
+    pass
+
+
+def process_rss_url(redis_client, recipient_id, query):
+    pass
+
+
+def process_rss_removal(redis_client, recipient_id, query):
+    pass

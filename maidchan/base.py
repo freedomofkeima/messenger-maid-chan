@@ -64,7 +64,14 @@ class RedisDriver(object):
                   "kanji_level": "N3",
                   "schedules": {
                       "morning_offerings_mt": ... # UTC epoch
-                  }
+                  },
+                  "rss": [{
+                      "url: "...",
+                      "pattern": "...",
+                      "timestamp": ..., # UTC epoch
+                      "last_top_title": "...", # If pubdate not exist
+                      "last_timestamp": ... # UTC epoch
+                  }]
               }
         """
         redis_key = "{}_{}".format(USER, recipient_id)
@@ -86,7 +93,8 @@ class RedisDriver(object):
                 "morning_time": Constants.DEFAULT_MORNING_TIME,
                 "night_time": Constants.DEFAULT_NIGHT_TIME,
                 "kanji_level": "N3",
-                "schedules": {}
+                "schedules": {},
+                "rss": []
             }
 
     def push_primitive_queue(self, data):

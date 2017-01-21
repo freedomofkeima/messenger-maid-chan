@@ -2,6 +2,7 @@ backports-abc==0.5
 certifi==2016.9.26
 chatterbot==0.5.4
 enum==0.4.6
+feedparser==5.2.1
 future==0.16.0
 futures==3.0.5
 jsondatabase==0.1.7
