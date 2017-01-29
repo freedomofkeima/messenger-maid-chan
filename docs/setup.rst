@@ -75,7 +75,7 @@ Maid-chan has 3 executables (recommended to use `screen`):
 
 - **maidchan_primitive**: CPU intensive task which processes image with Machine Learning and returns an abstract GIF (:ref:`Image Processing with Primitive`).
 
-- **maidchan_scheduler**: Scheduler which is used to handle daily and repetitive tasks, such as :ref:`Daily Offerings` and :ref:`Daily Japanese Lesson`.
+- **maidchan_scheduler**: Scheduler which is used to handle daily and repetitive tasks, such as :ref:`Daily Offerings`, :ref:`Daily Japanese Lesson`, and :ref:`RSS Feed Notifier`.
 
 .. _Facebook Messenger Bot: https://developers.facebook.com/docs/messenger-platform/guides/quick-start
 .. _davidchua/pymessenger: https://github.com/davidchua/pymessenger/blob/master/examples/echo_bot.py

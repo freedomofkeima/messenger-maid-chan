@@ -20,9 +20,9 @@ with billion of people around the world. It also eliminates the necessity of dev
 
 Maid-chan itself is not a general-purpose bot. If you like Japanese culture or have an interest in learning Japanese,
 then Maid-chan will probably useful for you. Currently, it supports several basic features, such as simple chatbot,
-daily scheduler for Kanji & Vocabulary of the day and daily greetings. In addition, Maid-chan can be used as an
-intermediary between mobile and server-side, where you could leverage server capability (CPU) for hard tasks such as
-Machine Learning (image processing).
+daily scheduler for Kanji & Vocabulary of the day, daily greetings, and RSS Feed notifier.
+In addition, Maid-chan can be used as an intermediary between mobile and server-side, where you could leverage server
+capability (CPU) for hard tasks such as Machine Learning (image processing).
 
 Maid-chan is mainly written in Python.
 
@@ -38,6 +38,7 @@ Contents
    chatbot
    offerings
    japanese
+   rss
    idea
 
 New Ideas & Issues

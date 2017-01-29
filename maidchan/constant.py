@@ -12,7 +12,9 @@ class Constants(object):
         ("unsubscribe japanese", "Maid-chan will stop sending you daily Japanese Kanji & Vocabulary"),
         ("update japanese", "Maid-chan will ask you about Kanji level selection (N1-N4, old test format)"),
         ("update name", "What name do you prefer to be called? onii-chan? goshujin-sama? or perhaps, ... darling?"),
-        ("show profile", "Maid-chan will show all information which Maid-chan knows about you")
+        ("subscribe rss", "[Experimental] Maid-chan will guide you through RSS Feed subscription, e.g.: manga, nyaa"),
+        ("unsubscribe rss", "[Experimental] Maid-chan will remove RSS Feed which you want to stop subscribing"),
+        ("show profile", "Maid-chan will show all information which Maid-chan knows about you"),
     ]
 
     FEATURES = [
@@ -24,7 +26,12 @@ class Constants(object):
         1: "What time do you usually wake up in the morning, {}? (e.g.: 9:00)",
         2: "What time do you usually sleep, {}? (e.g.: 23:00)",
         3: "Which level of Kanji do you want to learn between N1-N4, {}? (e.g.: N3)",
-        4: "How should Maid-chan call you? onii-chan? goshujin-sama? or perhaps, ... darling?"
+        4: "How should Maid-chan call you? onii-chan? goshujin-sama? or perhaps, ... darling?",
+        5: "Do you want to use preset RSS feed or add a custom one, {}? (Type 1 for preset, 2 for custom)",
+        6: "Which preset do you want to use?",
+        7: "Which RSS feed do you want to use? (e.g.: http://mangastream.com/rss)",
+        8: "What is the title (regex pattern) that you want to use? (e.g.: Shokugeki no Soma, or .* to match all)",
+        9: "Which number of subscription do you want to remove, {}?"
     }
 
     NORMAL_GOOD_MORNING = [
@@ -35,7 +42,8 @@ class Constants(object):
         "Morning, {}. It's time to wake up :D",
         "Good morning to you, {}",
         "Ohaa~ Time to get up already, {}",
-        "Guten Morgen, {}. A new day means a new hope, がんばって!"
+        "Guten Morgen, {}. A new day means a new hope, がんばって!",
+        "Good morning, {}! Don't forget to eat healthy food!"
     ]
 
     NORMAL_GOOD_NIGHT = [
@@ -46,7 +54,8 @@ class Constants(object):
         "Tomorrow will be absolutely better. It's time to sleep, {} :D",
         "Good night to you, {}",
         "Oyaa~ Let's have a nice sleep, {}",
-        "Gute Nacht, have a proper rest, {}!"
+        "Gute Nacht, have a proper rest, {}!",
+        "Good night! Don't forget to have enough sleep time, {} ^^"
     ]
 
     SPECIAL_GOOD_MORNING = [
@@ -63,3 +72,15 @@ class Constants(object):
     DEFAULT_MORNING_TIME = "09:00"  # UTC+9
     DEFAULT_JAPANESE_TIME = "13:00"  # UTC+9
     DEFAULT_NIGHT_TIME = "23:00"  # UTC+9
+
+    # RSS Feed default preset
+    DEFAULT_RSS_PRESET = {
+        "1": {
+            "title": "Manga",
+            "url": "https://www.mangaupdates.com/rss.php"
+        },
+        "2": {
+            "title": "Nyaa",
+            "url": "https://www.nyaa.se/?page=rss"
+        }
+    }
