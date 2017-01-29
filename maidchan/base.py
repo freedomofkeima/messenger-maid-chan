@@ -69,8 +69,7 @@ class RedisDriver(object):
                       1: {
                           "url: "...",
                           "pattern": "...",
-                          "timestamp": ..., # UTC epoch
-                          "last_top_title": ... # If pubdate not exist
+                          "title_list": []
                       }
                   },
                   "rss_id": 1

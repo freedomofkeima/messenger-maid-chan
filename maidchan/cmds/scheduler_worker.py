@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import concurrent.futures
 import logging
+import re
 import sys
 import time
 from random import randint
@@ -14,6 +15,7 @@ from maidchan.japanese import get_random_kanji, get_random_vocabulary,\
 from maidchan.offerings import get_morning_offerings_text,\
     get_night_offerings_text, get_offerings_image, remove_offerings_image,\
     SPECIAL
+from maidchan.rss import get_feed
 from pymessenger.bot import Bot
 
 from maidchan.helper import time_to_next_utc_mt
@@ -44,7 +46,7 @@ def send_offerings(recipient_id, text_message, image_path):
         )
 
 
-def process_user(redis_client, recipient_id, metadata, current_mt):
+def process_user_schedules(redis_client, recipient_id, metadata, current_mt):
     user = redis_client.get_user(recipient_id)
     schedules = user["schedules"]
     for schedule_type, mt in schedules.items():
@@ -93,8 +95,43 @@ def process_user(redis_client, recipient_id, metadata, current_mt):
             redis_client.set_user(recipient_id, user)
             logging.info("Japanese scheduler for {} - {} is executed!".format(
                 recipient_id,
-                user["nickname"]
+                user.get("nickname", DEFAULT_NICKNAME)
             ))
+
+
+def process_user_rss(redis_client, recipient_id):
+    user = redis_client.get_user(recipient_id)
+    for key, entry in user["rss"].iteritems():
+        feed = get_feed(entry["url"]).get("entries", {})
+        title = feed.get("title", "")
+        m = re.search(
+            entry["pattern"].encode("utf-8").lower(),
+            title.lower()
+        )
+        if m and title not in user["rss"][key]["title_list"]:
+            message = "\"{}\" in {} is now available, {}!".format(
+                title,
+                entry["url"],
+                user.get("nickname", DEFAULT_NICKNAME)
+            )
+            bot.send_text_message(recipient_id, message)
+            user["rss"][key]["title_list"].append(title)
+            redis_client.set_user(recipient_id, user)
+
+
+def process_user(redis_client, recipient_id, metadata, current_mt):
+    # Process schedule-based operation
+    process_user_schedules(
+        redis_client,
+        recipient_id,
+        metadata,
+        current_mt
+    )
+    # Process RSS-based operation
+    process_user_rss(
+        redis_client,
+        recipient_id
+    )
 
 
 def adjust_offerings_mt(redis_client, users, metadata,

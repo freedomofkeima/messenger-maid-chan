@@ -12,8 +12,8 @@ class Constants(object):
         ("unsubscribe japanese", "Maid-chan will stop sending you daily Japanese Kanji & Vocabulary"),
         ("update japanese", "Maid-chan will ask you about Kanji level selection (N1-N4, old test format)"),
         ("update name", "What name do you prefer to be called? onii-chan? goshujin-sama? or perhaps, ... darling?"),
-        ("subscribe rss", "Maid-chan will guide you through RSS Feed subscription, e.g.: manga, nyaa"),
-        ("unsubscribe rss", "Maid-chan will remove RSS Feed which you want to stop subscribing"),
+        ("subscribe rss", "[Experimental] Maid-chan will guide you through RSS Feed subscription, e.g.: manga, nyaa"),
+        ("unsubscribe rss", "[Experimental] Maid-chan will remove RSS Feed which you want to stop subscribing"),
         ("show profile", "Maid-chan will show all information which Maid-chan knows about you"),
     ]
 
