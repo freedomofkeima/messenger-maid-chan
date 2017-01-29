@@ -3,6 +3,7 @@ import re
 
 from maidchan.constant import Constants
 from maidchan.helper import time_to_next_utc_mt
+from maidchan.rss import is_valid_feed_url, validate_and_create_entry
 
 DEFAULT_NICKNAME = "onii-chan"
 
@@ -187,11 +188,19 @@ def process_subscribe_rss(redis_client, recipient_id):
 
 def process_unsubscribe_rss(redis_client, recipient_id):
     user = redis_client.get_user(recipient_id)
-    redis_client.set_active_question(recipient_id, 9)
-    message = Constants.QUESTIONS[9].format(
-        user.get("nickname", DEFAULT_NICKNAME)
-    )
-    # TODO: Append RSS subscription list to message
+    if user["rss"]:
+        redis_client.set_active_question(recipient_id, 9)
+        message = Constants.QUESTIONS[9].format(
+            user.get("nickname", DEFAULT_NICKNAME)
+        )
+        for key, entry in user["rss"].iteritems():
+            message += "{}: URL = {} and pattern = {}\n".format(
+                key,
+                entry["url"],
+                entry["pattern"]
+            )
+    else:
+        message = "Your RSS subscription is currently empty!"
     return message
 
 
@@ -200,6 +209,7 @@ def process_show_profile(redis_client, recipient_id):
     message = "Hi, {}!\n\n".format(user.get("nickname", DEFAULT_NICKNAME))
     if not user.get("nickname"):
         message += "Maid-chan haven't learned how to call you properly :'(\n\n"
+    # Offerings Section
     message += "Offerings status: {}\n".format(user["offerings_status"])
     if user["offerings_status"] == "subscribed":
         message += "Morning message: around {} UTC+9\n".format(
@@ -208,10 +218,18 @@ def process_show_profile(redis_client, recipient_id):
         message += "Night message: around {} UTC+9\n".format(
             user["night_time"]
         )
+    # Japanese Section
     message += "Japanese status: {}\n".format(user["japanese_status"])
     if user["japanese_status"] == "subscribed":
         message += "Kanji level: {}".format(user["kanji_level"])
-    # TODO: Show RSS status
+    # RSS Section
+    if user["rss"]:
+        message += "RSS Subscription status:\n"
+        for entry in user["rss"].values():
+            message += "- URL = {} and pattern = {}\n".format(
+                entry["url"],
+                entry["pattern"]
+            )
     return message
 
 
@@ -321,30 +339,48 @@ def process_default_preset(redis_client, recipient_id, query):
     else:
         preset = Constants.DEFAULT_RSS_PRESET[query]
         user["temp_rss_url"] = preset["url"]
-        message = Constants.QUESTIONS[8]
         redis_client.set_user(recipient_id, user)
+        redis_client.set_active_question(recipient_id, 8)
+        message = Constants.QUESTIONS[8]
     return message
-
 
 
 def process_rss_url(redis_client, recipient_id, query):
     user = redis_client.get_user(recipient_id)
-    # TODO: Validate query is a RSS feed
-    user["temp_rss_url"] = query
-    message = Constants.QUESTIONS[8]
-    redis_client.set_user(recipient_id, user)
+    if is_valid_feed_url(query):
+        user["temp_rss_url"] = query
+        redis_client.set_user(recipient_id, user)
+        redis_client.set_active_question(recipient_id, 8)
+        message = Constants.QUESTIONS[8]
+    else:
+        message = "Sorry, your URL feed is not valid!"
     return message
 
 
 def process_rss_pattern(redis_client, recipient_id, query):
     user = redis_client.get_user(recipient_id)
-    # TODO: update RSS feed
-    message = "Your RSS subscription has been updated!"
-    del user["temp_rss_url"]  # Remove temporary reference
+    entry = validate_and_create_entry(
+        user.get("temp_rss_url"),
+        query
+    )
+    if entry:
+        user["rss_id"] += 1  # Increment ID
+        user["rss"][user["rss_id"]] = entry
+        message = "Your RSS subscription has been updated!"
+    else:
+        message = "Sorry, Maid-chan seems confused with your entry >_<"
+    if "temp_rss_url" in user:
+        del user["temp_rss_url"]  # Remove temporary reference
     redis_client.set_user(recipient_id, user)
     return message
 
 
 def process_rss_removal(redis_client, recipient_id, query):
-    # TODO: implement
-    pass
+    user = redis_client.get_user(recipient_id)
+    if query in user["rss"]:
+        del user["rss"][query]
+        redis_client.set_user(recipient_id, user)
+        message = "Your RSS subscription has been updated!"
+    else:
+        message = "Sorry, Maid-chan could not recognize the given number!"
+    return message
