@@ -39,7 +39,7 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 - `update name`: By default, Maid-chan will call you with `onii-chan`  
 <img src="https://freedomofkeima.com/images/maid-chan/name.png" width="350">  
 - [Experimental] `subscribe rss`: You could add an RSS feed with its pattern and let Maid-chan notify you when there is an update
-- [Experimental] `unsubscribe rss`: You could remove one of your RSS feed subscription each time you call this command
+- [Experimental] `unsubscribe rss`: You could remove one of your RSS feed subscription each time you call this command  
 <img src="https://freedomofkeima.com/images/maid-chan/rss_1_manga.png" width="350">  
 - `show profile`: Do you want to know what Maid-chan knows about you? Then, you could use this command!
 
