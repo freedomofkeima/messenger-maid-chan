@@ -193,8 +193,9 @@ def process_unsubscribe_rss(redis_client, recipient_id):
         message = Constants.QUESTIONS[9].format(
             user.get("nickname", DEFAULT_NICKNAME)
         )
+        message += "\n"
         for key, entry in user["rss"].iteritems():
-            message += "{}: URL = {} and pattern = {}\n".format(
+            message += "{}: URL = \"{}\" and pattern = \"{}\"\n".format(
                 key,
                 entry["url"],
                 entry["pattern"]
@@ -221,12 +222,12 @@ def process_show_profile(redis_client, recipient_id):
     # Japanese Section
     message += "Japanese status: {}\n".format(user["japanese_status"])
     if user["japanese_status"] == "subscribed":
-        message += "Kanji level: {}".format(user["kanji_level"])
+        message += "Kanji level: {}\n".format(user["kanji_level"])
     # RSS Section
     if user["rss"]:
         message += "RSS Subscription status:\n"
         for entry in user["rss"].values():
-            message += "- URL = {} and pattern = {}\n".format(
+            message += "- URL = \"{}\" and pattern = \"{}\"\n".format(
                 entry["url"],
                 entry["pattern"]
             )
@@ -322,7 +323,7 @@ def process_rss_source_selection(redis_client, recipient_id, query):
         message += Constants.QUESTIONS[6]
         message += "\n"
         for k, v in Constants.DEFAULT_RSS_PRESET.iteritems():
-            message = "Type {} for {}\n".format(k, v["title"])
+            message += "Type {} for {}\n".format(k, v["title"])
     elif query == "2" or query.lower() == "custom":
         message = "Thank you!\n"
         redis_client.set_active_question(recipient_id, 7)

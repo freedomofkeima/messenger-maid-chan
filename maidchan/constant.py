@@ -30,7 +30,7 @@ class Constants(object):
         5: "Do you want to use preset RSS feed or add a custom one, {}? (Type 1 for preset, 2 for custom)",
         6: "Which preset do you want to use?",
         7: "Which RSS feed do you want to use? (e.g.: http://mangastream.com/rss)",
-        8: "What is the title (or even regex pattern) that you want to use? (e.g.: Shokugeki no Souma)",
+        8: "What is the title (regex pattern) that you want to use? (e.g.: Shokugeki no Soma, or .* to match all)",
         9: "Which number of subscription do you want to remove, {}?"
     }
 

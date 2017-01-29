@@ -45,6 +45,13 @@ Currently, Maid-chan has the following features:
     :align: center
     :width: 300pt
 
+- :ref:`RSS Feed Notifier`: The idea is similar to `rss-twilio-bot`_, where all subscribed RSS feed is aggregated to Facebook Messenger via Maid-chan scheduler
+
+.. image:: https://freedomofkeima.com/images/maid-chan/rss_notification.png
+    :alt: maidchan-rss-preset-manga
+    :align: center
+    :width: 300pt
+
 Currently, Maid-chan only supports `Asia/Tokyo` timezone (**UTC +9**).
 
 
@@ -85,6 +92,14 @@ All commands receive 2 parameters: `redis_client` as `RedisDriver` object and `r
 
 **update name** is used to change user's nickname. By default, Maid-chan will use `onii-chan` to call users.
 
+.. autofunction:: maidchan.command.process_subscribe_rss
+
+**subscribe rss** is used to subscribe a new RSS Feed with its pattern and let Maid-chan sends a notification if there is an update.
+
+.. autofunction:: maidchan.command.process_unsubscribe_rss
+
+**unsubscribe rss** is used to remove one of the registered RSS Feed.
+
 .. autofunction:: maidchan.command.process_show_profile
 
 **show profile** is used to show user's nickname, subscription status, and preference.
@@ -92,3 +107,4 @@ All commands receive 2 parameters: `redis_client` as `RedisDriver` object and `r
 .. _Primitive: https://github.com/fogleman/primitive
 .. _ChatterBot: https://github.com/gunthercox/ChatterBot
 .. _langdetect: https://github.com/Mimino666/langdetect
+.. _rss-twilio-bot: https://github.com/freedomofkeima/rss-twilio-bot

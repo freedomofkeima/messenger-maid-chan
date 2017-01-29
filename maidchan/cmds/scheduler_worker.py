@@ -103,20 +103,27 @@ def process_user_rss(redis_client, recipient_id):
     user = redis_client.get_user(recipient_id)
     for key, entry in user["rss"].iteritems():
         feed = get_feed(entry["url"]).get("entries", {})
-        title = feed.get("title", "")
-        m = re.search(
-            entry["pattern"].encode("utf-8").lower(),
-            title.lower()
-        )
-        if m and title not in user["rss"][key]["title_list"]:
-            message = "\"{}\" in {} is now available, {}!".format(
-                title,
-                entry["url"],
-                user.get("nickname", DEFAULT_NICKNAME)
-            )
-            bot.send_text_message(recipient_id, message)
-            user["rss"][key]["title_list"].append(title)
-            redis_client.set_user(recipient_id, user)
+        for record in feed:
+            title = record.get("title", "")
+            try:
+                m = re.search(
+                    entry["pattern"].encode("utf-8").lower(),
+                   title.lower()
+                )
+            except:
+                m = None
+            if m and title not in user["rss"][key]["title_list"]:
+                url = entry["url"]
+                if "link" in record:
+                    url = record["link"]
+                message = "\"{}\" in {} is now available, {}!".format(
+                    title,
+                    url,
+                    user.get("nickname", DEFAULT_NICKNAME)
+                )
+                bot.send_text_message(recipient_id, message)
+                user["rss"][key]["title_list"].append(title)
+                redis_client.set_user(recipient_id, user)
 
 
 def process_user(redis_client, recipient_id, metadata, current_mt):

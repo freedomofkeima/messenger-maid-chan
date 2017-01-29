@@ -17,7 +17,8 @@ If you have any other ideas, I am accepting contributions :) For developers, you
 <img src="https://freedomofkeima.com/images/maid-chan/daily_night_offerings.png" width="350">  
 - Daily Japanese Kanji & Vocabulary (**Requires** `maidchan_scheduler` running in the background)  
 <img src="https://freedomofkeima.com/images/maid-chan/daily_japanese.png" width="350">
-- RSS Feed Notifier for Anime, Manga, etc which is similar to [my previous RSS Twilio bot](https://github.com/freedomofkeima/rss-twilio-bot) (**Requires** `maidchan_scheduler` running in the background)
+- [Experimental] RSS Feed Notifier for Anime, Manga, etc which is similar to [my previous RSS Twilio bot](https://github.com/freedomofkeima/rss-twilio-bot) (**Requires** `maidchan_scheduler` running in the background)  
+<img src="https://freedomofkeima.com/images/maid-chan/rss_notification.png" width="350">
 
 All time-related features are currently handled in **UTC+9 (Japan Time)**.
 
@@ -39,6 +40,7 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 <img src="https://freedomofkeima.com/images/maid-chan/name.png" width="350">  
 - [Experimental] `subscribe rss`: You could add an RSS feed with its pattern and let Maid-chan notify you when there is an update
 - [Experimental] `unsubscribe rss`: You could remove one of your RSS feed subscription each time you call this command
+<img src="https://freedomofkeima.com/images/maid-chan/rss_1_manga.png" width="350">  
 - `show profile`: Do you want to know what Maid-chan knows about you? Then, you could use this command!
 
 

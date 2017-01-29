@@ -5,7 +5,6 @@ Ideas
 Priority Ideas
 --------------
 
-- RSS monitoring (similar to my previous RSS Twilio bot: https://github.com/freedomofkeima/rss-twilio-bot)
 - Translate text (feat: https://github.com/soimort/translate-shell)
 - (Admin only) Send link to download at home, e.g.: Youtube (feat https://github.com/soimort/you-get), image files, etc
 

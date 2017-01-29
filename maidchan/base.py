@@ -86,6 +86,9 @@ class RedisDriver(object):
             # Update existing DB
             if "schedules" not in data:
                 data["schedules"] = {}
+            if "rss" not in data:
+                data["rss"] = {}
+                data["rss_id"] = 0
             return data
         else:
             return {

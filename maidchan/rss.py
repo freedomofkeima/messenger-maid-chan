@@ -35,10 +35,13 @@ def validate_and_create_entry(url, pattern):
         "title_list": []
     }
     for entry in d.get("entries", {}):
-        m = re.search(
-            pattern.encode("utf-8").lower(),
-            entry.get("title", "").lower()
-        )
+        try:
+            m = re.search(
+                pattern.encode("utf-8").lower(),
+                entry.get("title", "").lower()
+            )
+        except:
+            m = None
         if m:
             ret["title_list"].append(entry.get("title", ""))
 
