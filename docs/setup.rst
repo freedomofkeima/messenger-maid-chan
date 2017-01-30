@@ -71,7 +71,7 @@ Maid-chan Executables
 
 Maid-chan has 3 executables (recommended to use `screen`):
 
-- **maidchan**: Maid-chan main logic which is used to communicate with Facebook. It also handles user's input processing, such as :ref:`Chatbot with ChatterBot`.
+- **maidchan**: Maid-chan main logic which is used to communicate with Facebook. It also handles user's input processing, such as :ref:`Chatbot with ChatterBot` and :ref:`Translate text via Google Translate`.
 
 - **maidchan_primitive**: CPU intensive task which processes image with Machine Learning and returns an abstract GIF (:ref:`Image Processing with Primitive`).
 

@@ -8,6 +8,11 @@ How It Works
 `ChatterBot`_ is a machine-learning based conversational dialog engine which is able to generate
 responses based on collections of known conversations.
 
+.. image:: https://freedomofkeima.com/images/maid-chan/chatterbot.png
+    :alt: maid-chatbot-messenger
+    :align: center
+    :width: 300pt
+
 .. autoclass:: maidchan.chatbot.ChatBotDriver
 
 Maid-chan is trained with the provided Indonesian corpus, English corpus, and an additional corpus

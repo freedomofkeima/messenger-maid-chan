@@ -7,6 +7,11 @@ How It Works
 
 `Primitive`_ is a machine-learning based program which converts images to its geometric primitives form (written in Go).
 
+.. image:: https://freedomofkeima.com/images/maid-chan/primitive.gif
+    :alt: maid-primitive-gif
+    :align: center
+    :height: 300pt
+
 .. autofunction:: maidchan.primitive.process_image
 
 Initially, Maid-chan will validate whether the image input is either `.png` or `.jpg`.

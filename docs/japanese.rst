@@ -7,6 +7,11 @@ How It Works
 
 One of the functionality of Maid-chan's scheduler worker is daily Japanese lesson. Currently, daily Japanese lesson sends a random kanji based on user's level selection (N1 - N4) and a random vocabulary (same for all levels) every 13:00 UTC+9.
 
+.. image:: https://freedomofkeima.com/images/maid-chan/daily_japanese.png
+    :alt: maidchan-japanese-messenger
+    :align: center
+    :width: 300pt
+
 The raw data is parsed from `Gakuran`_ and currently stored under `data/` directory.
 
 .. autofunction:: maidchan.japanese.get_kanji

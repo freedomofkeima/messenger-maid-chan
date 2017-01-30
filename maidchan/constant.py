@@ -20,7 +20,7 @@ class Constants(object):
     FEATURES = [
         ("upload picture", "Maid-chan will convert it to a primivite image, but it might take several minutes"),
         ("simple chatbot", "Maid-chan will try her best to engage in a conversation!"),
-        ("translate", "Maid-chan will ask Google-sensei for the translation from/to Indonesian, English, and Japanese (with language detection)")
+        ("translate", "[Experimental] Maid-chan will ask Google-sensei for the translation from/to Indonesian, English, and Japanese (with language detection)")
     ]
 
     QUESTIONS = {
