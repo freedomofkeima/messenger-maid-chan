@@ -5,7 +5,6 @@ Ideas
 Priority Ideas
 --------------
 
-- Translate text (feat: https://github.com/soimort/translate-shell)
 - (Admin only) Send link to download at home, e.g.: Youtube (feat https://github.com/soimort/you-get), image files, etc
 
 Existing Feature Improvement Ideas

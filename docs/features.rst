@@ -12,12 +12,12 @@ Currently, Maid-chan has the following features:
 .. image:: https://freedomofkeima.com/images/maid-chan/primitive_scr.jpg
     :alt: maid-primitive-messenger
     :align: center
-    :width: 300pt
+    :height: 300pt
 
 .. image:: https://freedomofkeima.com/images/maid-chan/primitive.gif
     :alt: maid-primitive-gif
     :align: center
-    :width: 300pt
+    :height: 300pt
 
 - :ref:`Chatbot with ChatterBot`: For every text messages outside the provided available commands, Maid-chan will send a text response via `ChatterBot`_ and `langdetect`_ (to detect the language validity).
 
@@ -45,10 +45,17 @@ Currently, Maid-chan has the following features:
     :align: center
     :width: 300pt
 
-- :ref:`RSS Feed Notifier`: The idea is similar to `rss-twilio-bot`_, where all subscribed RSS feed is aggregated to Facebook Messenger via Maid-chan scheduler
+- :ref:`RSS Feed Notifier`: The idea is similar to `rss-twilio-bot`_, where all subscribed RSS feeds are aggregated to Facebook Messenger via Maid-chan scheduler.
 
 .. image:: https://freedomofkeima.com/images/maid-chan/rss_notification.png
     :alt: maidchan-rss-preset-manga
+    :align: center
+    :width: 300pt
+
+- :ref:`Translate text via Google Translate`: For every messages which have "translate" and its language derivatives in it, Maid-chan will use Google-translate to translate the given messages (with several default configuration).
+
+.. image:: https://freedomofkeima.com/images/maid-chan/translate_normal.png
+    :alt: maidchan-translate-text
     :align: center
     :width: 300pt
 

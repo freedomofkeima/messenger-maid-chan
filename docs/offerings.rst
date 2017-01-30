@@ -7,6 +7,11 @@ How It Works
 
 Maid-chan has a scheduler worker for handling various daily tasks. For example, Maid-chan will send out daily good morning and good night greetings upon subscription. This feature is known as "Daily Offerings".
 
+.. image:: https://freedomofkeima.com/images/maid-chan/daily_morning_offerings.png
+    :alt: maidchan-offerings-morning
+    :align: center
+    :width: 300pt
+
 Daily offerings contain of two parts: greeting and image. Greetings are taken from `maidchan/constant.py` while offerings are taken from `offerings/stock/` directory.
 
 .. autofunction:: maidchan.offerings.get_morning_offerings_text

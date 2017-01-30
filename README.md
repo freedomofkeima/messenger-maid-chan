@@ -19,6 +19,9 @@ If you have any other ideas, I am accepting contributions :) For developers, you
 <img src="https://freedomofkeima.com/images/maid-chan/daily_japanese.png" width="350">
 - [Experimental] RSS Feed Notifier for Anime, Manga, etc which is similar to [my previous RSS Twilio bot](https://github.com/freedomofkeima/rss-twilio-bot) (**Requires** `maidchan_scheduler` running in the background)  
 <img src="https://freedomofkeima.com/images/maid-chan/rss_notification.png" width="350">
+- [Experimental] Translate text via Google Translate feat [translate-shell](https://github.com/soimort/translate-shell)  
+<img src="https://freedomofkeima.com/images/maid-chan/translate_normal.png" width="350">  
+<img src="https://freedomofkeima.com/images/maid-chan/translate_using_from.png" width="350">
 
 All time-related features are currently handled in **UTC+9 (Japan Time)**.
 
@@ -57,7 +60,6 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 
 ## Priority Ideas
 
-- Translate text (feat: https://github.com/soimort/translate-shell)
 - (Admin only) Send link to download at home, e.g.: Youtube (feat https://github.com/soimort/you-get), image files, etc
 
 

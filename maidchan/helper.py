@@ -46,7 +46,14 @@ def validate_attachments(attachments):
 
 def validate_reserved_keywords(command):
     for keyword in Constants.RESERVED_KEYWORDS:
-        if keyword[0] in command:
+        if command.startswith(keyword[0]):
+            return True
+    return False
+
+
+def validate_translation_keywords(command):
+    for keyword in Constants.TRANSLATION_KEYWORD:
+        if command.startswith(keyword):
             return True
     return False
 
@@ -69,7 +76,7 @@ def split_message(message):
             current_line += line
         else:
             messages.append(current_line)
-            current_line = ""
+            current_line = line
     if current_line:
         messages.append(current_line)
     return messages
