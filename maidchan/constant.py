@@ -19,7 +19,8 @@ class Constants(object):
 
     FEATURES = [
         ("upload picture", "Maid-chan will convert it to a primivite image, but it might take several minutes"),
-        ("simple chatbot", "Maid-chan will try her best to engage in a conversation!")
+        ("simple chatbot", "Maid-chan will try her best to engage in a conversation!"),
+        ("translate", "Maid-chan will ask Google-sensei for the translation from/to Indonesian, English, and Japanese (with language detection)")
     ]
 
     QUESTIONS = {
@@ -84,3 +85,24 @@ class Constants(object):
             "url": "https://www.nyaa.se/?page=rss"
         }
     }
+
+    # Supported Languages
+    TRANSLATION_LANGUAGE = {
+        "id": ["id", "indo", "indonesia", "bahasa", "indonesian", "インドネシア語"],
+        "ja": ["ja", "jp", "japanese", "japan", "jepang", "日本語", "nihongo"],
+        "en": ["en", "english", "inggris", "英語", "eigo"]
+    }
+    TRANSLATION_DETECT = {
+        "Bahasa": "id",
+        "Japanese": "ja",
+        "English": "en"
+    }
+    TRANSLATION_MAP = { # Source : Target
+        "en": "ja",
+        "ja": "en",
+        "id": "ja",
+        "": "en"  # Default
+    }
+    TRANSLATION_KEYWORD = ["translate", "terjemahkan"]
+    TRANSLATION_FROM = ["from", "dari"]
+    TRANSLATION_TO = ["to", "ke"]

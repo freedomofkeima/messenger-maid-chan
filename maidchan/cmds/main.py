@@ -10,7 +10,8 @@ from maidchan.chatbot import ChatBotDriver
 from maidchan.command import process_command, process_active_question
 from maidchan.config import ACCESS_TOKEN, VERIFY_TOKEN, STORAGE_ADAPTER
 from maidchan.helper import validate_reserved_keywords, validate_attachments,\
-    split_message
+    validate_translation_keywords, split_message
+from maidchan.translate import get_translation
 from pymessenger.bot import Bot
 
 # Global init
@@ -65,6 +66,9 @@ class WebhookHandler(tornado.web.RequestHandler):
                             q_id,
                             query
                         )
+                    elif validate_translation_keywords(query.lower()):
+                        # Translation feature
+                        response = get_translation(query.lower())
                     elif validate_reserved_keywords(query.lower()):
                         # Process user's command
                         response = process_command(
@@ -75,6 +79,7 @@ class WebhookHandler(tornado.web.RequestHandler):
                     else:
                         # Normal chatbot
                         response = self.application.chatbot.get_response(query)
+                    # Send message
                     response_part = split_message(response)
                     for part in response_part:
                         bot.send_text_message(recipient_id, part)

@@ -45,7 +45,7 @@ Currently, Maid-chan has the following features:
     :align: center
     :width: 300pt
 
-- :ref:`RSS Feed Notifier`: The idea is similar to `rss-twilio-bot`_, where all subscribed RSS feed is aggregated to Facebook Messenger via Maid-chan scheduler
+- :ref:`RSS Feed Notifier`: The idea is similar to `rss-twilio-bot`_, where all subscribed RSS feeds are aggregated to Facebook Messenger via Maid-chan scheduler.
 
 .. image:: https://freedomofkeima.com/images/maid-chan/rss_notification.png
     :alt: maidchan-rss-preset-manga
