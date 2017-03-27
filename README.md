@@ -4,6 +4,8 @@ Maid-chan name is inspired from [Sakurasou's Artificial Intelligence](http://sak
 
 If you have any other ideas, I am accepting contributions :) For developers, you could access [the documentation pages for developers here](https://messenger-maid-chan.readthedocs.io/). For others who are interested in using Maid-chan features, please ask me directly and head to [Maid-chan Facebook Page](https://www.facebook.com/maidchan2/).
 
+Maid-chan is now featured in [Chatbot's Life!](https://chatbotslife.com/building-personalized-maid-assistant-for-dummies-23ce7196fa35)
+
 
 ## Available Features
 
