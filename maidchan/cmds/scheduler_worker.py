@@ -86,11 +86,14 @@ def process_user_schedules(redis_client, recipient_id, metadata, current_mt):
             ))
         elif schedule_type == "japanese_lesson_mt" and mt < current_mt:
             level = user["kanji_level"].lower()
-            message = get_japanese_message(
-                metadata["kanji_{}".format(level)],
-                metadata["vocabulary"]
-            )
-            bot.send_text_message(recipient_id, message)
+            try:
+                message = get_japanese_message(
+                    metadata["kanji_{}".format(level)],
+                    metadata["vocabulary"]
+                )
+                bot.send_text_message(recipient_id, message)
+            except Exception:
+                pass
             user["schedules"]["japanese_lesson_mt"] += 86400
             redis_client.set_user(recipient_id, user)
             logging.info("Japanese scheduler for {} - {} is executed!".format(
