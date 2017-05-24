@@ -227,6 +227,8 @@ def process_show_profile(redis_client, recipient_id):
     message += "Japanese status: {}\n".format(user["japanese_status"])
     if user["japanese_status"] == "subscribed":
         message += "Kanji level: {}\n".format(user["kanji_level"])
+    # Train section
+    message += "Tokyo train status: {}\n".format(user["train_status"])
     # RSS Section
     if user["rss"]:
         message += "RSS Subscription status:\n"
