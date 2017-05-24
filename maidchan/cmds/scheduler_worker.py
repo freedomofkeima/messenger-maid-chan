@@ -138,6 +138,14 @@ def process_train_status(redis_client):
     cur_train_status = get_train_status()
     # Store current train status
     redis_client.set_train_status(cur_train_status)
+    # Add newly occurred
+    for cur in cur_train_status:
+        is_existed = False
+        for prev in prev_train_status:
+            if prev["line"] == cur["line"]:
+                is_existed = True
+        if not is_existed:
+            notifications.append(cur)
     # Check
     for prev in prev_train_status:
         is_resolved = True
@@ -165,10 +173,16 @@ def process_train_notification(redis_client, recipient_id,
     if user.get("train_status", "unsubscribed") == "unsubscribed":
         return
     for notification in train_notifications:
-        message = "{} Status Update\n".format(notification["line"])
-        message += "Status: {}".format(notification["status"])
+        message = "{} Status Update:\n\n".format(
+            notification["line"].encode("utf-8")
+        )
+        message += "Status: {}".format(
+            notification["status"].encode("utf-8")
+        )
         if notification.get("reason"):
-            message += "\nReason: {}".format(notification["reason"])
+            message += "\nReason: {}".format(
+                notification["reason"].encode("utf-8")
+            )
         bot.send_text_message(recipient_id, message)
 
 
