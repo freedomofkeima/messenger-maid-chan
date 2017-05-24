@@ -28,6 +28,10 @@ def process_command(redis_client, recipient_id, query):
         return process_subscribe_rss(redis_client, recipient_id)
     elif query == "unsubscribe rss":
         return process_unsubscribe_rss(redis_client, recipient_id)
+    elif query == "subscribe train":
+        return process_subscribe_train(redis_client, recipient_id)
+    elif query == "unsubscribe train":
+        return process_unsubscribe_train(redis_client, recipient_id)
     elif query == "show profile":
         return process_show_profile(redis_client, recipient_id)
     # query "help" as default query
@@ -385,3 +389,27 @@ def process_rss_removal(redis_client, recipient_id, query):
     else:
         message = "Sorry, Maid-chan could not recognize the given number!"
     return message
+
+
+def process_subscribe_train(redis_client, recipient_id):
+    user = redis_client.get_user(recipient_id)
+    if user["train_status"] == "subscribed":
+        return "You have been subscribed to Tokyo train status, {}!".format(
+            user.get("nickname", DEFAULT_NICKNAME)
+        )
+    # Update DB information
+    user["train_status"] = "subscribed"
+    redis_client.set_user(recipient_id, user)
+    # Ask for user's preference
+    message = "Thanks for subscribing to Maid-chan Tokyo train status <3\n"
+    return message
+
+
+def process_unsubscribe_train(redis_client, recipient_id):
+    user = redis_client.get_user(recipient_id)
+    # Update DB information
+    user["train_status"] = "unsubscribed"
+    redis_client.set_user(recipient_id, user)
+    return "Maid-chan wish she could serve {} in the future :)".format(
+        user.get("nickname", DEFAULT_NICKNAME)
+    )

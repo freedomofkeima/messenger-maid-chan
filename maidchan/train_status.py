@@ -23,7 +23,7 @@ STATUSES = {
     u'交通障害情報': 'Traffic trouble information'
 }
 
-l = lambda s: lambda name, **kw: s.format(name=line(name.strip()), **kw)
+l = lambda s: lambda name, **kw: s.format(name=_line(name.strip()), **kw)
 
 REASONS = {
     c(r'^大雪災害の影響で'): 'due to heavy snow',
@@ -93,6 +93,14 @@ def _line(ja):
         return ja
 
 
+def _is_line_supported(ja):
+    try:
+        _ = LINES[ja]
+        return True
+    except KeyError:
+        return False
+
+
 def parse_information(group_triples):
     result = []
     for triple in group_triples:
@@ -103,11 +111,12 @@ def parse_information(group_triples):
             if status_tag.select('span.colTrouble')
             else status_tag.text
         ).strip()
-        result.append({
-            'line': _line(line),
-            'status': _status(status),
-            'reason': _reason(info_tag.text.strip())
-        })
+        if _is_line_supported(line):
+            result.append({
+                'line': LINES[line],
+                'status': _status(status),
+                'reason': _reason(info_tag.text.strip())
+            })
     return result
 
 
