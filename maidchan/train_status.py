@@ -12,7 +12,8 @@ STATUS_URL = "https://transit.yahoo.co.jp/traininfo/area/4/"
 
 LINES = {
     u'東急田園都市線': 'Tokyu Den-en-toshi Line',
-    u'南武線[川崎～立川]': 'Nambu Line [Kawasaki-Tachikawa]'
+    u'南武線[川崎～立川]': 'Nambu Line [Kawasaki-Tachikawa]',
+    u'東急大井町線': 'Tokyu Oimachi Line'
 }
 
 STATUSES = {
