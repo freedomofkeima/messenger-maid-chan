@@ -6,6 +6,7 @@
 import requests
 from bs4 import BeautifulSoup
 from re import compile as c
+from maidchan.translate import get_translation
 
 STATUS_URL = "https://transit.yahoo.co.jp/traininfo/area/4/"
 
@@ -79,7 +80,7 @@ def _reason(ja):
                 return value(**match.groupdict())
             else:
                 return value.format(**match.groupdict())
-    return ja
+    return ja + "\nAutomatic translation: " + get_translation(ja)
 
 
 def _status(ja):
