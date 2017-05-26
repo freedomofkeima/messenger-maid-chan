@@ -25,6 +25,7 @@ Maid-chan is now featured in [Chatbot's Life!](https://chatbotslife.com/building
 <img src="https://freedomofkeima.com/images/maid-chan/translate_normal.png" width="350">  
 <img src="https://freedomofkeima.com/images/maid-chan/translate_using_from.png" width="350">  
 - [Experimental] Tokyo train status feat [Yahoo Japan](https://transit.yahoo.co.jp/traininfo/area/4/) (**Requires** `maidchan_scheduler` running in the background)  
+<img src="https://freedomofkeima.com/images/maid-chan/train_status.png" width="350">
 
 All time-related features are currently handled in **UTC+9 (Japan Time)**.
 
@@ -96,4 +97,4 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 
 This project itself is licensed under MIT License. All images are owned by their respective creators.
 
-Last Updated: May 24, 2017
+Last Updated: May 26, 2017

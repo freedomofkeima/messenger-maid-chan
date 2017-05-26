@@ -21,6 +21,6 @@ Future Ideas
 - Image recognition, e.g.: waifu recognizer - https://github.com/nagadomi/lbpcascade_animeface or self-created
 - Natural Language processing for conversing daily conversation (Naturally we can improve it with IBM Watson or Google Cloud Speech, but the model "probably" differs from Maid-chan requirement)
 - Mini games
-- Location-aware features: Recommendation, weather, train status, etc
+- Location-aware features: Recommendation, weather, etc
 - IoT with home electronics
 - etc

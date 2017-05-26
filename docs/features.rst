@@ -59,6 +59,14 @@ Currently, Maid-chan has the following features:
     :align: center
     :width: 300pt
 
+- :ref:`Tokyo Train Status feat Yahoo Japan`: Yahoo Japan provides real-time information of all trains status in Tokyo. Instead of checking pages periodically, Maid-chan will send push notification via Messenger if there is a trouble with the monitored lines.
+
+.. image:: https://freedomofkeima.com/images/maid-chan/train_status.png
+    :alt: maidchan-train-status
+    :align: center
+    :width: 300pt
+
+
 Currently, Maid-chan only supports `Asia/Tokyo` timezone (**UTC +9**).
 
 
@@ -106,6 +114,14 @@ All commands receive 2 parameters: `redis_client` as `RedisDriver` object and `r
 .. autofunction:: maidchan.command.process_unsubscribe_rss
 
 **unsubscribe rss** is used to remove one of the registered RSS Feed.
+
+.. autofunction:: maidchan.command.process_subscribe_train
+
+**subscribe train** is used to subscribe Tokyo train status notification and let Maid-chan sends a message if there is an update.
+
+.. autofunction:: maidchan.command.process_unsubscribe_train
+
+**unsubscribe train** is used to unsubscribe Tokyo train status notification.
 
 .. autofunction:: maidchan.command.process_show_profile
 
