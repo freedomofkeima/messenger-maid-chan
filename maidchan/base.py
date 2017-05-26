@@ -12,6 +12,7 @@ USERS = "USERS"
 PRIMITIVE_QUEUE = "PRIM_QUEUE"
 ACTIVE_QUESTION = "ACTIVE_QUESTION"
 SCHEDULES = "SCHEDULES"
+TRAIN_STATUS = "TRAIN_STATUS"
 
 
 def connect_redis(host, port, db):
@@ -59,6 +60,7 @@ class RedisDriver(object):
                   "nickname": "Ryuunosuke",
                   "offerings_status": "subscribed",
                   "japanese_status": "subscribed",
+                  "train_status": "subscribed",
                   "morning_time": "09:00",  # UTC+9
                   "night_time": "23:00",  # UTC+9
                   "kanji_level": "N3",
@@ -86,6 +88,8 @@ class RedisDriver(object):
             # Update existing DB
             if "schedules" not in data:
                 data["schedules"] = {}
+            if "train_status" not in data:
+                data["train_status"] = "unsubscribed"
             if "rss" not in data:
                 data["rss"] = {}
                 data["rss_id"] = 0
@@ -94,6 +98,7 @@ class RedisDriver(object):
             return {
                 "offerings_status": "unsubscribed",
                 "japanese_status": "unsubscribed",
+                "train_status": "unsubscribed",
                 "morning_time": Constants.DEFAULT_MORNING_TIME,
                 "night_time": Constants.DEFAULT_NIGHT_TIME,
                 "kanji_level": "N3",
@@ -166,3 +171,24 @@ class RedisDriver(object):
 
     def flush_schedules(self):
         self.redis_client.delete(SCHEDULES)
+
+    def set_train_status(self, data):
+        """
+        Store train status in Redis cache
+        e.g.: [{
+            "line": "...",
+            "status": "...",
+            "reason": "..."
+        }]
+        """
+        train_status = {
+            "status": data
+        }
+        self.redis_client.set(TRAIN_STATUS, json.dumps(train_status))
+
+    def get_train_status(self):
+        data = self.redis_client.get(TRAIN_STATUS)
+        if data:
+            return json.loads(data).get("status", [])
+        else:
+            return []

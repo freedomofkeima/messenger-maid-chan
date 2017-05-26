@@ -16,6 +16,7 @@ from maidchan.offerings import get_morning_offerings_text,\
     get_night_offerings_text, get_offerings_image, remove_offerings_image,\
     SPECIAL
 from maidchan.rss import get_feed
+from maidchan.train_status import get_train_status
 from pymessenger.bot import Bot
 
 from maidchan.helper import time_to_next_utc_mt
@@ -129,7 +130,64 @@ def process_user_rss(redis_client, recipient_id):
                 redis_client.set_user(recipient_id, user)
 
 
-def process_user(redis_client, recipient_id, metadata, current_mt):
+def process_train_status(redis_client):
+    notifications = []
+    # Get stored / previous train status from DB
+    prev_train_status = redis_client.get_train_status()
+    # Get current train status
+    cur_train_status = get_train_status()
+    # Store current train status
+    redis_client.set_train_status(cur_train_status)
+    # Add newly occurred
+    for cur in cur_train_status:
+        is_existed = False
+        for prev in prev_train_status:
+            if prev["line"] == cur["line"]:
+                is_existed = True
+        if not is_existed:
+            notifications.append(cur)
+    # Check
+    for prev in prev_train_status:
+        is_resolved = True
+        for cur in cur_train_status:
+            # Not sure if normal operations is still parsed here ...
+            if cur["status"] == "Normal operations":
+                continue
+            if prev["line"] == cur["line"]:
+                is_resolved = False
+                # Send out notification if status is changed
+                if prev["status"] != cur["status"]:
+                    notifications.append(cur)
+        # Send out notification if status is resolved
+        if is_resolved:
+            notifications.append({
+                "line": prev["line"],
+                "status": "Normal operations"
+            })
+    return notifications
+
+
+def process_train_notification(redis_client, recipient_id,
+                               train_notifications):
+    user = redis_client.get_user(recipient_id)
+    if user.get("train_status", "unsubscribed") == "unsubscribed":
+        return
+    for notification in train_notifications:
+        message = "{} Status Update:\n\n".format(
+            notification["line"].encode("utf-8")
+        )
+        message += "Status: {}".format(
+            notification["status"].encode("utf-8")
+        )
+        if notification.get("reason"):
+            message += "\nReason: {}".format(
+                notification["reason"].encode("utf-8")
+            )
+        bot.send_text_message(recipient_id, message)
+
+
+def process_user(redis_client, recipient_id, metadata, current_mt,
+                 train_notifications):
     # Process schedule-based operation
     process_user_schedules(
         redis_client,
@@ -142,6 +200,13 @@ def process_user(redis_client, recipient_id, metadata, current_mt):
         redis_client,
         recipient_id
     )
+    # Process train notification operation
+    if train_notifications is not None:
+        process_train_notification(
+            redis_client,
+            recipient_id,
+            train_notifications
+        )
 
 
 def adjust_offerings_mt(redis_client, users, metadata,
@@ -224,7 +289,11 @@ def main():
 
             # Save to DB
             redis_client.set_schedules(metadata)
-
+        # Get train status
+        try:
+            train_notifications = process_train_status(redis_client)
+        except:
+            train_notifications = None
         # Check all users (good enough if the number of users are small)
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) \
             as executor:
@@ -234,7 +303,8 @@ def main():
                     redis_client,
                     recipient_id,
                     metadata,
-                    current_mt
+                    current_mt,
+                    train_notifications
                 ): recipient_id for recipient_id in recipient_ids}
             for future in concurrent.futures.as_completed(future_to_msg):
                 try:
