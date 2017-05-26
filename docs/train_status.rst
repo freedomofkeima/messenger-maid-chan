@@ -42,4 +42,5 @@ Special Thanks
 Special thanks to Jonas Obrist (ojii) for providing `tokyotrainstatus`_ codebase.
 
 .. _Yahoo: https://transit.yahoo.co.jp/traininfo/area/4/
+.. _translate-shell: https://github.com/soimort/translate-shell
 .. _tokyotrainstatus: https://github.com/ojii/tokyotrainstatus

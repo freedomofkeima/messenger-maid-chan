@@ -11,19 +11,25 @@ Maid-chan is now featured in [Chatbot's Life!](https://chatbotslife.com/building
 
 - Upload image for random image filtering via [Primitive](https://github.com/fogleman/primitive) (**Requires** `maidchan_primitive` running in the background and [ImageMagick](https://www.imagemagick.org/script/index.php) `convert` feature for generating GIF)  
 <img src="https://freedomofkeima.com/images/maid-chan/primitive_scr.jpg" width="350">  
-<img alt="Combined result" src="https://freedomofkeima.com/images/maid-chan/primitive.gif" width="350">  
+<img alt="Combined result" src="https://freedomofkeima.com/images/maid-chan/primitive.gif" width="350">
+
 - Simple chat (English or Bahasa Indonesia) via [ChatterBot](https://github.com/gunthercox/ChatterBot) feat [langdetect](https://github.com/Mimino666/langdetect). The accuracy is still bad, though  
-<img src="https://freedomofkeima.com/images/maid-chan/chatterbot.png" width="350">  
+<img src="https://freedomofkeima.com/images/maid-chan/chatterbot.png" width="350">
+
 - Daily good morning and good night messages, with "offerings"! (**Requires** `maidchan_scheduler` running in the background)  
 <img src="https://freedomofkeima.com/images/maid-chan/daily_morning_offerings.png" width="350">  
-<img src="https://freedomofkeima.com/images/maid-chan/daily_night_offerings.png" width="350">  
+<img src="https://freedomofkeima.com/images/maid-chan/daily_night_offerings.png" width="350">
+
 - Daily Japanese Kanji & Vocabulary (**Requires** `maidchan_scheduler` running in the background)  
 <img src="https://freedomofkeima.com/images/maid-chan/daily_japanese.png" width="350">
+
 - RSS Feed Notifier for Anime, Manga, etc which is similar to [my previous RSS Twilio bot](https://github.com/freedomofkeima/rss-twilio-bot) (**Requires** `maidchan_scheduler` running in the background)  
 <img src="https://freedomofkeima.com/images/maid-chan/rss_notification.png" width="350">
+
 - Translate text via Google Translate feat [translate-shell](https://github.com/soimort/translate-shell)  
 <img src="https://freedomofkeima.com/images/maid-chan/translate_normal.png" width="350">  
-<img src="https://freedomofkeima.com/images/maid-chan/translate_using_from.png" width="350">  
+<img src="https://freedomofkeima.com/images/maid-chan/translate_using_from.png" width="350">
+
 - [Experimental] Tokyo train status feat [Yahoo Japan](https://transit.yahoo.co.jp/traininfo/area/4/) (**Requires** `maidchan_scheduler` running in the background)  
 <img src="https://freedomofkeima.com/images/maid-chan/train_status.png" width="350">
 
@@ -38,18 +44,22 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 - `subscribe offerings`: Maid-chan will start giving you a good morning message and a good night messages
 - `unsubscribe offerings`: Maid-chan will stop spamming you with those messages, but Maid-chan will be sad :'(
 - `update offerings`: Maid-chan will ask you about your usual waking up and sleeping time, because Maid-chan doesn't want to disturb your sleep . . ., usually :p (some surprises inside!)  
-<img src="https://freedomofkeima.com/images/maid-chan/offerings_subscribe.png" width="350">  
+<img src="https://freedomofkeima.com/images/maid-chan/offerings_subscribe.png" width="350">
+
 - `subscribe japanese`: Maid-chan will start sending you random daily Kanji & Vocabulary
 - `unsubscribe japanese`: Maid-chan will stop sending you random daily Kanji & Vocabulary
-- `update japanese`: Maid-chan will ask about your level preference for Kanji (N1 to N4, old test format)
-<img src="https://freedomofkeima.com/images/maid-chan/japanese_subscribe.png" width="350">  
-- `update name`: By default, Maid-chan will call you with `onii-chan`
-<img src="https://freedomofkeima.com/images/maid-chan/name.png" width="350">  
+- `update japanese`: Maid-chan will ask about your level preference for Kanji (N1 to N4, old test format)  
+<img src="https://freedomofkeima.com/images/maid-chan/japanese_subscribe.png" width="350">
+
+- `update name`: By default, Maid-chan will call you with `onii-chan`  
+<img src="https://freedomofkeima.com/images/maid-chan/name.png" width="350">
+
 - `subscribe rss`: You could add an RSS feed with its pattern and let Maid-chan notify you when there is an update
-- `unsubscribe rss`: You could remove one of your RSS feed subscription each time you call this command
-<img src="https://freedomofkeima.com/images/maid-chan/rss_1_manga.png" width="350">  
+- `unsubscribe rss`: You could remove one of your RSS feed subscription each time you call this command  
+<img src="https://freedomofkeima.com/images/maid-chan/rss_1_manga.png" width="350">
+
 - [Experimental] `subscribe train`: Maid-chan will give you updates related to Tokyo train status (currently, it only supports admin's train line :p)
-- [Experimental]  `unsubscribe train`: Maid-chan will stop sending you information related to Tokyo train status
+- [Experimental] `unsubscribe train`: Maid-chan will stop sending you information related to Tokyo train status
 - `show profile`: Do you want to know what Maid-chan knows about you? Then, you could use this command!
 
 
