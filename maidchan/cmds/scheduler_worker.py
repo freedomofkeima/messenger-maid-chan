@@ -95,7 +95,8 @@ def process_user_schedules(redis_client, recipient_id, metadata, current_mt):
                 bot.send_text_message(recipient_id, message)
             except Exception:
                 pass
-            user["schedules"]["japanese_lesson_mt"] += 86400
+            while user["schedules"]["japanese_lesson_mt"] < int(time.time()):
+                user["schedules"]["japanese_lesson_mt"] += 86400
             redis_client.set_user(recipient_id, user)
             logging.info("Japanese scheduler for {} - {} is executed!".format(
                 recipient_id,
