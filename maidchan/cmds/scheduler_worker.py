@@ -286,6 +286,8 @@ def main():
             metadata["vocabulary"] = get_random_vocabulary()
 
             # Set next_mt
+            if "next_mt" not in metadata:
+                metadata["next_mt"] = current_mt
             metadata["next_mt"] += 86400  # every 1 day
 
             # Save to DB
