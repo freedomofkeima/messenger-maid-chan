@@ -14,11 +14,15 @@ Maid-chan has a scheduler worker for handling various daily tasks. For example, 
 
 Daily offerings contain of two parts: greeting and image. Greetings are taken from `maidchan/constant.py` while offerings are taken from `offerings/stock/` directory.
 
+.. autofunction:: maidchan.offerings.check_event_morning_offerings
+
+Maid-chan supports event type morning messages, e.g.: Halloween, Christmas, etc. If "force" flag is turned on, Maid-chan will use a specific message for the morning greeting. Otherwise, there's a probability that Maid-chan will use seasonal type of messages.
+
 .. autofunction:: maidchan.offerings.get_morning_offerings_text
 
 .. autofunction:: maidchan.offerings.get_night_offerings_text
 
-Offerings text functionality has two types: normal and special with 2% of probability. For example, Maid-chan sends morning greeting more than half an hour later than usual because of overslept. Greeting text on any specific day is the same for everyone, as it is stored in scheduler's metadata.
+In general, offerings text functionality has two types: normal and special with 2% of probability. For example, Maid-chan sends morning greeting more than half an hour later than usual because of overslept (2% chance). Greeting text on any specific day is the same for everyone, as it is stored in scheduler's metadata.
 
 .. autofunction:: maidchan.offerings.get_offerings_image
 

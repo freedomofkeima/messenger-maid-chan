@@ -71,6 +71,49 @@ class Constants(object):
         "The game was so much fun! Are you sleeping already, {}? Good nite~"
     ]
 
+    EVENT_GOOD_MORNING = [
+        {
+            "text": "Good morning, {}! It's almost time for Halloween!",
+            "start_date": 1,
+            "start_month": 10,
+            "end_date": 30,
+            "end_month": 10,
+            "force": False
+        },
+        {
+            "text": "おはよう! Happy Halloween, {}! Trick or Treat <3",
+            "start_date": 31,
+            "start_month": 10,
+            "end_date": 31,
+            "end_month": 10,
+            "force": True
+        },
+        {
+            "text": "Ohaa~ Christmas is coming, {}!",
+            "start_date": 1,
+            "start_month": 12,
+            "end_date": 24,
+            "end_month": 12,
+            "force": False
+        },
+        {
+            "text": "Merry Christmas, {}! Santa came to my house last night, nyaa~",
+            "start_date": 25,
+            "start_month": 12,
+            "end_date": 25,
+            "end_month": 12,
+            "force": True
+        },
+        {
+            "text": "あけましておめでとう! 今年もよろしく, {}!",
+            "start_date": 1,
+            "start_month": 1,
+            "end_date": 1,
+            "end_month": 1,
+            "force": True
+        }
+    ]
+
     # Base default time, before adding random delta
     DEFAULT_MORNING_TIME = "09:00"  # UTC+9
     DEFAULT_JAPANESE_TIME = "13:00"  # UTC+9
