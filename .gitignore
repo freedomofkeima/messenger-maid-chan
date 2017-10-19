@@ -1,6 +1,8 @@
 *.pyc
 /build
 /venv
+.cache/
+.coverage
 
 # Packages
 *.egg
