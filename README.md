@@ -1,5 +1,7 @@
 # Maid-chan feat Facebook Messenger
 
+[![CircleCI](https://circleci.com/gh/freedomofkeima/messenger-maid-chan.svg?style=shield)](https://circleci.com/gh/freedomofkeima/messenger-maid-chan)
+
 Maid-chan name is inspired from [Sakurasou's Artificial Intelligence](http://sakurasounopetnakanojo.wikia.com/wiki/Maid).
 
 If you have any other ideas, I am accepting contributions :) For developers, you could access [the documentation pages for developers here](https://messenger-maid-chan.readthedocs.io/). For others who are interested in using Maid-chan features, please ask me directly and head to [Maid-chan Facebook Page](https://www.facebook.com/maidchan2/).
