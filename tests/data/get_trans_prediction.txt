@@ -1,0 +1,9 @@
+English
+Name                  English
+Family                Indo-European
+Writing system        Latin
+Code                  en
+ISO 639-3             eng
+SIL                   http://www-01.sil.org/iso639-3/documentation.asp?id=eng
+Glottolog             http://glottolog.org/resource/languoid/id/stan1293
+Wikipedia             http://en.wikipedia.org/wiki/English_language
