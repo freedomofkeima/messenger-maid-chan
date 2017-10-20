@@ -1,6 +1,6 @@
 # Maid-chan feat Facebook Messenger
 
-[![CircleCI](https://circleci.com/gh/freedomofkeima/messenger-maid-chan.svg?style=shield)](https://circleci.com/gh/freedomofkeima/messenger-maid-chan)
+[![CircleCI](https://circleci.com/gh/freedomofkeima/messenger-maid-chan/tree/master.svg?style=shield)](https://circleci.com/gh/freedomofkeima/messenger-maid-chan/tree/master)
 
 Maid-chan name is inspired from [Sakurasou's Artificial Intelligence](http://sakurasounopetnakanojo.wikia.com/wiki/Maid).
 
@@ -111,4 +111,4 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 
 This project itself is licensed under MIT License. All images are owned by their respective creators.
 
-Last Updated: May 26, 2017
+Last Updated: October 21, 2017
