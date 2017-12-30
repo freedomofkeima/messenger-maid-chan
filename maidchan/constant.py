@@ -105,10 +105,26 @@ class Constants(object):
             "force": True
         },
         {
+            "text": "Good morning, {}! New year is coming soon <3",
+            "start_date": 31,
+            "start_month": 12,
+            "end_date": 31,
+            "end_month": 12,
+            "force": True
+        },
+        {
             "text": "あけましておめでとう! 今年もよろしく, {}!",
             "start_date": 1,
             "start_month": 1,
             "end_date": 1,
+            "end_month": 1,
+            "force": True
+        },
+        {
+            "text": "Good morning, {}! Today is my birthday! Thanks for accompanying Maid-chan this whole year!",
+            "start_date": 10,
+            "start_month": 1,
+            "end_date": 10,
             "end_month": 1,
             "force": True
         }
