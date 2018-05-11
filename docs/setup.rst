@@ -3,7 +3,6 @@ How to Run
 ==========
 
 In order to run Maid-chan properly, you need to be able to use `Facebook Messenger Bot`_.
-There is a simple echo bot which is provided by `davidchua/pymessenger`_.
 
 Maid-chan Installation
 ----------------------
@@ -78,5 +77,4 @@ Maid-chan has 3 executables (recommended to use `screen`):
 - **maidchan_scheduler**: Scheduler which is used to handle daily and repetitive tasks, such as :ref:`Daily Offerings`, :ref:`Daily Japanese Lesson`, :ref:`RSS Feed Notifier`, and :ref:`Tokyo Train Status feat Yahoo Japan`.
 
 .. _Facebook Messenger Bot: https://developers.facebook.com/docs/messenger-platform/guides/quick-start
-.. _davidchua/pymessenger: https://github.com/davidchua/pymessenger/blob/master/examples/echo_bot.py
 .. _Chatterbot Documentation: http://chatterbot.readthedocs.io/en/stable/storage/index.html

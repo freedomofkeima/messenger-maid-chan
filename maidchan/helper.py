@@ -15,12 +15,13 @@ def send_text_message(access_token, recipient_id, text, passive=False):
     """
     Note: MESSAGE_TAG is introduced to circumvent 24+1h window limit
     """
+    escaped_text = text.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n')
     args = [
         'curl',
         '-F',
         'recipient={"id":"%s"}' % recipient_id,
         '-F',
-        'message={"text": "%s"}' % text
+        'message={"text": "%s"}' % escaped_text
     ]
     if passive:
         args.append('-F')
@@ -46,8 +47,7 @@ def send_text_message(access_token, recipient_id, text, passive=False):
 def send_image(access_token, recipient_id, image_path,
                image_type, passive=False):
     """
-    Since pymessenger has a bug in sending image,
-    we will use this method for time being
+    Note: MESSAGE_TAG is introduced to circumvent 24+1h window limit
     """
     args = [
         'curl',
