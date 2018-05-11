@@ -9,7 +9,7 @@ from random import randint
 from maidchan.base import connect_redis, RedisDriver
 from maidchan.command import DEFAULT_NICKNAME
 from maidchan.config import ACCESS_TOKEN
-from maidchan.helper import send_image
+from maidchan.helper import send_text_message, send_image
 from maidchan.japanese import get_random_kanji, get_random_vocabulary,\
     get_japanese_message
 from maidchan.offerings import get_morning_offerings_text,\
@@ -17,12 +17,8 @@ from maidchan.offerings import get_morning_offerings_text,\
     SPECIAL
 from maidchan.rss import get_feed
 from maidchan.train_status import get_train_status
-from pymessenger.bot import Bot
 
 from maidchan.helper import time_to_next_utc_mt
-
-
-bot = Bot(ACCESS_TOKEN)
 
 
 def send_offerings(recipient_id, text_message, image_path):
@@ -33,9 +29,11 @@ def send_offerings(recipient_id, text_message, image_path):
     else:
         image_type = None
     # Send good morning / good night message
-    bot.send_text_message(
+    send_text_message(
+        ACCESS_TOKEN,
         recipient_id,
-        text_message
+        text_message,
+        passive=True
     )
     # Send image offerings if file exists and recognizable
     if image_path and image_type:
@@ -43,7 +41,8 @@ def send_offerings(recipient_id, text_message, image_path):
             ACCESS_TOKEN,
             recipient_id,
             image_path,
-            image_type
+            image_type,
+            passive=True
         )
 
 
@@ -92,7 +91,12 @@ def process_user_schedules(redis_client, recipient_id, metadata, current_mt):
                     metadata["kanji_{}".format(level)],
                     metadata["vocabulary"]
                 )
-                bot.send_text_message(recipient_id, message)
+                send_text_message(
+                    ACCESS_TOKEN,
+                    recipient_id,
+                    message,
+                    passive=True
+                )
             except Exception:
                 pass
             while user["schedules"]["japanese_lesson_mt"] < int(time.time()):
@@ -126,7 +130,12 @@ def process_user_rss(redis_client, recipient_id):
                     url,
                     user.get("nickname", DEFAULT_NICKNAME)
                 )
-                bot.send_text_message(recipient_id, message)
+                send_text_message(
+                    ACCESS_TOKEN,
+                    recipient_id,
+                    message,
+                    passive=True
+                )
                 user["rss"][key]["title_list"].append(title)
                 redis_client.set_user(recipient_id, user)
 
@@ -184,7 +193,12 @@ def process_train_notification(redis_client, recipient_id,
             message += "\nReason: {}".format(
                 notification["reason"].encode("utf-8")
             )
-        bot.send_text_message(recipient_id, message)
+        send_text_message(
+            ACCESS_TOKEN,
+            recipient_id,
+            message,
+            passive=True
+        )
 
 
 def process_user(redis_client, recipient_id, metadata, current_mt,

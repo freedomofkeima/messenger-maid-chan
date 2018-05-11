@@ -7,11 +7,8 @@ import time
 
 from maidchan.base import connect_redis, RedisDriver
 from maidchan.config import ACCESS_TOKEN
-from maidchan.helper import send_image
+from maidchan.helper import send_text_message, send_image
 from maidchan.primitive import process_image
-from pymessenger.bot import Bot
-
-bot = Bot(ACCESS_TOKEN)
 
 
 class ThreadHandler(threading.Thread):
@@ -28,12 +25,15 @@ class ThreadHandler(threading.Thread):
                     ACCESS_TOKEN,
                     self.data.get('recipient_id', ""),
                     image_path,
-                    image_type
+                    image_type,
+                    passive=False
                 )
             else:
-                bot.send_text_message(
+                send_text_message(
+                    ACCESS_TOKEN,
                     self.data.get('recipient_id', ""),
-                    "なにそれ？意味わかない!"
+                    "なにそれ？意味わかない!",
+                    passive=False
                 )
         finally:
             # cleanup temporary directory

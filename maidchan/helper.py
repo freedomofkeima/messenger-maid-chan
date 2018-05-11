@@ -10,7 +10,41 @@ import time
 from maidchan.constant import Constants
 
 
-def send_image(access_token, recipient_id, image_path, image_type):
+# TODO: Refactor send_text_message and send_image
+def send_text_message(access_token, recipient_id, text, passive=False):
+    """
+    Note: MESSAGE_TAG is introduced to circumvent 24+1h window limit
+    """
+    args = [
+        'curl',
+        '-F',
+        'recipient={"id":"%s"}' % recipient_id,
+        '-F',
+        'message={"text": "%s"}' % text
+    ]
+    if passive:
+        args.append('-F')
+        args.append('messaging_type=MESSAGE_TAG')
+        args.append('-F')
+        # Waiting for NON_PROMOTIONAL_SUBSCRIPTION
+        args.append('tag=ACCOUNT_UPDATE')
+    else:
+        args.append('-F')
+        args.append('messaging_type=RESPONSE')
+    args.append(
+        'https://graph.facebook.com/v2.7/me/messages?access_token={}'.format(
+            access_token
+        )
+    )
+    # Execute
+    p = subprocess.Popen(args, stdout=subprocess.PIPE, shell=False)
+    (output, err) = p.communicate()
+    if err:
+        logging.error(err)
+
+
+def send_image(access_token, recipient_id, image_path,
+               image_type, passive=False):
     """
     Since pymessenger has a bug in sending image,
     we will use this method for time being
@@ -22,11 +56,22 @@ def send_image(access_token, recipient_id, image_path, image_type):
         '-F',
         'message={"attachment":{"type":"image", "payload":{}}}',
         '-F',
-        'filedata=@{};type={}'.format(image_path, image_type),
-        'https://graph.facebook.com/v2.6/me/messages?access_token={}'.format(
+        'filedata=@{};type={}'.format(image_path, image_type)
+    ]
+    if passive:
+        args.append('-F')
+        args.append('messaging_type=MESSAGE_TAG')
+        args.append('-F')
+        # Waiting for NON_PROMOTIONAL_SUBSCRIPTION
+        args.append('tag=ACCOUNT_UPDATE')
+    else:
+        args.append('-F')
+        args.append('messaging_type=RESPONSE')
+    args.append(
+        'https://graph.facebook.com/v2.7/me/messages?access_token={}'.format(
             access_token
         )
-    ]
+    )
     # Execute
     p = subprocess.Popen(args, stdout=subprocess.PIPE, shell=False)
     (output, err) = p.communicate()
