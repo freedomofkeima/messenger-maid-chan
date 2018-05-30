@@ -9,13 +9,9 @@ from maidchan.base import connect_redis, RedisDriver
 from maidchan.chatbot import ChatBotDriver
 from maidchan.command import process_command, process_active_question
 from maidchan.config import ACCESS_TOKEN, VERIFY_TOKEN, STORAGE_ADAPTER
-from maidchan.helper import validate_reserved_keywords, validate_attachments,\
-    validate_translation_keywords, split_message
+from maidchan.helper import send_text_message, validate_reserved_keywords, \
+    validate_attachments, validate_translation_keywords, split_message
 from maidchan.translate import get_translation
-from pymessenger.bot import Bot
-
-# Global init
-bot = Bot(ACCESS_TOKEN)
 
 
 def check_user_id(redis_client, recipient_id):
@@ -82,19 +78,34 @@ class WebhookHandler(tornado.web.RequestHandler):
                     # Send message
                     response_part = split_message(response)
                     for part in response_part:
-                        bot.send_text_message(recipient_id, part)
+                        send_text_message(
+                            ACCESS_TOKEN,
+                            recipient_id,
+                            part,
+                            passive=False
+                        )
                 elif 'attachments' in fb_message:
                     is_valid = validate_attachments(fb_message['attachments'])
                     if not is_valid:
                         # We are not handling non-image data right now
-                        bot.send_text_message(recipient_id, "いいねえ!")
+                        send_text_message(
+                            ACCESS_TOKEN,
+                            recipient_id,
+                            "いいねえ!",
+                            passive=False
+                        )
                         continue
                     for attachment in fb_message['attachments']:
                         self.application.redis_client.push_primitive_queue({
                             "url": attachment.get('payload', {}).get('url'),
                             "recipient_id": recipient_id
                         })
-                    bot.send_text_message(recipient_id, "しばらくねえ <3")
+                    send_text_message(
+                        ACCESS_TOKEN,
+                        recipient_id,
+                        "しばらくねえ <3",
+                        passive=False
+                    )
         self.write("Success")
 
 
