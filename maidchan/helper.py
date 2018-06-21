@@ -27,8 +27,7 @@ def send_text_message(access_token, recipient_id, text, passive=False):
         args.append('-F')
         args.append('messaging_type=MESSAGE_TAG')
         args.append('-F')
-        # Waiting for NON_PROMOTIONAL_SUBSCRIPTION
-        args.append('tag=ACCOUNT_UPDATE')
+        args.append('tag=NON_PROMOTIONAL_SUBSCRIPTION')
     else:
         args.append('-F')
         args.append('messaging_type=RESPONSE')
@@ -62,8 +61,7 @@ def send_image(access_token, recipient_id, image_path,
         args.append('-F')
         args.append('messaging_type=MESSAGE_TAG')
         args.append('-F')
-        # Waiting for NON_PROMOTIONAL_SUBSCRIPTION
-        args.append('tag=ACCOUNT_UPDATE')
+        args.append('tag=NON_PROMOTIONAL_SUBSCRIPTION')
     else:
         args.append('-F')
         args.append('messaging_type=RESPONSE')
