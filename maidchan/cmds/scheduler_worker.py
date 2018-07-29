@@ -51,39 +51,41 @@ def process_user_schedules(redis_client, recipient_id, metadata, current_mt):
     schedules = user["schedules"]
     for schedule_type, mt in schedules.items():
         if schedule_type == "morning_offerings_mt" and mt < current_mt:
-            send_offerings(
-                recipient_id,
-                metadata["morning_offering_text"].format(
+            if mt <= 0 or (current_mt - mt < 3600):  # 1 hour limit or skip it
+                send_offerings(
+                    recipient_id,
+                    metadata["morning_offering_text"].format(
+                        user.get("nickname", DEFAULT_NICKNAME)
+                    ),
+                    metadata["morning_offering_image"]
+                )
+                logging.info("Morning offerings for {} - {} is sent!".format(
+                    recipient_id,
                     user.get("nickname", DEFAULT_NICKNAME)
-                ),
-                metadata["morning_offering_image"]
-            )
+                ))
             next_mt = time_to_next_utc_mt(user["night_time"])
             next_mt += metadata.get("night_offering_mt_offset", 0)
             del user["schedules"]["morning_offerings_mt"]  # Remove current item
             user["schedules"]["night_offerings_mt"] = next_mt
             redis_client.set_user(recipient_id, user)
-            logging.info("Morning offerings for {} - {} is sent!".format(
-                recipient_id,
-                user.get("nickname", DEFAULT_NICKNAME)
-            ))
         elif schedule_type == "night_offerings_mt" and mt < current_mt:
-            send_offerings(
-                recipient_id,
-                metadata["night_offering_text"].format(
+            if mt <= 0 or (current_mt - mt < 3600):  # 1 hour limit or skip it
+                send_offerings(
+                    recipient_id,
+                    metadata["night_offering_text"].format(
+                        user.get("nickname", DEFAULT_NICKNAME)
+                    ),
+                    metadata["night_offering_image"]
+                )
+                logging.info("Night offerings for {} - {} is sent!".format(
+                    recipient_id,
                     user.get("nickname", DEFAULT_NICKNAME)
-                ),
-                metadata["night_offering_image"]
-            )
+                ))
             next_mt = time_to_next_utc_mt(user["morning_time"])
             next_mt += metadata.get("morning_offering_mt_offset", 0)
             del user["schedules"]["night_offerings_mt"]  # Remove current item
             user["schedules"]["morning_offerings_mt"] = next_mt
             redis_client.set_user(recipient_id, user)
-            logging.info("Night offerings for {} - {} is sent!".format(
-                recipient_id,
-                user.get("nickname", DEFAULT_NICKNAME)
-            ))
         elif schedule_type == "japanese_lesson_mt" and mt < current_mt:
             level = user["kanji_level"].lower()
             try:
