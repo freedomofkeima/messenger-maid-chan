@@ -10,6 +10,7 @@ If you have any other ideas, I am accepting contributions :) For developers, you
 Maid-chan is featured in:
 - [Chatbot's Life](https://chatbotslife.com/building-personalized-maid-assistant-for-dummies-23ce7196fa35)
 - [PyCon JP 2017](https://pycon.jp/2017/en/schedule/presentation/4/) | [Presentation](https://freedomofkeima.com/pyconjp2017/)
+- [PyCon MY 2018](https://pycon.my/pycon-my-2018-program-schedule/) | [Presentation](https://freedomofkeima.com/pyconmy2018.pdf)
 
 
 ## Available Features
@@ -112,4 +113,4 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 
 This project itself is licensed under MIT License. All images are owned by their respective creators.
 
-Last Updated: October 21, 2017
+Last Updated: September 12, 2018
