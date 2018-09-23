@@ -32,7 +32,7 @@ def send_text_message(access_token, recipient_id, text, passive=False):
         args.append('-F')
         args.append('messaging_type=RESPONSE')
     args.append(
-        'https://graph.facebook.com/v2.7/me/messages?access_token={}'.format(
+        'https://graph.facebook.com/v2.8/me/messages?access_token={}'.format(
             access_token
         )
     )
@@ -66,7 +66,7 @@ def send_image(access_token, recipient_id, image_path,
         args.append('-F')
         args.append('messaging_type=RESPONSE')
     args.append(
-        'https://graph.facebook.com/v2.7/me/messages?access_token={}'.format(
+        'https://graph.facebook.com/v2.8/me/messages?access_token={}'.format(
             access_token
         )
     )
