@@ -2,7 +2,7 @@
 import logging
 import os
 import subprocess
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 
 def process_image(image_path, url):
@@ -17,7 +17,7 @@ def process_image(image_path, url):
 
     if image_path and filename:
         # Download image to the specified directory
-        urllib.urlretrieve(url, os.path.join(image_path, filename))
+        urllib.request.urlretrieve(url, os.path.join(image_path, filename))
         return create_primitive_image(image_path, filename)
     return None, None
 
@@ -26,7 +26,7 @@ def create_primitive_image(image_path, filename):
     """
     create_primitive_image utilizes fogleman/primitive
     """
-    for i in xrange(0, 3):  # Generate 3 different images
+    for i in range(0, 3):  # Generate 3 different images
         output_path = os.path.join(image_path, "output{}.png".format(i))
         args = [
             'primitive',

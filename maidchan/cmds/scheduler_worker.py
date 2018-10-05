@@ -49,7 +49,7 @@ def send_offerings(recipient_id, text_message, image_path):
 def process_user_schedules(redis_client, recipient_id, metadata, current_mt):
     user = redis_client.get_user(recipient_id)
     schedules = user["schedules"]
-    for schedule_type, mt in schedules.items():
+    for schedule_type, mt in list(schedules.items()):
         if schedule_type == "morning_offerings_mt" and mt < current_mt:
             if mt <= 0 or (current_mt - mt < 3600):  # 1 hour limit or skip it
                 send_offerings(
@@ -112,7 +112,7 @@ def process_user_schedules(redis_client, recipient_id, metadata, current_mt):
 
 def process_user_rss(redis_client, recipient_id):
     user = redis_client.get_user(recipient_id)
-    for key, entry in user["rss"].iteritems():
+    for key, entry in user["rss"].items():
         feed = get_feed(entry["url"]).get("entries", {})
         for record in feed:
             title = record.get("title", "")

@@ -198,7 +198,7 @@ def process_unsubscribe_rss(redis_client, recipient_id):
             user.get("nickname", DEFAULT_NICKNAME)
         )
         message += "\n"
-        for key, entry in user["rss"].iteritems():
+        for key, entry in list(user["rss"].items()):
             message += "{}: URL = \"{}\" and pattern = \"{}\"\n".format(
                 key,
                 entry["url"],
@@ -232,7 +232,7 @@ def process_show_profile(redis_client, recipient_id):
     # RSS Section
     if user["rss"]:
         message += "RSS Subscription status:\n"
-        for entry in user["rss"].values():
+        for entry in list(user["rss"].values()):
             message += "- URL = \"{}\" and pattern = \"{}\"\n".format(
                 entry["url"],
                 entry["pattern"]
@@ -328,7 +328,7 @@ def process_rss_source_selection(redis_client, recipient_id, query):
         redis_client.set_active_question(recipient_id, 6)
         message += Constants.QUESTIONS[6]
         message += "\n"
-        for k, v in Constants.DEFAULT_RSS_PRESET.iteritems():
+        for k, v in list(Constants.DEFAULT_RSS_PRESET.items()):
             message += "Type {} for {}\n".format(k, v["title"])
     elif query == "2" or query.lower() == "custom":
         message = "Thank you!\n"
@@ -341,7 +341,7 @@ def process_rss_source_selection(redis_client, recipient_id, query):
 
 def process_default_preset(redis_client, recipient_id, query):
     user = redis_client.get_user(recipient_id)
-    if query not in Constants.DEFAULT_RSS_PRESET.keys():
+    if query not in list(Constants.DEFAULT_RSS_PRESET.keys()):
         message = "Sorry, your preset is not recognized!"
     else:
         preset = Constants.DEFAULT_RSS_PRESET[query]

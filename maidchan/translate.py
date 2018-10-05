@@ -16,7 +16,7 @@ def get_trans_language_prediction(text):
     (output, err) = p.communicate()
     if err:
         logging.error(err)
-    for key, val in Constants.TRANSLATION_DETECT.iteritems():
+    for key, val in list(Constants.TRANSLATION_DETECT.items()):
         if key in output:
             return val
     return ""
@@ -53,7 +53,7 @@ def get_translation(query):
     # Find language mapping
     source_language_key = None
     target_language_key = None
-    for key, val in Constants.TRANSLATION_LANGUAGE.iteritems():
+    for key, val in list(Constants.TRANSLATION_LANGUAGE.items()):
         if source_language_str in val:
             source_language_key = key
         if target_language_str in val:
