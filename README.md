@@ -77,7 +77,7 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 
 2. Maid-chan is using Redis as the database. Redis can be downloaded via https://redis.io/download. Run Redis as a background process in port 6379 (default port).
 
-3. It is recommended to use `virtualenv` (e.g.: `virtualenv venv` then `source venv/bin/activate`). You need to install all dependencies via `pip install -r requirements.txt`.
+3. It is recommended to use `venv` (e.g.: `python3 -m venv venv` then `source venv/bin/activate`). You need to install all dependencies via `pip install -r requirements.txt`.
 
 4. Run `python setup.py install` to build Maid-chan. Finally, you can execute `maidchan` in the background process to run this bot.
 
@@ -115,4 +115,4 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 
 This project itself is licensed under MIT License. All images are owned by their respective creators.
 
-Last Updated: September 12, 2018
+Last Updated: October 5, 2018
