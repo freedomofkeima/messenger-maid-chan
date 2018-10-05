@@ -29,9 +29,9 @@ def get_translation(query):
 
     # Split
     try:
-        elements = shlex.split(query.encode('utf-8'))
+        elements = shlex.split(query)
     except Exception:
-        elements = [query.encode('utf-8')]
+        elements = [query]
     source_list = []
     skip = False
     for index, element in enumerate(elements):

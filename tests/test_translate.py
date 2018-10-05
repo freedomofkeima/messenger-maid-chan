@@ -39,14 +39,14 @@ class TestTranslate:
     @patch('subprocess.Popen', side_effect=mocked_trans)
     def test_get_translation_en_to_ja(self, mock_trans):
         query = "translate hello, world! from english to japanese"
-        assert get_translation(query).decode('utf-8') == u"こんにちは世界！"
+        assert get_translation(query) == "こんにちは世界！"
 
     @patch('subprocess.Popen', side_effect=mocked_trans)
     def test_get_translation_en_to_default(self, mock_trans):
         query = "translate hello, world! from english"
-        assert get_translation(query).decode('utf-8') == u"こんにちは世界！"
+        assert get_translation(query) == "こんにちは世界！"
 
     @patch('subprocess.Popen', side_effect=mocked_trans)
     def test_get_translation_default_to_id(self, mock_trans):
         query = "translate hello, world! to bahasa"
-        assert get_translation(query).decode('utf-8') == "Halo Dunia!"
+        assert get_translation(query) == "Halo Dunia!"

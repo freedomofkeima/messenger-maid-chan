@@ -118,7 +118,7 @@ def process_user_rss(redis_client, recipient_id):
             title = record.get("title", "")
             try:
                 m = re.search(
-                    entry["pattern"].encode("utf-8").lower(),
+                    entry["pattern"].lower(),
                    title.lower()
                 )
             except:
@@ -186,14 +186,14 @@ def process_train_notification(redis_client, recipient_id,
         return
     for notification in train_notifications:
         message = "{} Status Update:\n\n".format(
-            notification["line"].encode("utf-8")
+            notification["line"]
         )
         message += "Status: {}".format(
-            notification["status"].encode("utf-8")
+            notification["status"]
         )
         if notification.get("reason"):
             message += "\nReason: {}".format(
-                notification["reason"].encode("utf-8")
+                notification["reason"]
             )
         send_text_message(
             ACCESS_TOKEN,

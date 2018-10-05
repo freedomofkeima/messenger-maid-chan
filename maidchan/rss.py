@@ -37,7 +37,7 @@ def validate_and_create_entry(url, pattern):
     for entry in d.get("entries", {}):
         try:
             m = re.search(
-                pattern.encode("utf-8").lower(),
+                pattern.lower(),
                 entry.get("title", "").lower()
             )
         except:
