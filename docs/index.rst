@@ -6,6 +6,8 @@
 Maid-chan Messenger Bot
 =======================
 
+(Note: As of October 5, 2018, Maid-chan is now migrated to Python 3.6+)
+
 Maid-chan name is inspired from `Sakurasou's Artificial Intelligence`_.
 
 This documentation is intended for developers.

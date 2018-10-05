@@ -10,12 +10,13 @@ def install_requires():
 setup(
     zip_safe = False,
     name = "messenger-maid-chan",
-    version = "0.1",
+    version = "0.2",
     packages = find_packages(),
     author='Iskandar Setiadi',
     author_email='iskandarsetiadi@gmail.com',
     url='https://github.com/freedomofkeima/messenger-maid-chan',
     description='Maid-chan feat Facebook Messenger bot',
+    license="MIT",
     entry_points = {
         'console_scripts': [
                 'maidchan = maidchan.cmds.main:main',
@@ -25,6 +26,10 @@ setup(
     },
     install_requires = install_requires(),
     classifiers=[
-        'Programming Language :: Python'
+        "Development Status :: 3 - Alpha",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3 :: Only",
+        "Programming Language :: Python :: 3.6",
     ]
 )
