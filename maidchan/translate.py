@@ -13,6 +13,7 @@ def get_trans_language_prediction(text):
         text
     ]
     # Execute
+    output = b""
     p = subprocess.Popen(args, stdout=subprocess.PIPE, shell=False)
     timer = Timer(10, p.kill)  # Wait for 10 seconds
     try:
@@ -22,8 +23,6 @@ def get_trans_language_prediction(text):
             logging.error(err)
     finally:
         timer.cancel()
-        logging.warning("Problem has occurred!")
-        return ""
     for key, val in list(Constants.TRANSLATION_DETECT.items()):
         if key in output.decode("utf-8"):
             return val
@@ -82,6 +81,7 @@ def get_translation(query):
     ]
 
     # Execute
+    output = b""
     p = subprocess.Popen(args, stdout=subprocess.PIPE, shell=False)
     timer = Timer(10, p.kill)  # Wait for 10 seconds
     try:
@@ -91,7 +91,5 @@ def get_translation(query):
             logging.error(err)
     finally:
         timer.cancel()
-        logging.warning("Problem has occurred!")
-        return ""
 
     return output.decode("utf-8")
