@@ -14,7 +14,7 @@ class ChatBotDriver(object):
         self.chatbot = ChatBot(
             'Maid-chan',
             trainer='chatterbot.trainers.ChatterBotCorpusTrainer',
-            output_adapter="chatterbot.output.OutputFormatAdapter",
+            output_adapter="chatterbot.output.OutputAdapter",
             output_format='text',
             storage_adapter=storage_adapter
         )
