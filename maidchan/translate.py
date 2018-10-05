@@ -17,7 +17,7 @@ def get_trans_language_prediction(text):
     if err:
         logging.error(err)
     for key, val in list(Constants.TRANSLATION_DETECT.items()):
-        if key in output:
+        if key in output.decode("utf-8"):
             return val
     return ""
 
@@ -80,4 +80,4 @@ def get_translation(query):
         logging.error(err)
         return ""
 
-    return output
+    return output.decode("utf-8")

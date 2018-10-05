@@ -11,7 +11,7 @@ SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__))
 def _get_response(name):
     path = os.path.join(SCRIPT_PATH, 'data', name)
     with open(path) as f:
-        return f.read()
+        return f.read().encode("utf-8")
 
 
 def mocked_trans(*args, **kwargs):
