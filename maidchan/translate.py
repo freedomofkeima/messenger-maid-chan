@@ -2,6 +2,7 @@
 import logging
 import shlex
 import subprocess
+from threading import Timer
 from maidchan.constant import Constants
 
 
@@ -13,9 +14,16 @@ def get_trans_language_prediction(text):
     ]
     # Execute
     p = subprocess.Popen(args, stdout=subprocess.PIPE, shell=False)
-    (output, err) = p.communicate()
-    if err:
-        logging.error(err)
+    timer = Timer(10, p.kill)  # Wait for 10 seconds
+    try:
+        timer.start()
+        (output, err) = p.communicate()
+        if err:
+            logging.error(err)
+    finally:
+        timer.cancel()
+        logging.warning("Problem has occurred!")
+        return ""
     for key, val in list(Constants.TRANSLATION_DETECT.items()):
         if key in output.decode("utf-8"):
             return val
@@ -75,9 +83,15 @@ def get_translation(query):
 
     # Execute
     p = subprocess.Popen(args, stdout=subprocess.PIPE, shell=False)
-    (output, err) = p.communicate()
-    if err:
-        logging.error(err)
+    timer = Timer(10, p.kill)  # Wait for 10 seconds
+    try:
+        timer.start()
+        (output, err) = p.communicate()
+        if err:
+            logging.error(err)
+    finally:
+        timer.cancel()
+        logging.warning("Problem has occurred!")
         return ""
 
     return output.decode("utf-8")
