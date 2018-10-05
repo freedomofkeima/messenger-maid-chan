@@ -2,6 +2,7 @@
 import logging
 import shlex
 import subprocess
+from threading import Timer
 from maidchan.constant import Constants
 
 
@@ -12,12 +13,18 @@ def get_trans_language_prediction(text):
         text
     ]
     # Execute
+    output = b""
     p = subprocess.Popen(args, stdout=subprocess.PIPE, shell=False)
-    (output, err) = p.communicate()
-    if err:
-        logging.error(err)
-    for key, val in Constants.TRANSLATION_DETECT.iteritems():
-        if key in output:
+    timer = Timer(10, p.kill)  # Wait for 10 seconds
+    try:
+        timer.start()
+        (output, err) = p.communicate()
+        if err:
+            logging.error(err)
+    finally:
+        timer.cancel()
+    for key, val in list(Constants.TRANSLATION_DETECT.items()):
+        if key in output.decode("utf-8"):
             return val
     return ""
 
@@ -29,9 +36,9 @@ def get_translation(query):
 
     # Split
     try:
-        elements = shlex.split(query.encode('utf-8'))
+        elements = shlex.split(query)
     except Exception:
-        elements = [query.encode('utf-8')]
+        elements = [query]
     source_list = []
     skip = False
     for index, element in enumerate(elements):
@@ -53,7 +60,7 @@ def get_translation(query):
     # Find language mapping
     source_language_key = None
     target_language_key = None
-    for key, val in Constants.TRANSLATION_LANGUAGE.iteritems():
+    for key, val in list(Constants.TRANSLATION_LANGUAGE.items()):
         if source_language_str in val:
             source_language_key = key
         if target_language_str in val:
@@ -74,10 +81,15 @@ def get_translation(query):
     ]
 
     # Execute
+    output = b""
     p = subprocess.Popen(args, stdout=subprocess.PIPE, shell=False)
-    (output, err) = p.communicate()
-    if err:
-        logging.error(err)
-        return ""
+    timer = Timer(10, p.kill)  # Wait for 10 seconds
+    try:
+        timer.start()
+        (output, err) = p.communicate()
+        if err:
+            logging.error(err)
+    finally:
+        timer.cancel()
 
-    return output
+    return output.decode("utf-8")

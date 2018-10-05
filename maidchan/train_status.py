@@ -11,18 +11,18 @@ from maidchan.translate import get_translation
 STATUS_URL = "https://transit.yahoo.co.jp/traininfo/area/4/"
 
 LINES = {
-    u'東急田園都市線': 'Tokyu Den-en-toshi Line',
-    u'南武線[川崎～立川]': 'Nambu Line [Kawasaki-Tachikawa]',
-    u'東急大井町線': 'Tokyu Oimachi Line'
+    '東急田園都市線': 'Tokyu Den-en-toshi Line',
+    '南武線[川崎～立川]': 'Nambu Line [Kawasaki-Tachikawa]',
+    '東急大井町線': 'Tokyu Oimachi Line'
 }
 
 STATUSES = {
-    u'列車遅延': 'Delays',
-    u'運転見合わせ': 'Operations temporarily suspended',
-    u'運転状況': 'Delays and cancellations',
-    u'平常運転': 'Normal operations',
-    u'運転再開': 'Preparing to resume operations',
-    u'交通障害情報': 'Traffic trouble information'
+    '列車遅延': 'Delays',
+    '運転見合わせ': 'Operations temporarily suspended',
+    '運転状況': 'Delays and cancellations',
+    '平常運転': 'Normal operations',
+    '運転再開': 'Preparing to resume operations',
+    '交通障害情報': 'Traffic trouble information'
 }
 
 l = lambda s: lambda name, **kw: s.format(name=_line(name.strip()), **kw)
@@ -74,7 +74,7 @@ REASONS = {
 
 
 def _reason(ja):
-    for key, value in REASONS.iteritems():
+    for key, value in list(REASONS.items()):
         match = key.match(ja)
         if match:
             if callable(value):

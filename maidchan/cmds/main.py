@@ -76,7 +76,7 @@ class WebhookHandler(tornado.web.RequestHandler):
                         # Normal chatbot
                         response = self.application.chatbot.get_response(query)
                     # Send message
-                    response_part = split_message(response)
+                    response_part = split_message(str(response))
                     for part in response_part:
                         send_text_message(
                             ACCESS_TOKEN,

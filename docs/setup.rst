@@ -54,7 +54,7 @@ which are specified in `requirements.txt`.
 
 .. code-block:: bash
 
-   $ virtualenv venv # create virtualenv
+   $ python3 -m venv venv # create virtualenv
    $ source venv/bin/activate # start virtualenv
    $ pip install -r requirements.txt # install Maid-chan dependencies
 

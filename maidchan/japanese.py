@@ -48,11 +48,8 @@ def get_kanji(level, current_pos=1):
         for line in reader:
             num_of_lines += 1
             if num_of_lines == current_pos:
-                kanji = dict(zip(KANJI_FIELDS, line))
+                kanji = dict(list(zip(KANJI_FIELDS, line)))
                 break
-    # Convert to UTF-8
-    for key, value in kanji.iteritems():
-        kanji[key] = value.encode("utf-8")
     return kanji
 
 
@@ -69,11 +66,8 @@ def get_vocabulary(current_pos=1):
         for line in reader:
             num_of_lines += 1
             if num_of_lines == current_pos:
-                vocabulary = dict(zip(VOCABULARY_FIELDS, line))
+                vocabulary = dict(list(zip(VOCABULARY_FIELDS, line)))
                 break
-    # Convert to UTF-8
-    for key, value in vocabulary.iteritems():
-        vocabulary[key] = value.encode("utf-8")
     return vocabulary
 
 
@@ -88,12 +82,6 @@ def get_random_vocabulary():
 
 
 def get_japanese_message(kanji, vocab):
-    # Convert to UTF-8
-    for key, value in kanji.iteritems():
-        kanji[key] = value.encode("utf-8")
-    for key, value in vocab.iteritems():
-        vocab[key] = value.encode("utf-8")
-
     message = "Welcome to Maid-chan's Daily Japanese lesson!\n\n"
     message += "Today Kanji is {}\nOn: {}\nKun: {}\nMeaning: {}\n\n".format(
         kanji["kanji"],

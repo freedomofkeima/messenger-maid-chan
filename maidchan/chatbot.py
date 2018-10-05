@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 import os
-import chatterbot.corpus
+import chatterbot_corpus
 from chatterbot import ChatBot
 from langdetect import detect
 from langdetect.lang_detect_exception import LangDetectException
@@ -14,7 +14,7 @@ class ChatBotDriver(object):
         self.chatbot = ChatBot(
             'Maid-chan',
             trainer='chatterbot.trainers.ChatterBotCorpusTrainer',
-            output_adapter="chatterbot.output.OutputFormatAdapter",
+            output_adapter="chatterbot.output.OutputAdapter",
             output_format='text',
             storage_adapter=storage_adapter
         )
@@ -32,7 +32,7 @@ class ChatBotDriver(object):
         WARNING: Not exactly a correct way to do it
         """
         # Get installed path
-        path = os.path.dirname(chatterbot.corpus.__file__)
+        path = os.path.dirname(chatterbot_corpus.__file__)
         # Put maidcorpus to the destination path
         data_path = os.path.join(path, "data", "maidcorpus")
         copy_recursive("maidcorpus", data_path)
