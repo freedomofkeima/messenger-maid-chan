@@ -143,7 +143,7 @@ class Constants(object):
         },
         "2": {
             "title": "Nyaa",
-            "url": "https://www.nyaa.se/?page=rss"
+            "url": "https://www.nyaa.si/?page=rss"
         }
     }
 
