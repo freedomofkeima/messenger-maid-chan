@@ -86,7 +86,7 @@ def process_user_schedules(redis_client, recipient_id, metadata, current_mt):
             del user["schedules"]["night_offerings_mt"]  # Remove current item
             user["schedules"]["morning_offerings_mt"] = next_mt
             redis_client.set_user(recipient_id, user)
-        elif schedule_type == "japanese_lesson_mt" and mt < current_mt:
+        elif user.get("japanese_status", "") == "subscribed" and schedule_type == "japanese_lesson_mt" and mt < current_mt:
             level = user["kanji_level"].lower()
             try:
                 message = get_japanese_message(
@@ -182,7 +182,7 @@ def process_train_status(redis_client):
 def process_train_notification(redis_client, recipient_id,
                                train_notifications):
     user = redis_client.get_user(recipient_id)
-    if user.get("train_status", "unsubscribed") == "unsubscribed":
+    if user.get("train_status", "") != "subscribed":
         return
     for notification in train_notifications:
         message = "{} Status Update:\n\n".format(

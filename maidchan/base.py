@@ -88,6 +88,10 @@ class RedisDriver(object):
             # Update existing DB
             if "schedules" not in data:
                 data["schedules"] = {}
+            if "offerings_status" not in data:
+                data["offerings_status"] = "unsubscribed"
+            if "japanese_status" not in data:
+                data["japanese_status"] = "unsubscribed"
             if "train_status" not in data:
                 data["train_status"] = "unsubscribed"
             if "rss" not in data:
