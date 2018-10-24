@@ -123,7 +123,10 @@ def parse_information(group_triples):
 
 
 def get_train_status():
-    r = requests.get(STATUS_URL)
+    try:
+        r = requests.get(STATUS_URL, timeout=30)
+    except Exception:
+        return  # pass
     if r.status_code != 200:
         return
     soup = BeautifulSoup(r.content, "html.parser")
