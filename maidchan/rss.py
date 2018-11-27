@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import feedparser
+import io
 import re
 import requests
 
@@ -17,7 +18,7 @@ def is_valid_feed_url(url):
 def get_feed(url):
     try:
         resp = requests.get(url, timeout=30)
-        content = BytesIO(resp.content)
+        content = io.BytesIO(resp.content)
         return feedparser.parse(content)
     except Exception:
         return {}
