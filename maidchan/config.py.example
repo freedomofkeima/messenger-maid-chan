@@ -10,6 +10,8 @@ ADMIN = [
 ]
 
 # Chatbot storage adapter
-# If you're using MongoDB, specify "chatterbot.storage.MongoDatabaseAdapter"
+# Chatterbot has dropped support for JsonFileStorageAdapter
+# Therefore, this tutorial assumes we are using MongoDB
+# If you want to use the default SQLite database, specify "chatterbot.storage.SQLStorageAdapter"
 # See http://chatterbot.readthedocs.io/en/stable/storage/index.html
-STORAGE_ADAPTER = "chatterbot.storage.JsonFileStorageAdapter"
+STORAGE_ADAPTER = "chatterbot.storage.MongoDatabaseAdapter"

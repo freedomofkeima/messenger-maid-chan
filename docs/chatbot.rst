@@ -33,9 +33,8 @@ or not (e.g.: emoticon).
 Storage Adapter
 ---------------
 
-By default, ChatterBot uses `chatterbot.storage.JsonFileStorageAdapter` as its database adapter.
-However, after receiving messages from number of users, ChatterBot becomes slow (more than 5 seconds per query).
-Therefore, it is recommended to use MongoDB adapter (`chatterbot.storage.MongoDatabaseAdapter`) for production.
+By default, ChatterBot uses `chatterbot.storage.SQLDatabaseAdapter` as its database adapter (since version 0.8.X).
+For backwards compatibility reasons, this tutorial assumes we are using MongoDB adapter (`chatterbot.storage.MongoDatabaseAdapter`) as ChatterBot storage.
 
 See http://chatterbot.readthedocs.io/en/stable/storage/index.html for full references.
 

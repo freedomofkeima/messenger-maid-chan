@@ -27,7 +27,7 @@ Maid-chan Installation
    ]
 
    # Chatbot storage
-   STORAGE_ADAPTER = "chatterbot.storage.JsonFileStorageAdapter"
+   STORAGE_ADAPTER = "chatterbot.storage.MongoDatabaseAdapter"
 
 **ACCESS_TOKEN** is received when you are creating an application on Facebook.
 
@@ -49,7 +49,9 @@ It's preferable to run Redis as a background process in port 6379 (default port)
    $ screen -R redis # use screen
    $ ... # run Redis in background
 
-4. It is recommended to use `virtualenv` for running Python code. After that, you need to install all dependencies
+4. ChatterBot 0.8.X has dropped support for simple JSON storage because of performance issues. Depending on your choice, you need to have either SQLite or MongoDB  and modify `maidchan/config.py` accordingly.
+
+5. It is recommended to use `virtualenv` for running Python code. After that, you need to install all dependencies
 which are specified in `requirements.txt`.
 
 .. code-block:: bash
@@ -58,7 +60,7 @@ which are specified in `requirements.txt`.
    $ source venv/bin/activate # start virtualenv
    $ pip install -r requirements.txt # install Maid-chan dependencies
 
-5. Finally, you can create Maid-chan executables by executing:
+6. Finally, you can create Maid-chan executables by executing:
 
 .. code-block:: bash
 
