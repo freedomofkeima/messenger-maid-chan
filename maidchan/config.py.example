@@ -15,3 +15,8 @@ ADMIN = [
 # If you want to use the default SQLite database, specify "chatterbot.storage.SQLStorageAdapter"
 # See http://chatterbot.readthedocs.io/en/stable/storage/index.html
 STORAGE_ADAPTER = "chatterbot.storage.MongoDatabaseAdapter"
+
+# To enable / disable chatbot feature
+# Hence removing SQLite or MongoDB requirements for initial testing
+IS_CHATTERBOT_ENABLED = True
+

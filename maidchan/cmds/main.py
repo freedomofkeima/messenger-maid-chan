@@ -8,7 +8,8 @@ import tornado.web
 from maidchan.base import connect_redis, RedisDriver
 from maidchan.chatbot import ChatBotDriver
 from maidchan.command import process_command, process_active_question
-from maidchan.config import ACCESS_TOKEN, VERIFY_TOKEN, STORAGE_ADAPTER
+from maidchan.config import ACCESS_TOKEN, VERIFY_TOKEN, STORAGE_ADAPTER, \
+    IS_CHATTERBOT_ENABLED
 from maidchan.helper import send_text_message, validate_reserved_keywords, \
     validate_attachments, validate_translation_keywords, split_message
 from maidchan.translate import get_translation
@@ -72,9 +73,11 @@ class WebhookHandler(tornado.web.RequestHandler):
                             recipient_id,
                             query.lower()
                         )
-                    else:
+                    elif IS_CHATTERBOT_ENABLED:
                         # Normal chatbot
                         response = self.application.chatbot.get_response(query)
+                    else:
+                        response = "Chatbot feature is disabled"
                     # Send message
                     response_part = split_message(str(response))
                     for part in response_part:
@@ -127,7 +130,8 @@ def main():
     application.redis_client = RedisDriver(rc)
 
     # Initialize Chatbot
-    application.chatbot = ChatBotDriver(STORAGE_ADAPTER)
+    if IS_CHATTERBOT_ENABLED:
+        application.chatbot = ChatBotDriver(STORAGE_ADAPTER)
 
     # Start app
     application.listen(9999)
