@@ -49,7 +49,7 @@ It's preferable to run Redis as a background process in port 6379 (default port)
    $ screen -R redis # use screen
    $ ... # run Redis in background
 
-4. ChatterBot 0.8.X has dropped support for simple JSON storage because of performance issues. Depending on your choice, you need to have either SQLite or MongoDB  and modify `maidchan/config.py` accordingly.
+4. ChatterBot 0.8.X has dropped support for simple JSON storage because of performance issues. Depending on your choice, you need to have either SQLite or MongoDB  and modify `maidchan/config.py` accordingly. Alternatively, you can set `IS_CHATTERBOT_ENABLED` flag to `False` in `maidchan/config.py` to disable chatbot feature
 
 5. It is recommended to use `virtualenv` for running Python code. After that, you need to install all dependencies
 which are specified in `requirements.txt`.

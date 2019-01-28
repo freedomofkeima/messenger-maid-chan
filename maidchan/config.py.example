@@ -19,4 +19,3 @@ STORAGE_ADAPTER = "chatterbot.storage.MongoDatabaseAdapter"
 # To enable / disable chatbot feature
 # Hence removing SQLite or MongoDB requirements for initial testing
 IS_CHATTERBOT_ENABLED = True
-

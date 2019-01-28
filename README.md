@@ -77,7 +77,7 @@ All time-related features are currently handled in **UTC+9 (Japan Time)**.
 
 2. Maid-chan is using Redis as the database. Redis can be downloaded via https://redis.io/download. Run Redis as a background process in port 6379 (default port).
 
-3. ChatterBot 0.8.X has dropped support for simple JSON storage because of performance issues. Depending on your choice, you need to have either SQLite or MongoDB and modify `maidchan/config.py` accordingly. [MongoDB Installation Guide](https://docs.mongodb.com/manual/administration/install-community/))
+3. ChatterBot 0.8.X has dropped support for simple JSON storage because of performance issues. Depending on your choice, you need to have either SQLite or MongoDB and modify `maidchan/config.py` accordingly. Alternatively, you can set `IS_CHATTERBOT_ENABLED` flag to `False` in `maidchan/config.py` to disable chatbot feature. [MongoDB Installation Guide](https://docs.mongodb.com/manual/administration/install-community/)
 
 4. It is recommended to use `venv` (e.g.: `python3 -m venv venv` then `source venv/bin/activate`). You need to install all dependencies via `pip install -r requirements.txt`.
 
