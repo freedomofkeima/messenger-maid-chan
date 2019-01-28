@@ -37,8 +37,8 @@ Maid-chan Installation
 directly with your application, since `recipient_id` is not the same with user's Facebook ID and it
 differs between applications.
 
-**STORAGE_ADAPTER** is used to store Chatterbot learning data. By default, it will create `database.db`
-in JSON format, but the performance gets slower as the number of data gets bigger. See `Chatterbot Documentation`_
+**STORAGE_ADAPTER** is used to store Chatterbot learning data. By default, it will use SQLite as
+its default storage adapter. See `Chatterbot Documentation`_
 or :ref:`Storage Adapter` for better reference.
 
 3. Maid-chan is using Redis as the database. Redis can be downloaded via https://redis.io/download.
@@ -49,7 +49,9 @@ It's preferable to run Redis as a background process in port 6379 (default port)
    $ screen -R redis # use screen
    $ ... # run Redis in background
 
-4. ChatterBot 0.8.X has dropped support for simple JSON storage because of performance issues. Depending on your choice, you need to have either SQLite or MongoDB  and modify `maidchan/config.py` accordingly. Alternatively, you can set `IS_CHATTERBOT_ENABLED` flag to `False` in `maidchan/config.py` to disable chatbot feature
+4. ChatterBot 0.8.X has dropped support for simple JSON storage because of performance issues.
+Depending on your choice, you need to have either SQLite or MongoDB  and modify `maidchan/config.py` accordingly.
+Alternatively, you can set `IS_CHATTERBOT_ENABLED` flag to `False` in `maidchan/config.py` to disable chatbot feature.
 
 5. It is recommended to use `virtualenv` for running Python code. After that, you need to install all dependencies
 which are specified in `requirements.txt`.
