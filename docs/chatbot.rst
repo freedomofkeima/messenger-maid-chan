@@ -33,8 +33,8 @@ or not (e.g.: emoticon).
 Storage Adapter
 ---------------
 
-By default, ChatterBot uses `chatterbot.storage.SQLDatabaseAdapter` as its database adapter (since version 0.8.X).
-For backwards compatibility reasons, this tutorial assumes we are using MongoDB adapter (`chatterbot.storage.MongoDatabaseAdapter`) as ChatterBot storage.
+By default, ChatterBot uses `chatterbot.storage.SQLStorageAdapter` as its storage adapter (since version 0.8.X).
+For backwards compatibility reasons, we are using MongoDB adapter (`chatterbot.storage.MongoDatabaseAdapter`) as ChatterBot storage.
 
 See http://chatterbot.readthedocs.io/en/stable/storage/index.html for full references.
 
