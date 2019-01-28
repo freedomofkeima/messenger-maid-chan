@@ -28,6 +28,7 @@ Maid-chan Installation
 
    # Chatbot storage
    STORAGE_ADAPTER = "chatterbot.storage.MongoDatabaseAdapter"
+   IS_CHATTERBOT_ENABLED = True
 
 **ACCESS_TOKEN** is received when you are creating an application on Facebook.
 
