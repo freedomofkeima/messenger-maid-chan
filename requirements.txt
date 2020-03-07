@@ -4,7 +4,7 @@ chatterbot==0.8.7
 feedparser==5.2.1
 future==0.16.0
 langdetect==1.0.7
-nltk==3.3
+nltk==3.4.5
 numpy==1.15.2
 oauthlib==2.1.0
 pymongo==3.7.1
