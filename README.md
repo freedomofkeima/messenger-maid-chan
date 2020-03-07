@@ -1,7 +1,11 @@
-# Maid-chan feat Facebook Messenger
+# [Deprecated] Maid-chan feat Facebook Messenger
 
 [![CircleCI](https://circleci.com/gh/freedomofkeima/messenger-maid-chan/tree/master.svg?style=shield)](https://circleci.com/gh/freedomofkeima/messenger-maid-chan/tree/master)
 [![readthedocs](https://readthedocs.org/projects/messenger-maid-chan/badge/?version=latest)](https://messenger-maid-chan.readthedocs.io/en/latest/)
+
+**Note 2**: As of March 4, 2020, Facebook Messenger does not allow non-news page to use `NON_PROMOTIONAL_SUBSCRIPTION` tag.
+
+> After March 4th, 2020 Only Pages that are registered with the Facebook News Page Index (NPI) will be allowed to send non-promotional subscription messages. This rule has blocked Maid-chan in sending background messages.
 
 **Note**: As of October 5, 2018, Maid-chan is now migrated to Python 3.6+.
 
