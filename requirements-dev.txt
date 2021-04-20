@@ -2,6 +2,6 @@ coverage==4.5.1
 funcsigs==1.0.2
 mock==2.0.0
 pbr==4.3.0
-py==1.6.0
+py==1.10.0
 pytest==3.8.2
 pytest-cov==2.6.0
