@@ -5,7 +5,7 @@ feedparser==5.2.1
 future==0.16.0
 langdetect==1.0.7
 nltk==3.3
-numpy==1.15.2
+numpy==1.22.0
 oauthlib==2.1.0
 pymongo==3.7.1
 python-twitter==3.4.2
